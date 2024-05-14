@@ -23,6 +23,11 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
+     public function index(): \Illuminate\View\View
+    {
+        return view('welcome');
+    }
+
     /**
      * Handle an incoming authentication request.
      */

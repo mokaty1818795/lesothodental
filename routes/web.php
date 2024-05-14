@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminPaymentController;
+use App\Http\Controllers\Auth\ClientNewPasswordController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Client as Client;
 use App\Http\Controllers\ClientController;
@@ -12,7 +13,6 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentGatewayController;
 use App\Http\Controllers\PaymentQrCodeController;
-use App\Http\Controllers\Auth\ClientNewPasswordController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\SettingController;
@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::middleware(['xss'])->group(function () {
     Route::get('/', function () {
@@ -44,7 +44,7 @@ Route::middleware(['xss'])->group(function () {
             return Redirect::to(getClientDashboardURL());
         }
 
-        return redirect(route('login'));
+        return redirect(route('welcome'));
     });
 
     // client reset password routes
@@ -326,5 +326,5 @@ Route::middleware(['auth', 'xss'])->group(function () {
     Route::get('payment-notes/{paymentId}', [PaymentController::class, 'showPaymentNotes'])->name('payment-notes.show');
 });
 
-require __DIR__.'/auth.php';
-require __DIR__.'/upgrade.php';
+require __DIR__ . '/auth.php';
+require __DIR__ . '/upgrade.php';
