@@ -47,14 +47,13 @@
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">{{ __('messages.login.login') }}</button>
                 </div>
-{{--                <div class="d-flex align-items-center mb-10 mt-4">--}}
-{{--                    <span class="text-gray-700 me-2">{{ __('New Here?') }}</span>--}}
-{{--                    <a href="{{ route('register') }}" class="link-info fs-6 text-decoration-none">--}}
-{{--                        {{ __('Create an Account') }}--}}
-{{--                    </a>--}}
-{{--                </div>--}}
+            <div class="d-flex align-items-center mb-10 mt-4">
+                <span class="text-gray-700 me-2">{{ __('New Here?') }}</span>
+                <a href="{{ route('register') }}" class="link-info fs-6 text-decoration-none">
+                    {{ __('Create an Account') }}
+                </a>
+              </div>
             </form>
         </div>
     </div>
 @endsection
-
