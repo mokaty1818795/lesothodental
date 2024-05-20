@@ -127,6 +127,19 @@ class User extends Authenticatable implements HasMedia
         'language',
         'dark_mode',
         'is_default_admin',
+        'region',
+        'date_of_birth',
+        'practice',
+        'practice_number',
+        'address',
+        'zip_code',
+        'state',
+        'authorization_number',
+        'facility_name',
+        'employer_letter',
+        'registration_number',
+        'license_number',
+        'occupation',
     ];
 
     protected $appends = ['full_name', 'profile_image'];
@@ -144,6 +157,19 @@ class User extends Authenticatable implements HasMedia
     public static $rules = [
         'first_name' => 'required',
         'last_name' => 'required',
+        'region' => 'required',
+        'date_of_birth' => 'required',
+        'practice' => 'required',
+        'practice_number' => 'required',
+        'address' => 'required',
+        'zip_code' => 'required',
+        'state' => 'required',
+        'authorization_number' => 'required',
+        'facility_name' => 'required',
+        'employer_letter' => 'required',
+        'registration_number' => 'required',
+        'license_number' => 'required',
+        'occupation' => 'required',
         'email' => 'required|email:filter|unique:users,email',
         'password' => 'required|same:password_confirmation|min:6',
     ];
@@ -166,13 +192,27 @@ class User extends Authenticatable implements HasMedia
         'password' => 'string',
         'remember_token' => 'string',
         'is_default_admin' => 'integer',
+        'region' => 'string',
+        'date_of_birth' => 'string',
+        'practice' => 'string',
+        'practice_number' => 'string',
+        'address' => 'string',
+        'zip_code' => 'string',
+        'state' => 'string',
+        'authorization_number' => 'string',
+        'facility_name' => 'string',
+        'employer_letter' => 'string',
+        'registration_number' => 'string',
+        'license_number' => 'string',
+        'occupation' => 'string',
+
     ];
 
     public function getProfileImageAttribute(): string
     {
         /** @var Media $media */
         $media = $this->getMedia(self::PROFILE)->first();
-        if (! empty($media)) {
+        if (!empty($media)) {
             return $media->getFullUrl();
         }
 
@@ -183,14 +223,14 @@ class User extends Authenticatable implements HasMedia
     {
         $role = $this->roles()->first();
 
-        if (! empty($role)) {
+        if (!empty($role)) {
             return $role->display_name;
         }
     }
 
     public function getFullNameAttribute(): string
     {
-        return $this->first_name.' '.$this->last_name;
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function client(): HasOne

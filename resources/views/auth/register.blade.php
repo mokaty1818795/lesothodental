@@ -15,7 +15,7 @@
         <div class="w-lg-600px">
             @include('layouts.errors')
             <div class="w-lg-600px bg-white rounded shadow-sm p-10 p-lg-15 mx-auto">
-                <form class="form w-100" method="POST" action="{{ route('register') }}">
+                <form class="form w-100" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-10 text-center">
                         <h1 class="text-dark mb-3">Create an Account</h1>
@@ -36,7 +36,7 @@
                         <!-- Name -->
                         <div class="col-xl-6">
                             <label class="form-label fw-bolder text-dark fs-6 required" for="name">First Name:</label>
-                            <input class="form-control form-control-lg " id="first_name"
+                            <input class="form-control form-control-lg" id="first_name"
                                    value="{{ old('first_name') }}" type="text" name="first_name"
                                    placeholder="{{__('messages.client.first_name')}}" autocomplete="off" required
                                    autofocus/>
@@ -66,25 +66,25 @@
 
                         <!-- Name -->
                         <div class="col-xl-6">
-                            <label class="form-label fw-bolder text-dark fs-6 required" for="name">Region:</label>
-                            <input class="form-control form-control-lg " id="first_name"
-                                   value="{{ old('first_name') }}" type="text" name="Lesotho"
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="region">Region:</label>
+                            <input class="form-control form-control-lg " id="region"
+                                   value="{{ old('region') }}" type="text" name="Lesotho"
                                    placeholder="{{__('Region')}}" autocomplete="off" required
                                    autofocus/>
                             <div class="invalid-feedback">
-                                {{ $errors->first('first_name') }}
+                                {{ $errors->first('region') }}
                             </div>
                         </div>
 
                         <!-- Last Name -->
                         <div class="col-xl-6">
-                            <label class="form-label fw-bolder text-dark fs-6 required" for="last_name">Date Of Birth:</label>
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="date_of_birth">Date Of Birth:</label>
                             <input class="form-control form-control-lg " type="date"
-                                   value="{{ old('last_name') }}" name="last_name"
-                                   placeholder="{{__('messages.client.last_name')}}"
+                                   value="{{ old('date_of_birth') }}" name="date_of_birth"
+                                   placeholder="{{__('messages.client.date_of_birth')}}"
                                    autocomplete="off" autofocus/>
                             <div class="invalid-feedback">
-                                {{ $errors->first('last_name') }}
+                                {{ $errors->first('date_of_birth') }}
                             </div>
                         </div>
 
@@ -94,25 +94,25 @@
 
                         <!-- Name -->
                         <div class="col-xl-6">
-                            <label class="form-label fw-bolder text-dark fs-6 required" for="name">Practition:</label>
-                            <input class="form-control form-control-lg " id="first_name"
-                                   value="{{ old('first_name') }}" type="text" name="practition"
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="practice">Practition:</label>
+                            <input class="form-control form-control-lg " id="practice"
+                                   value="{{ old('practice') }}" type="text" name="practice"
                                    placeholder="{{__('Dentist')}}" autocomplete="off" required
                                    autofocus/>
                             <div class="invalid-feedback">
-                                {{ $errors->first('first_name') }}
+                                {{ $errors->first('practice') }}
                             </div>
                         </div>
 
                         <!-- Last Name -->
                         <div class="col-xl-6">
-                            <label class="form-label fw-bolder text-dark fs-6 required" for="Practice Number">Practice Number:</label>
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="practice_number">Practice Number:</label>
                             <input class="form-control form-control-lg " type="text"
                                    value="{{ old('practice_number') }}" name="practice_number"
                                    placeholder="{{__('Practice Number')}}"
                                    autocomplete="off" autofocus/>
                             <div class="invalid-feedback">
-                                {{ $errors->first('last_name') }}
+                                {{ $errors->first('practice_number') }}
                             </div>
                         </div>
 
@@ -123,25 +123,25 @@
 
                         <!-- Name -->
                         <div class="col-xl-6">
-                            <label class="form-label fw-bolder text-dark fs-6 required" for="name">Address:</label>
-                            <input class="form-control form-control-lg " id="first_name"
-                                   value="{{ old('first_name') }}" type="text" name="practition"
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="address">Address:</label>
+                            <input class="form-control form-control-lg " id="address"
+                                   value="{{ old('address') }}" type="text" name="address"
                                    placeholder="{{__('Address')}}" autocomplete="off" required
                                    autofocus/>
                             <div class="invalid-feedback">
-                                {{ $errors->first('first_name') }}
+                                {{ $errors->first('address') }}
                             </div>
                         </div>
 
                         <!-- Last Name -->
                         <div class="col-xl-6">
-                            <label class="form-label fw-bolder text-dark fs-6 required" for="Practice Number">ZipCode:</label>
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="zip_code">ZipCode:</label>
                             <input class="form-control form-control-lg " type="text"
-                                   value="{{ old('practice_number') }}" name="practice_number"
+                                   value="{{ old('zip_code') }}" name="zip_code"
                                    placeholder="{{__('Zip Code')}}"
                                    autocomplete="off" autofocus/>
                             <div class="invalid-feedback">
-                                {{ $errors->first('last_name') }}
+                                {{ $errors->first('zip_code') }}
                             </div>
                         </div>
 
@@ -151,26 +151,26 @@
 
                         <!-- Name -->
                         <div class="col-xl-6">
-                            <label class="form-label fw-bolder text-dark fs-6 required" for="name">State:</label>
-                            <input class="form-control form-control-lg " id="first_name"
-                                   value="{{ old('first_name') }}" type="text" name="practition"
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="state">State:</label>
+                            <input class="form-control form-control-lg " id="state"
+                                   value="{{ old('state') }}" type="text" name="state"
                                    placeholder="{{__('State')}}" autocomplete="off" required
                                    autofocus/>
                             <div class="invalid-feedback">
-                                {{ $errors->first('first_name') }}
+                                {{ $errors->first('state') }}
                             </div>
                         </div>
 
                         <!-- Last Name -->
                         <div class="col-xl-6">
-                            <label class="form-label fw-bolder text-dark fs-6 required" for="Practice Number">Moh Authorization Number:</label>
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="authorization_number">Moh Authorization Number:</label>
                             <input class="form-control form-control-lg " type="text"
-                                   value="{{ old('practice_number') }}" name="practice_number"
+                                   value="{{ old('authorization_number') }}" name="authorization_number"
                                    placeholder="{{__('Authorization Number')}}"
                                    required
                                    autocomplete="off" autofocus/>
                             <div class="invalid-feedback">
-                                {{ $errors->first('last_name') }}
+                                {{ $errors->first('authorization_number') }}
                             </div>
                         </div>
 
@@ -186,26 +186,26 @@
 
                         <!-- Name -->
                         <div class="col-xl-6">
-                            <label class="form-label fw-bolder text-dark fs-6 required" for="name">Facility Name:</label>
-                            <input class="form-control form-control-lg " id="first_name"
-                                   value="{{ old('first_name') }}" type="text" name="practition"
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="facility_name">Facility Name:</label>
+                            <input class="form-control form-control-lg " id="facility_name"
+                                   value="{{ old('facility_name') }}" type="text" name="facility_name"
                                    placeholder="{{__('Facility Name')}}" autocomplete="off" required
                                    autofocus/>
                             <div class="invalid-feedback">
-                                {{ $errors->first('first_name') }}
+                                {{ $errors->first('facility_name') }}
                             </div>
                         </div>
 
                         <!-- Last Name -->
                         <div class="col-xl-6">
-                            <label class="form-label fw-bolder text-dark fs-6 required" for="Practice Number">Employer's Letter:</label>
-                            <input class="form-control form-control-lg " type="file"
-                                   value="{{ old('practice_number') }}" name="practice_number"
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="employer_letter">Employer's Letter:</label>
+                            <input class="form-control form-control-lg" id="employer_letter" type="file"
+                                   value="{{ old('employer_letter') }}" name="employer_letter"
                                    placeholder="{{__('Authorization Number')}}"
                                    required
                                    autocomplete="off" autofocus/>
                             <div class="invalid-feedback">
-                                {{ $errors->first('last_name') }}
+                                {{ $errors->first('employer_letter') }}
                             </div>
                         </div>
 
@@ -215,39 +215,39 @@
 
                         <!-- Name -->
                         <div class="col-xl-6">
-                            <label class="form-label fw-bolder text-dark fs-6 required" for="name">Company Registration Number:</label>
-                            <input class="form-control form-control-lg " id="first_name"
-                                   value="{{ old('first_name') }}" type="text" name="practition"
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="registration_number">Company Registration Number:</label>
+                            <input class="form-control form-control-lg " id="registration_number"
+                                   value="{{ old('registration_number') }}" type="text" name="registration_number"
                                    placeholder="{{__('Company Registration Number')}}" autocomplete="off" required
                                    autofocus/>
                             <div class="invalid-feedback">
-                                {{ $errors->first('first_name') }}
+                                {{ $errors->first('registration_number') }}
                             </div>
                         </div>
 
                         <!-- Last Name -->
                         <div class="col-xl-6">
-                            <label class="form-label fw-bolder text-dark fs-6 required" for="Practice Number">Pharmacy Trader's Licence Number:*:</label>
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="license_number">Pharmacy Trader's Licence Number:*:</label>
                             <input class="form-control form-control-lg " type="text"
-                                   value="{{ old('practice_number') }}" name="practice_number"
-                                   placeholder="{{__('Licence Numbe')}}"
+                                   value="{{ old('license_number') }}" name="license_number"
+                                   placeholder="{{__('Licence Number')}}"
                                    required
                                    autocomplete="off" autofocus/>
                             <div class="invalid-feedback">
-                                {{ $errors->first('last_name') }}
+                                {{ $errors->first('license_number') }}
                             </div>
                         </div>
 
                     </div>
 
                     <div class="fv-row mt-7 mb-7">
-                        <label class="form-label fw-bolder text-dark fs-6 required" for="email">Occupation:</label>
-                        <input class="form-control form-control-lg " id="email"
-                               value="{{ old('email') }}"
+                        <label class="form-label fw-bolder text-dark fs-6 required" for="occupation">Occupation:</label>
+                        <input class="form-control form-control-lg " id="occupation"
+                               value="{{ old('occupation') }}"
                                type="text" name="occupation" placeholder="{{__('Occupation')}}" required
                                autocomplete="off"/>
                         <div class="invalid-feedback">
-                            {{ $errors->first('email') }}
+                            {{ $errors->first('occupation') }}
                         </div>
                     </div>
 
