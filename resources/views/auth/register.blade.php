@@ -27,7 +27,7 @@
 
                     <div class="d-flex align-items-center mb-10">
                         <div class="border-bottom border-gray-300 mw-50 w-100"></div>
-                        <span class="fw-bold text-gray-400 fs-7 mx-2">OR</span>
+                            <span class="fw-bold text-red-500 fs-7 mx-2">Personal Details</span>
                         <div class="border-bottom border-gray-300 mw-50 w-100"></div>
                     </div>
 
@@ -59,6 +59,200 @@
                         </div>
 
                     </div>
+
+                    <!-- //new fields here -->
+
+                <div class="row fv-row mb-7 mt-7">
+
+                        <!-- Name -->
+                        <div class="col-xl-6">
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="name">Region:</label>
+                            <input class="form-control form-control-lg " id="first_name"
+                                   value="{{ old('first_name') }}" type="text" name="Lesotho"
+                                   placeholder="{{__('Region')}}" autocomplete="off" required
+                                   autofocus/>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('first_name') }}
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="col-xl-6">
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="last_name">Date Of Birth:</label>
+                            <input class="form-control form-control-lg " type="date"
+                                   value="{{ old('last_name') }}" name="last_name"
+                                   placeholder="{{__('messages.client.last_name')}}"
+                                   autocomplete="off" autofocus/>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('last_name') }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row fv-row mb-7">
+
+                        <!-- Name -->
+                        <div class="col-xl-6">
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="name">Practition:</label>
+                            <input class="form-control form-control-lg " id="first_name"
+                                   value="{{ old('first_name') }}" type="text" name="practition"
+                                   placeholder="{{__('Dentist')}}" autocomplete="off" required
+                                   autofocus/>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('first_name') }}
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="col-xl-6">
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="Practice Number">Practice Number:</label>
+                            <input class="form-control form-control-lg " type="text"
+                                   value="{{ old('practice_number') }}" name="practice_number"
+                                   placeholder="{{__('Practice Number')}}"
+                                   autocomplete="off" autofocus/>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('last_name') }}
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                      <div class="row fv-row mb-7">
+
+                        <!-- Name -->
+                        <div class="col-xl-6">
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="name">Address:</label>
+                            <input class="form-control form-control-lg " id="first_name"
+                                   value="{{ old('first_name') }}" type="text" name="practition"
+                                   placeholder="{{__('Address')}}" autocomplete="off" required
+                                   autofocus/>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('first_name') }}
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="col-xl-6">
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="Practice Number">ZipCode:</label>
+                            <input class="form-control form-control-lg " type="text"
+                                   value="{{ old('practice_number') }}" name="practice_number"
+                                   placeholder="{{__('Zip Code')}}"
+                                   autocomplete="off" autofocus/>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('last_name') }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row fv-row mb-7">
+
+                        <!-- Name -->
+                        <div class="col-xl-6">
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="name">State:</label>
+                            <input class="form-control form-control-lg " id="first_name"
+                                   value="{{ old('first_name') }}" type="text" name="practition"
+                                   placeholder="{{__('State')}}" autocomplete="off" required
+                                   autofocus/>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('first_name') }}
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="col-xl-6">
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="Practice Number">Moh Authorization Number:</label>
+                            <input class="form-control form-control-lg " type="text"
+                                   value="{{ old('practice_number') }}" name="practice_number"
+                                   placeholder="{{__('Authorization Number')}}"
+                                   required
+                                   autocomplete="off" autofocus/>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('last_name') }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex align-items-center mt-10 mb-10">
+                        <div class="border-bottom border-gray-300 mw-50 w-100"></div>
+                        <span class="fw-bold text-red-500 fs-7 mx-2">Facility</span>
+                        <div class="border-bottom border-gray-300 mw-50 w-100"></div>
+                    </div>
+
+                    <div class="row fv-row mt-12 mb-7">
+
+                        <!-- Name -->
+                        <div class="col-xl-6">
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="name">Facility Name:</label>
+                            <input class="form-control form-control-lg " id="first_name"
+                                   value="{{ old('first_name') }}" type="text" name="practition"
+                                   placeholder="{{__('Facility Name')}}" autocomplete="off" required
+                                   autofocus/>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('first_name') }}
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="col-xl-6">
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="Practice Number">Employer's Letter:</label>
+                            <input class="form-control form-control-lg " type="file"
+                                   value="{{ old('practice_number') }}" name="practice_number"
+                                   placeholder="{{__('Authorization Number')}}"
+                                   required
+                                   autocomplete="off" autofocus/>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('last_name') }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row fv-row mt-12 mb-7">
+
+                        <!-- Name -->
+                        <div class="col-xl-6">
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="name">Company Registration Number:</label>
+                            <input class="form-control form-control-lg " id="first_name"
+                                   value="{{ old('first_name') }}" type="text" name="practition"
+                                   placeholder="{{__('Company Registration Number')}}" autocomplete="off" required
+                                   autofocus/>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('first_name') }}
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="col-xl-6">
+                            <label class="form-label fw-bolder text-dark fs-6 required" for="Practice Number">Pharmacy Trader's Licence Number:*:</label>
+                            <input class="form-control form-control-lg " type="text"
+                                   value="{{ old('practice_number') }}" name="practice_number"
+                                   placeholder="{{__('Licence Numbe')}}"
+                                   required
+                                   autocomplete="off" autofocus/>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('last_name') }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="fv-row mt-7 mb-7">
+                        <label class="form-label fw-bolder text-dark fs-6 required" for="email">Occupation:</label>
+                        <input class="form-control form-control-lg " id="email"
+                               value="{{ old('email') }}"
+                               type="text" name="occupation" placeholder="{{__('Occupation')}}" required
+                               autocomplete="off"/>
+                        <div class="invalid-feedback">
+                            {{ $errors->first('email') }}
+                        </div>
+                    </div>
+
+
+
 
                     <!-- Email Address -->
                     <div class="fv-row mb-7">
