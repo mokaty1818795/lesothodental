@@ -6,7 +6,9 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateChangePasswordRequest;
 use App\Http\Requests\UpdateUserProfileRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Client;
 use App\Models\User;
+use App\Repositories\ClientRepository;
 use App\Repositories\UserRepository;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
@@ -27,13 +29,15 @@ class UserController extends AppBaseController
      * @var UserRepository
      */
     public $userRepository;
+    private $clientRepository;
 
     /**
      * UserController constructor.
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, ClientRepository $clientRepository)
     {
         $this->userRepository = $userRepository;
+        $this->clientRepository = $clientRepository;
     }
 
     /**
@@ -89,7 +93,7 @@ class UserController extends AppBaseController
      *
      * @return Application|Factory|View
      */
-    public function edit(User $user)
+    public function edit(User $user, Client $client)
     {
         $user->load('media');
 
@@ -138,11 +142,12 @@ class UserController extends AppBaseController
     /**
      * @return Application|Factory|View
      */
-    public function editProfile(): \Illuminate\View\View
+    public function editProfile(Client $client): \Illuminate\View\View
     {
         $user = Auth::user();
-
-        return view('profile.index', compact('user'));
+        $countries = $this->clientRepository->getData();
+        $client->load('user.media');
+        return view('profile.index', compact('user', 'countries', 'client'));
     }
 
     public function updateProfile(UpdateUserProfileRequest $request): RedirectResponse
@@ -160,7 +165,7 @@ class UserController extends AppBaseController
         try {
             /** @var User $user */
             $user = Auth::user();
-            if (! Hash::check($input['current_password'], $user->password)) {
+            if (!Hash::check($input['current_password'], $user->password)) {
                 return $this->sendError(__("messages.flash.current_password_is_invalid"));
             }
             $input['password'] = Hash::make($input['new_password']);
@@ -174,7 +179,7 @@ class UserController extends AppBaseController
 
     public function changeUserStatus(User $user): JsonResponse
     {
-        $status = ! $user->status;
+        $status = !$user->status;
         $user->update(['status' => $status]);
 
         return $this->sendSuccess(__("messages.flash.status_updated_successfully"));
@@ -195,7 +200,7 @@ class UserController extends AppBaseController
         $user = Auth::user();
         $darkEnabled = $user->dark_mode == true;
         $user->update([
-            'dark_mode' => ! $darkEnabled,
+            'dark_mode' => !$darkEnabled,
         ]);
 
         return redirect()->back();

@@ -70,7 +70,7 @@ class ClientController extends AppBaseController
     {
         $client->load('user.media', 'invoices.payments');
         $activeTab = $request->get('Active', 'overview');
-
+ 
         return view('clients.show', compact('client', 'activeTab'));
     }
 
