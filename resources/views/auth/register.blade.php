@@ -68,7 +68,7 @@
                         <div class="col-xl-6">
                             <label class="form-label fw-bolder text-dark fs-6 required" for="region">Region:</label>
                             <input class="form-control form-control-lg " id="region"
-                                   value="{{ old('region') }}" type="text" name="Lesotho"
+                                   value="{{ old('region') }}" type="text" name="region"
                                    placeholder="{{__('Region')}}" autocomplete="off" required
                                    autofocus/>
                             <div class="invalid-feedback">
@@ -251,8 +251,73 @@
                         </div>
                     </div>
 
+                    <div class="d-flex align-items-center mt-10 mb-10">
+                        <div class="border-bottom border-gray-300 mw-50 w-100"></div>
+                        <span class="fw-bold text-red-500 fs-7 mx-2">Educational Details</span>
+                        <div class="border-bottom border-gray-300 mw-50 w-100"></div>
+                    </div>
+                    <div class="fv-row mt-7 mb-7">
+                        <label class="form-label fw-bolder text-dark fs-6 required" for="institude">Full Name of Institution:</label>
+                        <input class="form-control form-control-lg " id="institude"
+                               value="{{ old('institude') }}"
+                               type="text" name="institude" placeholder="{{__('Institude')}}" required
+                               autocomplete="off"/>
+                        <div class="invalid-feedback">
+                            {{ $errors->first('institude') }}
+                        </div>
+                    </div>
+                    <div class="fv-row mt-7 mb-7">
+                        <label class="form-label fw-bolder text-dark fs-6 required" for="course">Course:</label>
+                        <input class="form-control form-control-lg " id="course"
+                               value="{{ old('course') }}"
+                               type="text" name="course" placeholder="{{__('Course')}}" required
+                               autocomplete="off"/>
+                        <div class="invalid-feedback">
+                            {{ $errors->first('course') }}
+                        </div>
+                    </div>
 
+                    <div class="fv-row mt-7 mb-7">
+                        <label class="form-label fw-bolder text-dark fs-6 " for="institude1">Full Name of Institution:</label>
+                        <input class="form-control form-control-lg " id="institude1"
+                               value="{{ old('institude1') }}"
+                               type="text" name="institude1" placeholder="{{__('Institude')}}"
+                               autocomplete="off"/>
+                        <div class="invalid-feedback">
+                            {{ $errors->first('institude1') }}
+                        </div>
+                    </div>
+                    <div class="fv-row mt-7 mb-7">
+                        <label class="form-label fw-bolder text-dark fs-6 " for="course1">Course:</label>
+                        <input class="form-control form-control-lg " id="course1"
+                               value="{{ old('course1') }}"
+                               type="text" name="course1" placeholder="{{__('Course')}}"
+                               autocomplete="off"/>
+                        <div class="invalid-feedback">
+                            {{ $errors->first('course1') }}
+                        </div>
+                    </div>
 
+                    <div class="fv-row mt-7 mb-7">
+                        <label class="form-label fw-bolder text-dark fs-6 " for="institude2">Full Name of Institution:</label>
+                        <input class="form-control form-control-lg " id="institude2"
+                               value="{{ old('institude2') }}"
+                               type="text" name="institude2" placeholder="{{__('Institude')}}"
+                               autocomplete="off"/>
+                        <div class="invalid-feedback">
+                            {{ $errors->first('institude2') }}
+                        </div>
+                    </div>
+                    <div class="fv-row mt-7 mb-7">
+                        <label class="form-label fw-bolder text-dark fs-6 " for="course2">Course:</label>
+                        <input class="form-control form-control-lg " id="course2"
+                               value="{{ old('course2') }}"
+                               type="text" name="course2" placeholder="{{__('Course')}}"
+                               autocomplete="off"/>
+                        <div class="invalid-feedback">
+                            {{ $errors->first('course2') }}
+                        </div>
+                    </div>
 
                     <!-- Email Address -->
                     <div class="fv-row mb-7">

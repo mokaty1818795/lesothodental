@@ -8,7 +8,6 @@ use App\Http\Requests\UpdateUserProfileRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Client;
 use App\Models\User;
-use App\Repositories\ClientRepository;
 use App\Repositories\UserRepository;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
@@ -29,15 +28,14 @@ class UserController extends AppBaseController
      * @var UserRepository
      */
     public $userRepository;
-    private $clientRepository;
 
     /**
      * UserController constructor.
      */
-    public function __construct(UserRepository $userRepository, ClientRepository $clientRepository)
+    public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
-        $this->clientRepository = $clientRepository;
+
     }
 
     /**
@@ -66,6 +64,7 @@ class UserController extends AppBaseController
     public function store(CreateUserRequest $request): RedirectResponse
     {
         $input = $request->all();
+        dd($input);
         try {
             $this->userRepository->store($input);
             Flash::success(__('messages.flash.admin_created_successfully'));
@@ -145,9 +144,7 @@ class UserController extends AppBaseController
     public function editProfile(Client $client): \Illuminate\View\View
     {
         $user = Auth::user();
-        $countries = $this->clientRepository->getData();
-        $client->load('user.media');
-        return view('profile.index', compact('user', 'countries', 'client'));
+        return view('profile.index', compact('user'));
     }
 
     public function updateProfile(UpdateUserProfileRequest $request): RedirectResponse

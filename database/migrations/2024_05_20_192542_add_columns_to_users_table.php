@@ -12,19 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('region');
-            $table->string('date_of_birth');
-            $table->string('practice');
-            $table->string('practice_number');
-            $table->string('address');
-            $table->string('zip_code');
-            $table->string('state');
-            $table->string('authorization_number');
-            $table->string('facility_name');
-            $table->string('employer_letter');
-            $table->string('registration_number');
-            $table->string('license_number');
-            $table->string('occupation');
+            $table->string('region')->nullable();
+            $table->string('date_of_birth')->nullable();
+            $table->string('practice')->nullable();
+            $table->string('practice_number')->nullable();
+            $table->string('address')->nullable();
+            $table->string('zip_code')->nullable();
+            $table->string('state')->nullable();
+            $table->string('authorization_number')->nullable();
+            $table->string('facility_name')->nullable();
+            $table->string('employer_letter')->nullable();
+            $table->string('registration_number')->nullable();
+            $table->string('license_number')->nullable();
+            $table->string('occupation')->nullable();
         });
     }
 
