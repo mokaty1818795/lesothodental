@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use App\Models\Education;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -46,11 +47,18 @@ class RegisteredUserController extends Controller
             'state' => 'required|string|max:255',
             'authorization_number' => 'required|string|max:255',
             'facility_name' => 'required|string|max:255',
-            // 'employer_letter'=> 'required|string|max:255',
+            'employer_letter' => 'required',
             'registration_number' => 'required|string|max:255',
             'license_number' => 'required|string|max:255',
             'occupation' => 'required|string|max:255',
+            'institude' => 'required|string|max:255',
+            'course' => 'required|string|max:255',
+            'institude1' => 'nullable|string|max:255',
+            'course1' => 'nullable|string|max:255',
+            'institude2' => 'nullable|string|max:255',
+            'course2' => 'nullable|string|max:255',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+
         ]);
 
         /** @var User $user */
@@ -74,11 +82,29 @@ class RegisteredUserController extends Controller
             'occupation' => $request->occupation,
         ]);
         $user->assignRole('client');
+
         $client = Client::create([
             'user_id' => $user->id,
         ]);
-
         event(new Registered($user));
+
+        Education::create([
+            'user_id' => $user->id,
+            'institude' => $request->institude,
+            'course' => $request->course,
+        ]);
+
+        Education::create([
+            'user_id' => $user->id,
+            'institude' => $request->institude1,
+            'course' => $request->course1,
+        ]);
+
+        Education::create([
+            'user_id' => $user->id,
+            'institude' => $request->institude2,
+            'course' => $request->course2,
+        ]);
 
         Auth::login($user);
 

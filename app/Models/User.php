@@ -237,4 +237,9 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasOne(Client::class, 'user_id');
     }
+
+    public function education(): HasOne
+    {
+        return $this->hasOne(Education::class, 'user_id');
+    }   
 }

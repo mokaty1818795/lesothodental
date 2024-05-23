@@ -17,9 +17,8 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
-            $table->string('institude');
-            $table->string('course');
+            $table->string('institude')->nullable();
+            $table->string('course')->nullable();
             $table->timestamps();
         });
     }
