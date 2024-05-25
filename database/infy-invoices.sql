@@ -53450,7 +53450,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `contact`, `region_code`, `status`, `is_default_admin`, `language`, `dark_mode`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Super', 'Admin', 'admin@infy-invoices.com', NULL, NULL, 1, 1, 'en', 0, '2023-11-03 11:11:33', '$2y$10$oCm/JhSIhuTrgfcSKawoEeK5GTyVuYhcRv6msV4LNCExOZxvPl0NO', NULL, '2023-11-03 11:11:33', '2023-11-03 11:11:33');
+(1, 'Super', 'Admin', 'admin@infy-invoices.com', NULL, NULL, 1, 1, 'en', 0, '2023-11-03 11:11:33', 'users
+', NULL, '2023-11-03 11:11:33', '2023-11-03 11:11:33');
 
 --
 -- Indexes for dumped tables

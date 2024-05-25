@@ -56,6 +56,18 @@
                                 class="fs-4 text-gray-800">{{ !empty($client->user->email) ? $client->user->email : 'N/A' }}</span>
                         </div>
                         <div class="col-sm-6 d-flex flex-column mb-md-10 mb-5">
+                            <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.client.dob') }}
+                                :</label>
+                            <span
+                                class="fs-4 text-gray-800">{{ !empty($client->user->date_of_birth) ? $client->user->date_of_birth : 'N/A' }}</span>
+                        </div>
+                        <div class="col-sm-6 d-flex flex-column mb-md-10 mb-5">
+                            <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.client.country') }}
+                                :</label>
+                            <span
+                                class="fs-4 text-gray-800">{{ !empty($client->user->region ) ? $client->user->region : 'N/A' }}</span>
+                        </div>
+                        <div class="col-sm-6 d-flex flex-column mb-md-10 mb-5">
                             <label for="name"
                                 class="pb-2 fs-4 text-gray-600">{{ __('messages.user.contact_number') }}
                                 :</label>
@@ -66,13 +78,13 @@
                             <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.client.country') }}
                                 :</label>
                             <span
-                                class="fs-4 text-gray-800">{{ !empty($client->country->name) ? $client->country->name : 'N/A' }}</span>
+                                class="fs-4 text-gray-800">{{ !empty($client->user->region ) ? $client->user->region : 'N/A' }}</span>
                         </div>
                         <div class="col-sm-6 d-flex flex-column mb-md-10 mb-5">
                             <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.client.state') }}
                                 :</label>
                             <span
-                                class="fs-4 text-gray-800">{{ !empty($client->state->name) ? $client->state->name : 'N/A' }}</span>
+                                class="fs-4 text-gray-800">{{ !empty($client->user->state) ? $client->user->state : 'N/A' }}</span>
                         </div>
                         <div class="col-sm-6 d-flex flex-column mb-md-10 mb-5">
                             <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.client.city') }}
@@ -84,12 +96,12 @@
                             <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.client.address') }}
                                 :</label>
                             <span
-                                class="fs-4 text-gray-800">{{ !empty($client->address) ? $client->address : 'N/A' }}</span>
+                                class="fs-4 text-gray-800">{{ !empty($client->user->address) ? $client->user->address : 'N/A' }}</span>
                         </div>
                         <div class="col-sm-6 d-flex flex-column mb-md-10 mb-5">
                             <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.client.note') }}
                                 :</label>
-                            <span class="fs-4 text-gray-800">{{ !empty($client->note) ? $client->note : 'N/A' }}</span>
+                            <span class="fs-4 text-gray-800">{{ !empty($client->user->zip_code) ? $client->user->zip_code : 'N/A' }}</span>
                         </div>
                         <div class="col-sm-6 d-flex flex-column mb-sm-0 mb-5">
                             <label for="name"
