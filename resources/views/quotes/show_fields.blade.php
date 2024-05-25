@@ -64,21 +64,151 @@
                                                class="btn btn-sm btn-success text-white">{{ __('messages.quote.print_quote') }}</a>
                                         @endif
                                     </div>
-                                    <div class="col-lg-5 col-md-6">
-                                        <div class="d-flex flex-column mb-md-10 mb-5">
+
+                                   
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
                                             <label for="name"
                                                    class="pb-2 fs-4 text-gray-600">{{ __('messages.quote.issue_for').':' }}</label>
                                             <span class="fs-4 text-gray-800 mb-3">{{ $quote->client->user->full_name }}</span>
                                             <p class="text-gray-700 fs-4 mb-0">
-                                                @if(isset($quote->client->address) && !empty($quote->client->address))
-                                                    {{ ucfirst($quote->client->address) }}
+                                                @if(isset($quote->client->user->address) && !empty($quote->client->user->address))
+                                                    {{ ucfirst($quote->client->user->address) }}
                                                 @else
                                                     {{ "N/A" }}
                                                 @endif
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="col-md-2 col-md-6">
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.authorization_number').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($quote->client->user->authorization_number) && !empty($quote->client->user->authorization_number))
+                                                    {{ ucfirst($quote->client->user->authorization_number) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+                                    
+                                     <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.practice_number').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($quote->client->user->practice_number) && !empty($quote->client->user->practice_number))
+                                                    {{ ucfirst($quote->client->user->practice_number) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.practice').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($quote->client->user->practice) && !empty($quote->client->user->practice))
+                                                    {{ ucfirst($quote->client->user->practice) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                     <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.registration_number').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($quote->client->user->registration_number) && !empty($quote->client->user->registration_number))
+                                                    {{ ucfirst($quote->client->user->registration_number) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.license_number').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($quote->client->user->license_number) && !empty($quote->client->user->license_number))
+                                                    {{ ucfirst($quote->client->user->license_number) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                     <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.facility_name').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($quote->client->user->facility_name) && !empty($quote->client->user->facility_name))
+                                                    {{ ucfirst($quote->client->user->facility_name) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.occupation').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($quote->client->user->occupation) && !empty($quote->client->user->occupation))
+                                                    {{ ucfirst($quote->client->user->occupation) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.dob').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($quote->client->user->date_of_birth) && !empty($quote->client->user->date_of_birth))
+                                                    {{ ucfirst($quote->client->user->date_of_birth) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                   
+                                    
+
+                                    <!-- <div class="col-lg-5 col-md-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.quote.issue_for').':' }}</label>
+                                            <span class="fs-4 text-gray-800 mb-3">{{ $quote->client->user->full_name }}</span>
+                                            <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($quote->client->user->address) && !empty($quote->client->user->address))
+                                                    {{ ucfirst($quote->client->user->address) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="col-md-2 col-md-6">
                                         <div class="d-flex flex-column mb-md-10 mb-5">
                                             <label for="name"
                                                    class="pb-2 fs-4 text-gray-600">{{ __('messages.quote.issue_by').':' }}</label>
@@ -86,7 +216,7 @@
                                             <p class="text-gray-700 fs-4 mb-0">
                                                 {!! getSettingValue('company_address') !!}</p>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-12 table-responsive">
                                         <table class="table table-striped box-shadow-none mt-4">
                                             <thead>
