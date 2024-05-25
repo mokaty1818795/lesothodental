@@ -7,7 +7,7 @@ return [
     | All Titles and static string in blade files - English Language
     |--------------------------------------------------------------------------
     |
-    */
+     */
     //menu.blade keys
     'dashboard' => 'Dashboard',
     'users' => 'Users',
@@ -21,13 +21,13 @@ return [
     'language' => 'Language',
     'clients' => 'Clients',
     'products' => 'Products',
-    'invoices' => 'Invoices',
+    'invoices' => 'Applications',
     'quotes' => 'Quotes',
     'general' => 'General',
     'taxes' => 'Taxes',
     'transactions' => 'Transactions',
-    'categories' => 'Categories',
-    'invoice_templates' => 'Invoice Templates',
+    'categories' => 'Services',
+    'invoice_templates' => 'Certificate Templates',
     'payments' => 'Payments',
     'payment-gateway' => 'Payment Gateway',
     'change_language' => 'Change Language',
@@ -264,8 +264,8 @@ return [
     ],
 
     'category' => [
-        'add_category' => 'Add Category',
-        'edit_category' => 'Edit Category',
+        'add_category' => 'Add Service',
+        'edit_category' => 'Edit Service',
         'category' => 'Category',
     ],
 
@@ -351,7 +351,7 @@ return [
         'send' => 'Send',
         'amount_should_be_less_than_payable_amount' => 'Amount should be less than payable amount.',
         'payment_reminder_mail' => 'Payment Reminder Mail',
-        'copy_invoice_url' => 'Copy Invoice URL'
+        'copy_invoice_url' => 'Copy Invoice URL',
     ],
 
     'quote' => [
@@ -492,7 +492,7 @@ return [
         'payment_qr_code' => 'Payment QR Code',
     ],
 
-    'placeholder' =>[
+    'placeholder' => [
         'valid_number' => 'Valid',
         'invalid_number' => 'Invalid number',
         'invalid_country_number' => 'Invalid country number',
@@ -570,8 +570,8 @@ return [
         'note_retrieved_successfully' => 'Note retrieved successfully',
         'manual_payment_approved_successfully' => 'Manual payment approved successfully',
         'manual_payment_denied_successfully' => 'Manual payment denied successfully',
-       'seems_you_are_not_allowed_to_access_this_record' => 'Seems, you are not allowed to access this record.',
-       'select_payment_qr_code' => 'Select Payment QR Code',
+        'seems_you_are_not_allowed_to_access_this_record' => 'Seems, you are not allowed to access this record.',
+        'select_payment_qr_code' => 'Select Payment QR Code',
         'select_currency' => 'Select Currency',
         'select_product_or_enter_free_text' => 'Select Product or Enter free text',
         'number_of_days_for_recurring_cycle' => 'Number of Days For Recurring Cycle',
@@ -579,6 +579,6 @@ return [
         'allowed_file_types_png_jpg_jpeg' => 'Allowed file types: png, jpg, jpeg.',
         'are_sure_want_to_delete_this_client_related_all_invoices' => 'Are you sure want to delete this client related all invoices ?',
         'paystack_token_expired' => 'The paystack token has expired. Please refresh the page and try again.',
-     ],
+    ],
 
 ];

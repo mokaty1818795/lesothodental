@@ -80,14 +80,14 @@
 
                                 <div class="col-lg-6">
                                     <div class="mb-5">
-                                        {{ Form::label('Practise', __('Practice').':', ['class' => 'form-label required mb-3']) }}
-                                        {{ Form::text('Practise', $user->practice ?? null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.practise'), 'required']) }}
+                                        {{ Form::label('Practice', __('Practice').':', ['class' => 'form-label required mb-3']) }}
+                                        {{ Form::text('Practice', $user->practice ?? null, ['class' => 'form-control form-control-solid', 'placeholder' => __('Practice'), 'required']) }}
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="mb-5">
                                         {{ Form::label('Practice Number', __('Practice Number').':', ['class' => 'form-label required mb-3']) }}
-                                        {{ Form::text('practice_number', $user->practice_number ?? null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.practice_number'), 'required']) }}
+                                        {{ Form::text('practice_number', $user->practice_number ?? null, ['class' => 'form-control form-control-solid', 'placeholder' => __('Practice Number'), 'required']) }}
                                     </div>
                                 </div>
 
@@ -100,7 +100,7 @@
                                 <div class="col-lg-6">
                                     <div class="mb-5">
                                         {{ Form::label('zip_code', __('Zip Code').':', ['class' => 'form-label required mb-3']) }}
-                                        {{ Form::text('zip_code', $user->zip_code ?? null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.zip_code'), 'required']) }}
+                                        {{ Form::text('zip_code', $user->zip_code ?? null, ['class' => 'form-control form-control-solid', 'placeholder' => __('Zip Code'), 'required']) }}
                                     </div>
                                 </div>
 
@@ -113,26 +113,26 @@
                                 <div class="col-lg-6">
                                     <div class="mb-5">
                                         {{ Form::label('authorization_number', __('AuthoRization NUmber').':', ['class' => 'form-label required mb-3']) }}
-                                        {{ Form::text('authorization_number', $user->authorization_number ?? null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.authorization_number'), 'required']) }}
+                                        {{ Form::text('authorization_number', $user->authorization_number ?? null, ['class' => 'form-control form-control-solid', 'placeholder' => __('AuthoRization NUmber'), 'required']) }}
                                     </div>
                                 </div>
 
                                  <div class="col-lg-4">
                                     <div class="mb-5">
                                         {{ Form::label('registration_number', __('Registration Number').':', ['class' => 'form-label required mb-3']) }}
-                                        {{ Form::text('registration_number', $user->registration_number ?? null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.registration_number'), 'required']) }}
+                                        {{ Form::text('registration_number', $user->registration_number ?? null, ['class' => 'form-control form-control-solid', 'placeholder' => __('Registration Number'), 'required']) }}
                                     </div>
                                 </div>
                                  <div class="col-lg-4">
                                     <div class="mb-5">
                                         {{ Form::label('license_number', __('License Number').':', ['class' => 'form-label required mb-3']) }}
-                                        {{ Form::text('license_number', $user->license_number ?? null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.license_number'), 'required']) }}
+                                        {{ Form::text('license_number', $user->license_number ?? null, ['class' => 'form-control form-control-solid', 'placeholder' => __('License Number'), 'required']) }}
                                     </div>
                                 </div>
                                  <div class="col-lg-4">
                                     <div class="mb-5">
                                         {{ Form::label('occupation', __('Occupation').':', ['class' => 'form-label required mb-3']) }}
-                                        {{ Form::text('occupation', $user->occupation ?? null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.occupation'), 'required']) }}
+                                        {{ Form::text('occupation', $user->occupation ?? null, ['class' => 'form-control form-control-solid', 'placeholder' => __('Occupation'), 'required']) }}
                                     </div>
                                 </div>
                             </div>
