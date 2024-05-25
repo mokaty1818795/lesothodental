@@ -360,7 +360,7 @@ class InvoiceRepository extends BaseRepository
                 $query->select(['id', 'user_id', 'address']);
                 $query->with([
                     'user' => function ($query) {
-                        $query->select(['first_name', 'last_name', 'email', 'id']);
+                        $query->select(['*']);
                     },
                 ]);
             },
