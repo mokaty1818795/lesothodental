@@ -127,10 +127,14 @@
                         <div class="col-sm-6 d-flex flex-column mb-md-10 mb-5">
                             <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.client.employer_letter') }}
                                 :</label>
-                            <span
-                                class="fs-4 text-gray-800">{{ !empty($client->user->employer_letter ) ? $client->user->employer_letter : 'N/A' }}</span>
+                                @if ($client->user->employer_letter)
+                                     <a class="fs-4 text-green-400" href="{{ $client->user->employer_letter }}" target="_blank" download>View Letter</a>
+                                @else
+                                    <span class="fs-4 text-gray-800">{{ !empty($client->user->employer_letter ) ? $client->user->employer_letter : 'N/A' }}</span>
+                                @endif
+
                         </div>
-                        
+
                         <div class="col-sm-6 d-flex flex-column mb-sm-0 mb-5">
                             <label for="name"
                                 class="pb-2 fs-4 text-gray-600">{{ __('messages.common.created_at') }}
