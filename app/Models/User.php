@@ -83,6 +83,8 @@ class User extends Authenticatable implements HasMedia
 
     const PROFILE = 'profile';
 
+    const LETTER_OF_EMPLOYMENT= "employer_letter";
+
     const ADMIN = 1;
 
     const CLIENT = 2;

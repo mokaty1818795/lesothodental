@@ -96,43 +96,43 @@
                         <div class="col-xl-6">
                             <label class="form-label fw-bolder text-dark fs-6 required" for="practice">Practition:</label>
                             <select class="form-control form-control-lg" id="practice"
-        value="{{ old('practice') }}" type="text" name="practice"
-        placeholder="{{ __('Dentist') }}" autocomplete="off" required autofocus>
-    <option value="Clinical Officer">Clinical Officer</option>
-    <option value="Medical Practitioner">Medical Practitioner</option>
-    <option value="Specialist">Specialist</option>
-    <option value="Dentist">Dentist</option>
-    <option value="Pharmacist">Pharmacist</option>
-    <option value="Environmental Health Specialist">Environmental Health Specialist</option>
-    <option value="Health Assistant">Health Assistant</option>
-    <option value="Physiotherapist">Physiotherapist</option>
-    <option value="Psychologist">Psychologist</option>
-    <option value="Counsellor">Counsellor</option>
-    <option value="Dental Technician">Dental Technician</option>
-    <option value="Dental Technologist">Dental Technologist</option>
-    <option value="Dental Therapist">Dental Therapist</option>
-    <option value="Pharm Technician">Pharm Technician</option>
-    <option value="Dispenser">Dispenser</option>
-    <option value="Medical Technologist">Medical Technologist</option>
-    <option value="Radiographer">Radiographer</option>
-    <option value="Speech Therapist">Speech Therapist</option>
-    <option value="Optometrist">Optometrist</option>
-    <option value="Orthopedic Technician">Orthopedic Technician</option>
-    <option value="Dietician">Dietician</option>
-    <option value="Laboratory Technician">Laboratory Technician</option>
-    <option value="Plaster Room Technician">Plaster Room Technician</option>
-    <option value="Paramedic">Paramedic</option>
-    <option value="Biomedical Forensic Genetic">Biomedical Forensic Genetic</option>
-    <option value="Anesthetic">Anesthetic</option>
-    <option value="Clinical Technologist">Clinical Technologist</option>
-    <option value="Biokinetic">Biokinetic</option>
-    <option value="Pastoral Care & Counselling">Pastoral Care & Counselling</option>
-    <option value="Psychometrist">Psychometrist</option>
-    <option value="Audiologist">Audiologist</option>
-    <option value="Nutritionist">Nutritionist</option>
-    <option value="Masseur">Masseur</option>
-    <option value="Oral Hygienist">Oral Hygienist</option>
-</select>
+                                value="{{ old('practice') }}" type="text" name="practice"
+                                placeholder="{{ __('Dentist') }}" autocomplete="off" required autofocus>
+                            <option value="Clinical Officer">Clinical Officer</option>
+                            <option value="Medical Practitioner">Medical Practitioner</option>
+                            <option value="Specialist">Specialist</option>
+                            <option value="Dentist">Dentist</option>
+                            <option value="Pharmacist">Pharmacist</option>
+                            <option value="Environmental Health Specialist">Environmental Health Specialist</option>
+                            <option value="Health Assistant">Health Assistant</option>
+                            <option value="Physiotherapist">Physiotherapist</option>
+                            <option value="Psychologist">Psychologist</option>
+                            <option value="Counsellor">Counsellor</option>
+                            <option value="Dental Technician">Dental Technician</option>
+                            <option value="Dental Technologist">Dental Technologist</option>
+                            <option value="Dental Therapist">Dental Therapist</option>
+                            <option value="Pharm Technician">Pharm Technician</option>
+                            <option value="Dispenser">Dispenser</option>
+                            <option value="Medical Technologist">Medical Technologist</option>
+                            <option value="Radiographer">Radiographer</option>
+                            <option value="Speech Therapist">Speech Therapist</option>
+                            <option value="Optometrist">Optometrist</option>
+                            <option value="Orthopedic Technician">Orthopedic Technician</option>
+                            <option value="Dietician">Dietician</option>
+                            <option value="Laboratory Technician">Laboratory Technician</option>
+                            <option value="Plaster Room Technician">Plaster Room Technician</option>
+                            <option value="Paramedic">Paramedic</option>
+                            <option value="Biomedical Forensic Genetic">Biomedical Forensic Genetic</option>
+                            <option value="Anesthetic">Anesthetic</option>
+                            <option value="Clinical Technologist">Clinical Technologist</option>
+                            <option value="Biokinetic">Biokinetic</option>
+                            <option value="Pastoral Care & Counselling">Pastoral Care & Counselling</option>
+                            <option value="Psychometrist">Psychometrist</option>
+                            <option value="Audiologist">Audiologist</option>
+                            <option value="Nutritionist">Nutritionist</option>
+                            <option value="Masseur">Masseur</option>
+                            <option value="Oral Hygienist">Oral Hygienist</option>
+                        </select>
                             <!-- <input class="form-control form-control-lg " id="practice"
                                    value="{{ old('practice') }}" type="text" name="practice"
                                    placeholder="{{__('Dentist')}}" autocomplete="off" required

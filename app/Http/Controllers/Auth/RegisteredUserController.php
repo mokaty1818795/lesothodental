@@ -81,6 +81,13 @@ class RegisteredUserController extends Controller
             'license_number' => $request->license_number,
             'occupation' => $request->occupation,
         ]);
+
+        if ((!empty($request->employer_letter))) {
+            // $user->clearMediaCollection(User::LETTER_OF_EMPLOYMENT);
+            // $user->media()->delete();
+            $user->addMedia($request->employer_letter)->toMediaCollection(User::LETTER_OF_EMPLOYMENT, config('app.media_disc'));
+        }
+
         $user->assignRole('client');
 
         $client = Client::create([
