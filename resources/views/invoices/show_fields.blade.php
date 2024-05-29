@@ -92,43 +92,6 @@
                                                 class="btn btn-sm btn-success text-white">{{ __('messages.invoice.print_invoice') }}</a>
                                         @endif
                                     </div>
-                                    <!-- <div class="col-md-4">
-                                        <div class="d-flex flex-column mb-md-10 mb-5">
-                                            <label for="name"
-                                                class="pb-2 fs-4 text-gray-600">{{ __('messages.invoice.issue_for') . ':' }}</label>
-                                            <span
-                                                class="fs-4 text-gray-800 mb-3">{{ $invoice->client->user->full_name }}</span>
-                                            <p class="text-gray-700 fs-4 mb-0">
-                                                @if (isset($invoice->client->address) && !empty($invoice->client->address))
-                                                    {{ ucfirst($invoice->client->address) }}
-                                                @else
-                                                    {{ 'N/A' }}
-                                                @endif
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="d-flex flex-column mb-md-10 mb-5">
-                                            <label for="name"
-                                                class="pb-2 fs-4 text-gray-600">{{ __('messages.invoice.issue_by') . ':' }}</label>
-                                            <span class="fs-4 text-gray-800 mb-3">{{ getAppName() }}</span>
-                                            <p class="text-gray-700 fs-4 mb-0 w-75">
-                                                {!! getSettingValue('company_address') !!}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="d-flex flex-column mb-md-10 mb-5">
-                                            <label for="name"
-                                                class="pb-2 fs-4 text-gray-600">{{ __('messages.payment_qr_codes.payment_qr_code') . ':' }}</label>
-                                            <p class="text-gray-700 fs-4 mb-0">
-                                                @if (!empty($invoice->paymentQrCode))
-                                                    {{ $invoice->paymentQrCode->title }}
-                                                @else
-                                                    {{ 'N/A' }}
-                                                @endif
-                                            </p>
-                                        </div>
-                                    </div> -->
                                      <div class="col-lg-3 col-md-3 col-6">
                                         <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
                                             <label for="name"
