@@ -49,7 +49,7 @@ class ClientQuoteRepository extends BaseRepository
         /** @var Product $product */
         static $product;
 
-        if (! isset($product) && empty($product)) {
+        if (!isset($product) && empty($product)) {
             $product = Product::orderBy('name', 'asc')->pluck('name', 'id')->toArray();
         }
 
@@ -61,9 +61,9 @@ class ClientQuoteRepository extends BaseRepository
         /** @var QuoteItem $quoteItems */
         static $quoteItems;
 
-        if (! isset($quoteItems) && empty($quoteItems)) {
+        if (!isset($quoteItems) && empty($quoteItems)) {
             $quoteItems = QuoteItem::whereQuoteId($quote[0]->id)
-            ->whereNotNull('product_name')->pluck('product_name', 'product_name')->toArray();
+                ->whereNotNull('product_name')->pluck('product_name', 'product_name')->toArray();
         }
 
         return $quoteItems;
@@ -72,7 +72,7 @@ class ClientQuoteRepository extends BaseRepository
     public function getSyncList(array $quote = []): array
     {
         $data['products'] = $this->getProductNameList();
-        if (! empty($quote)) {
+        if (!empty($quote)) {
             $data['productItem'] = $this->getQuoteItemList($quote);
             $data['products'] += $data['productItem'];
         }
@@ -91,7 +91,7 @@ class ClientQuoteRepository extends BaseRepository
     public function getAssociateProductList($quote = []): array
     {
         $result = $this->getProductNameList();
-        if (! empty($quote)) {
+        if (!empty($quote)) {
             $quoteItem = $this->getQuoteItemList();
             $result = $result + $quoteItem;
         }
@@ -121,7 +121,7 @@ class ClientQuoteRepository extends BaseRepository
             foreach ($quoteItemInput as $key => $value) {
                 $total[] = $value['price'] * $value['quantity'];
             }
-            if (! empty($input['discount'])) {
+            if (!empty($input['discount'])) {
                 if (array_sum($total) <= $input['discount']) {
                     throw new UnprocessableEntityHttpException('Discount amount should not be greater than sub total.');
                 }
@@ -199,7 +199,7 @@ class ClientQuoteRepository extends BaseRepository
             foreach ($quoteItemInput as $key => $value) {
                 $total[] = $value['price'] * $value['quantity'];
             }
-            if (! empty($input['discount'])) {
+            if (!empty($input['discount'])) {
                 if (array_sum($total) <= $input['discount']) {
                     throw new UnprocessableEntityHttpException('Discount amount should not be greater than sub total.');
                 }
@@ -274,7 +274,7 @@ class ClientQuoteRepository extends BaseRepository
         foreach ($input as $key => $data) {
             foreach ($data as $index => $value) {
                 $items[$index][$key] = $value;
-                if (! (isset($items[$index]['price']) && $key == 'price')) {
+                if (!(isset($items[$index]['price']) && $key == 'price')) {
                     continue;
                 }
                 $items[$index]['price'] = removeCommaFromNumbers($items[$index]['price']);
@@ -288,7 +288,7 @@ class ClientQuoteRepository extends BaseRepository
     {
         $userId = $input['client_id'];
         $input['quote_id'] = $quote->quote_id;
-        $title = 'New Quote created #'.$input['quote_id'].'.';
+        $title = 'New Quote created #' . $input['quote_id'] . '.';
         if ($input['status'] != Quote::DRAFT) {
             addNotification([
                 Notification::NOTIFICATION_TYPE['Quote Created'],
@@ -302,10 +302,10 @@ class ClientQuoteRepository extends BaseRepository
     {
         $quote->load('client.user');
         $userId = $quote->client->user_id;
-        $title = 'Your Quote #'.$quote->quote_id.' was updated.';
+        $title = 'Your Quote #' . $quote->quote_id . ' was updated.';
         if ($input['status'] != Quote::DRAFT) {
             if (isset($changes['status'])) {
-                $title = 'Status of your Quote #'.$quote->quote_id.' was updated.';
+                $title = 'Status of your Quote #' . $quote->quote_id . ' was updated.';
             }
             addNotification([
                 Notification::NOTIFICATION_TYPE['Quote Updated'],
@@ -324,7 +324,7 @@ class ClientQuoteRepository extends BaseRepository
                 $query->select(['id', 'user_id', 'address']);
                 $query->with([
                     'user' => function ($query) {
-                        $query->select(['first_name', 'last_name', 'email', 'id']);
+                        $query->select(['*']);
                     },
                 ]);
             },

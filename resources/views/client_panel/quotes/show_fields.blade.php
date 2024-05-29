@@ -53,27 +53,141 @@
                                            href="{{ route('client.quotes.pdf',['quote' => $quote->id]) }}"
                                            class="btn btn-sm btn-success text-white">{{ __('messages.quote.print_quote') }}</a>
                                     </div>
-                                    <div class="col-lg-5 col-md-6">
-                                        <div class="d-flex flex-column mb-md-10 mb-4">
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
                                             <label for="name"
                                                    class="pb-2 fs-4 text-gray-600">{{ __('messages.quote.issue_for').':' }}</label>
                                             <span class="fs-4 text-gray-800 mb-3">{{ $quote->client->user->full_name }}</span>
-                                            <p class="text-gray-700 fs-4 mb-0">
-                                                @if(isset($quote->client->address) && !empty($quote->client->address))
-                                                    {{ ucfirst($quote->client->address) }}
-                                                @else
-                                                    {{ "N/A" }}
-                                                @endif
-                                            </p>
                                         </div>
                                     </div>
-                                    <div class="col-md-2 col-md-6">
-                                        <div class="d-flex flex-column mb-md-10 mb-5">
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
                                             <label for="name"
-                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.quote.issue_by').':' }}</label>
-                                            <span class="fs-4 text-gray-800 mb-3">{{ getAppName() }}</span>
-                                            <p class="text-gray-700 fs-4 mb-0">
-                                                {!! getSettingValue('company_address') !!}</p>
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.user.email').':' }}</label>
+                                            <span
+                                                class="fs-4 text-gray-800">{{ !empty($quote->client->user->email) ? $quote->client->user->email : 'N/A' }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.dob').':' }}</label>
+                                           <span
+                                                class="fs-4 text-gray-800">{{ !empty($quote->client->user->date_of_birth) ? $quote->client->user->date_of_birth: 'N/A' }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.country').':' }}</label>
+                                          <span
+                                            class="fs-4 text-gray-800">{{ !empty($quote->client->user->region ) ? $quote->client->user->region: 'N/A' }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.state').':' }}</label>
+                                          <span
+                                            class="fs-4 text-gray-800">{{ !empty($quote->client->user->state ) ? $quote->client->user->state: 'N/A' }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.state').':' }}</label>
+                                          <span
+                                            class="fs-4 text-gray-800">{{ !empty($quote->client->user->state ) ? $quote->client->user->state: 'N/A' }}</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.address').':' }}</label>
+                                          <span
+                                            class="fs-4 text-gray-800">{{ !empty($quote->client->user->address ) ? $quote->client->user->address: 'N/A' }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.note').':' }}</label>
+                                          <span
+                                            class="fs-4 text-gray-800">{{ !empty($quote->client->user->zip_code ) ? $quote->client->user->zip_code: 'N/A' }}</span>
+                                        </div>
+                                    </div>
+
+                                     <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.practice').':' }}</label>
+                                          <span
+                                            class="fs-4 text-gray-800">{{ !empty($quote->client->user->practice ) ? $quote->client->user->practice: 'N/A' }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.practice_number').':' }}</label>
+                                          <span
+                                            class="fs-4 text-gray-800">{{ !empty($quote->client->user->practice_number ) ? $quote->client->user->practice_number: 'N/A' }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.authorization_number').':' }}</label>
+                                          <span
+                                            class="fs-4 text-gray-800">{{ !empty($quote->client->user->authorization_number ) ? $quote->client->user->authorization_number: 'N/A' }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.registration_number').':' }}</label>
+                                          <span
+                                            class="fs-4 text-gray-800">{{ !empty($quote->client->user->registration_number ) ? $quote->client->user->registration_number: 'N/A' }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.license_number').':' }}</label>
+                                          <span
+                                            class="fs-4 text-gray-800">{{ !empty($quote->client->user->license_number ) ? $quote->client->user->license_number: 'N/A' }}</span>
+                                        </div>
+                                    </div>
+
+                                     <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.occupation').':' }}</label>
+                                          <span
+                                            class="fs-4 text-gray-800">{{ !empty($quote->client->user->occupation ) ? $quote->client->user->occupation: 'N/A' }}</span>
+                                        </div>
+                                    </div>
+
+                                     <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.employer_letter').':' }}</label>
+
+                                            @if ($quote->client->user->employer_letter)
+                                                <a class="fs-4 text-green-400" href="{{$quote->client->user->employer_letter}}" target="_blank" download>View Letter</a>
+                                            @else
+                                                <span class="fs-4 text-gray-800">N/A</span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-12 table-responsive">
