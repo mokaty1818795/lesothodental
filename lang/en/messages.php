@@ -540,7 +540,7 @@ return [
         'payment_reminder_mail_send_successfully' => 'Payment reminder mail sent successfully',
         'recurring_status_updated_successfully' => 'Recurring status updated successfully',
         'quote_saved_successfully' => 'Application saved successfully',
-        'converted_quote_can_not_editable' => 'Converted quote can not be editable',
+        'converted_quote_can_not_editable' => 'Converted Application can not be editable',
         'quote_updated_successfully' => 'Application updated successfully',
         'quote_deleted_successfully' => 'Application deleted successfully',
         'product_price_retrieved_successfully' => 'Product price retrieved successfully',
