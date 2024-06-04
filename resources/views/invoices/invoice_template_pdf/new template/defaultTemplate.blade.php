@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="icon" href="{{ asset('web/media/logos/favicon.ico') }}" type="image/png">
-    <title>Certificate</title>
+    <title>{{ __('messages.invoice.invoice_pdf') }}</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,22 +17,20 @@
 
 </head>
 
-<body style="padding: 30px 15px !important;" style="background-image:url({{asset('assets/images/certifigate.jpeg')}})>
+<body style="padding: 30px 15px !important;">
     @php $styleCss = 'style'; @endphp
     <div>
         <div class="">
-            <div class="logo"><img width="100px" src="{{ asset('assets/images/logo.png') }}" alt="no-image">
+            <div class="logo"><img width="100px" src="{{ getLogoUrl($invoice->tenant_id) }}" alt="no-image">
             </div>
         </div>
 
-        <div class="card-body" {{ $styleCss }}="background-image: url({{ asset('assets/images/logo.png') }})">
-            <table class="table table-bordered w-100" style="background-image:url({{asset('assets/images/certifigate.jpeg')}})">
+        <div class="card-body">
+            <table class="table table-bordered w-100">
                 <thead class="bg-light">
                     <tr>
-                        <!--<th class="py-1 text-uppercase" style="width:33.33% !important;">
-                            {{ __('messages.common.from') }}</th> -->
-							 <th class="py-1 text-uppercase" style="width:33.33% !important;">
-                            {{ __('Certificate From') }}</th>
+                        <th class="py-1 text-uppercase" style="width:33.33% !important;">
+                            {{ __('messages.common.from') }}</th>
                         <th class="py-1 text-uppercase" style="width:33.33% !important;">{{ __('messages.common.to') }}
                         </th>
                         <th class="py-1 text-uppercase" style="width:33.33% !important;">

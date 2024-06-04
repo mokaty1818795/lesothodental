@@ -84,7 +84,8 @@
             </div>
         </div>
     </div>
-    {{ Form::hidden('company_address', 'Rajkot', ['id' => 'companyAddress']) }}
+    {{ Form::hidden('company_address', 'Main north 1, Mothamo house, 2nd floor, Room C
+', ['id' => 'companyAddress']) }}
     {{ Form::hidden('company_phone_number', '+7405868976', ['id' => 'companyPhoneNumber']) }}
     {{ Form::hidden('company_name', getAppName(), ['id' => 'companyName']) }}
 @endsection

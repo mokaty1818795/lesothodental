@@ -32,7 +32,7 @@
                 </div>
                 <div class="invoice-number font-color-gray">
                     {{ __('messages.quote.quote_id') . ':' }}&nbsp;#{{ $quote->quote_id }}</div>
-                <div class="logo"><img width="100px" src="{{ getLogoUrl() }}" alt="no-image"></div>
+                <div class="logo"><img width="100px" src="{{ asset('assets/images/logo.png') }}" alt="no-image"></div>
             </td>
         </tr>
     </table>

@@ -12,6 +12,13 @@
         * {
             font-family: DejaVu Sans, Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
         }
+       body {
+       // background-color:powderblue;
+        background-image: url("assets/images/certbg.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+}
 
         @if (getInvoiceCurrencyIcon($invoice->currency_id) == '€')
             .euroCurrency {
@@ -21,14 +28,16 @@
     </style>
 </head>
 
-<body style="padding: 0rem 0rem !important;">
+<body style="padding: 0rem 0rem ;">
     @php $styleCss = 'style'; @endphp
-    <div class="mb-8 w-100 position-relative" style="background-color:#F9F9F9; padding: 3rem 2rem ;">
+    <div class="mb-8 w-100 position-relative" style="padding: 3rem 2rem;">
+    
         <table class="w-100">
             <tr>
                 <td style="vertical-align:top; width: 45% !important;">
                     <div>
-                        <img width="100px" src="{{ getLogoUrl() }}" alt="">
+                    
+                   
                     </div>
                     @if (!empty($invoice->paymentQrCode))
                         <div style="margin-top:67%;">
@@ -107,7 +116,7 @@
     </div>
     <br>
     <div class="table-responsive-sm p-4">
-        <table class="w-100">
+        <table class="w-100" style="http://localhost:8000/assets/images/certificate.jpeg">
             <thead {{ $styleCss }}="border-bottom: 1px solid {{ $invoice_template_color }}">
                 <tr>
                     <th class="py-1" {{ $styleCss }}="color: {{ $invoice_template_color }}; width:5%;">#</th>
