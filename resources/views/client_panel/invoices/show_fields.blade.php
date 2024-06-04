@@ -63,29 +63,143 @@
                                            href="{{ route('clients.invoices.pdf',['invoice' => $invoice->id]) }}"
                                            class="btn btn-sm btn-success text-white">{{ __('messages.invoice.print_invoice') }}</a>
                                     </div>
-                                    <div class="col-lg-5 col-md-6">
-                                        <div class="d-flex flex-column mb-md-10 mb-4">
+                                     <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
                                             <label for="name"
-                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.invoice.issue_for').':' }}</label>
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.quote.issue_for').':' }}</label>
                                             <span class="fs-4 text-gray-800 mb-3">{{ $invoice->client->user->full_name }}</span>
                                             <p class="text-gray-700 fs-4 mb-0">
-                                                @if(isset($invoice->client->address) && !empty($invoice->client->address))
-                                                    {{ ucfirst($invoice->client->address) }}
+                                                @if(isset($invoice->client->user->address) && !empty($invoice->client->user->address))
+                                                    {{ ucfirst($invoice->client->user->address) }}
                                                 @else
                                                     {{ "N/A" }}
                                                 @endif
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="col-md-2 col-md-6">
-                                        <div class="d-flex flex-column mb-md-10 mb-5">
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
                                             <label for="name"
-                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.invoice.issue_by').':' }}</label>
-                                            <span class="fs-4 text-gray-800 mb-3">{{ getAppName() }}</span>
-                                            <p class="text-gray-700 fs-4 mb-0">
-                                                {!! getSettingValue('company_address') !!}</p>
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.authorization_number').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($invoice->client->user->authorization_number) && !empty($invoice->client->user->authorization_number))
+                                                    {{ ucfirst($invoice->client->user->authorization_number) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
                                         </div>
                                     </div>
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.practice_number').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($invoice->client->user->practice_number) && !empty($invoice->client->user->practice_number))
+                                                    {{ ucfirst($invoice->client->user->practice_number) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.practice').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($invoice->client->user->practice) && !empty($invoice->client->user->practice))
+                                                    {{ ucfirst($invoice->client->user->practice) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                     <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.registration_number').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($invoice->client->user->registration_number) && !empty($invoice->client->user->registration_number))
+                                                    {{ ucfirst($invoice->client->user->registration_number) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.license_number').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($invoice->client->user->license_number) && !empty($invoice->client->user->license_number))
+                                                    {{ ucfirst($invoice->client->user->license_number) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.facility_name').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($invoice->client->user->facility_name) && !empty($invoice->client->user->facility_name))
+                                                    {{ ucfirst($invoice->client->user->facility_name) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.client.employer_letter') . ':' }}</label>
+                                            <p class=" fs-4 mb-0">
+                                                @if(isset($invoice->client->user->employer_letter) && !empty($invoice->client->user->employer_letter))
+                                                    <a class="btn btn-sm btn-success text-white"" href="{{ $invoice->client->user->employer_letter }}" target="_blank" download>View Letter</a>
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                     <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.occupation').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($invoice->client->user->occupation) && !empty($invoice->client->user->occupation))
+                                                    {{ ucfirst($invoice->client->user->occupation) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.dob').':' }}</label>
+                                           <p class="text-gray-700 fs-4 mb-0">
+                                                @if(isset($invoice->client->user->date_of_birth) && !empty($invoice->client->user->date_of_birth))
+                                                    {{ ucfirst($invoice->client->user->date_of_birth) }}
+                                                @else
+                                                    {{ "N/A" }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+
                                     <div class="col-12 table-responsive">
                                         <table class="table table-striped box-shadow-none mt-4">
                                             <thead>

@@ -82,10 +82,18 @@ class RegisteredUserController extends Controller
             'occupation' => $request->occupation,
         ]);
 
+        // $path = $request->file('employer_letter')->store('letters', 'public');
+        // $url = Storage::url($path);
+
         if ((!empty($request->employer_letter))) {
             // $user->clearMediaCollection(User::LETTER_OF_EMPLOYMENT);
             // $user->media()->delete();
-            $user->addMedia($request->employer_letter)->toMediaCollection(User::LETTER_OF_EMPLOYMENT, config('app.media_disc'));
+            $fileItem = $user->addMedia($request->employer_letter)->toMediaCollection(User::LETTER_OF_EMPLOYMENT, config('app.media_disc'));
+
+            $fileUrl = $fileItem->getUrl();
+            $user->employer_letter = $fileUrl;
+
+            $user->save();
         }
 
         $user->assignRole('client');

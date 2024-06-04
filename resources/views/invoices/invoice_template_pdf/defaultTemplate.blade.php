@@ -57,8 +57,7 @@
                             @endif
                         </td>
                         <td class="py-1"
-                            style=" overflow:hidden; word-wrap: break-word;
-                word-break: break-all;">
+                            style=" overflow:hidden; word-wrap: break-word;word-break: break-all;">
                             <b>{{ __('messages.common.name') . ':' }}&nbsp;</b>{{ $client->user->full_name }}<br>
                             <b>{{ __('messages.common.email') . ':' }}&nbsp;</b>
                             <div class="" style="width:200px; word-break: break-all!important; ">
