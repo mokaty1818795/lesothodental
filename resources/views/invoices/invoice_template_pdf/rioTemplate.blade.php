@@ -13,7 +13,7 @@
             font-family: DejaVu Sans, Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
         }
        body {
-        background-image: url("assets/images/certbg.png");
+       background-image: url("assets/images/certificate.jpeg");
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
