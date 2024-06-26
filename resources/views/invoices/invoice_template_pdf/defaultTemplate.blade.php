@@ -14,7 +14,6 @@
         }
        body {
         background-image: url("assets/images/certificate.jpeg");
-        background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
         margin: 0;
@@ -26,6 +25,18 @@
     position: absolute;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
+}
+
+.certificate-type{
+    position: absolute;
+    top: 27%;
+    left: 40%;
     transform: translate(-50%, -50%);
     text-align: center;
     color: black;
@@ -61,7 +72,7 @@
 
 .qualifications{
     position: absolute;
-    top: 54%;
+    top: 57%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -112,7 +123,7 @@
 .stamp-date{
     position: absolute;
     top: 90%;
-    right: 9%;
+    right: 7%;
     transform: translate(-50%, -50%);
     text-align: center;
     color: black;
@@ -130,13 +141,21 @@
 
 <body style="padding: 0rem 0rem ;">
     @php $styleCss = 'style'; @endphp
-    <div class="name">John Doe</div>
-    <div class="registration-no">123456</div>
+    <div class="name">{{ $client->user->full_name }}</div>
+    @if (isset($invoice) && !empty($invoice))
+                @foreach ($invoice->invoiceItems as $key => $invoiceItems)
+                   <div class="certificate-type">
+                            {{ isset($invoiceItems->product->name) ? $invoiceItems->product->name : $invoiceItems->product_name ?? __('messages.common.n/a') }}
+                    </div>
+                 @endforeach
+    @endif
+    <div class="name">{{ $client->user->full_name }}</div>
+    <div class="registration-no">{{$client->user->authorization_number}}</div>
     <div class="qualifications">Bachelor of Medicine</div>
-    <div class="category">General Practitioner</div>
-    <div class="praction-category">Doctor</div>
-    <div class="retention-dates">01/01/2024 - 31/12/2024</div>
-     <div class="stamp-date">01/01/2024</div>
+    <div class="category">{{$client->user->occupation}}</div>
+    <div class="praction-category">{{$client->user->practice}}</div>
+    <div class="retention-dates">{{ \Carbon\Carbon::parse($invoice->invoice_date)->translatedFormat(currentDateFormat()) }} - {{ \Carbon\Carbon::parse($invoice->due_date)->translatedFormat(currentDateFormat()) }}</div>
+    <div class="stamp-date">{{ \Carbon\Carbon::now()->toDateString() }}</div>
 </body>
 
 </html>

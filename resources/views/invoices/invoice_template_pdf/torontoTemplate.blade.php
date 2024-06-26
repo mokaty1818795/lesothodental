@@ -106,6 +106,19 @@
     font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
 }
 
+.qr-code{
+ position: absolute;
+ background-color: gray;
+    top: 79%;
+    left: 34%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
+}
+
 
 .retention-dates{
     position: absolute;
@@ -141,6 +154,15 @@
 
 <body style="padding: 0rem 0rem ;">
     @php $styleCss = 'style'; @endphp
+
+     @php
+        $message="This is certificate  is a true copy of the original document of ";
+        $fullMessage = $message . ' ' .$client->user->full_name .'' . " Acredited by the  Lesotho Medical Dental and Pharmacy Council";
+    @endphp
+    <div class="qr-code">
+         <img src="data:image/png;base64, {!! base64_encode(QrCode::size(120)->color(31, 122, 140)->generate($fullMessage)) !!} ">
+    </div>
+
     @if (isset($invoice) && !empty($invoice))
                 @foreach ($invoice->invoiceItems as $key => $invoiceItems)
                    <div class="certificate-type">
@@ -156,5 +178,4 @@
     <div class="retention-dates">{{ \Carbon\Carbon::parse($invoice->invoice_date)->translatedFormat(currentDateFormat()) }} - {{ \Carbon\Carbon::parse($invoice->due_date)->translatedFormat(currentDateFormat()) }}</div>
     <div class="stamp-date">{{ \Carbon\Carbon::now()->toDateString() }}</div>
 </body>
-
 </html>
