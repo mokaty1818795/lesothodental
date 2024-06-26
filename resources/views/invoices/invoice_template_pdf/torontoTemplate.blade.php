@@ -9,17 +9,30 @@
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/invoice-pdf.css') }}" rel="stylesheet" type="text/css" />
     <style>
-        * {
-            font-family: DejaVu Sans, Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
+
+        @font-face {
+            font-family:"GeorgiaCustom" ;
+            src: url("/fonts/GeorgiaPro-Black.ttf")format('truetype');
         }
-       body {
+
+        @font-face {
+             font-family: 'CustomGotham';
+             src: url('/fonts/GothamBold/GothamBold.otf') format('opentype');
+        }
+
+        @font-face {
+             font-family: 'Welter';
+             src: url('/fonts/Welterweight.otf') format('opentype');
+        }
+body {
         background-image: url("assets/images/certificate.jpeg");
         background-repeat: no-repeat;
         background-size: cover;
         margin: 0;
         padding: 0;
         width: 100%;
-        height: 100%;}
+        height: 100%;
+ }
 
 .content{
     position: absolute;
@@ -37,12 +50,13 @@
     position: absolute;
     top: 27%;
     left: 40%;
+    color: #346073;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: black;
-    font-size: 20px;
+    font-size: 23px;
     font-weight: bold;
-    font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
+    text-transform: uppercase;
+    font-family: 'GeorgiaCustom',Arial, "Liberation Sans", sans-serif;
 }
 
 .name{
@@ -54,7 +68,9 @@
     color: black;
     font-size: 20px;
     font-weight: bold;
-    font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
+    font-style: italic;
+    text-transform: uppercase;
+    font-family:'CustomGotham',Arial, "Liberation Sans", sans-serif;
 }
 
 .registration-no{
@@ -64,9 +80,9 @@
     transform: translate(-50%, -50%);
     text-align: center;
     color: black;
-    font-size: 20px;
     font-weight: bold;
-    font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
+    font-size: 20px;
+    font-family: 'Welter',sans-serif;
 }
 
 
@@ -75,11 +91,12 @@
     top: 57%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-align: center;
+    text-align: left;
+    font-style: italic;
     color: black;
-    font-size: 20px;
-    font-weight: bold;
-    font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
+    font-size: 11;
+    font-weight:300;
+    font-family:'CustomGotham',Arial, "Liberation Sans", sans-serif;
 }
 
 .category{
