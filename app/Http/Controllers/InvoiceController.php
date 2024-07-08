@@ -12,8 +12,8 @@ use App\Models\Payment;
 use App\Models\Product;
 use App\Repositories\InvoiceRepository;
 use App\Repositories\PaymentRepository;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+// use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -25,8 +25,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use Laracasts\Flash\Flash;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class InvoiceController extends AppBaseController
@@ -42,7 +42,7 @@ class InvoiceController extends AppBaseController
     /**
      * @throws Exception
      */
-    public function index(Request $request): View|Factory|Application
+    public function index(Request $request): View | Factory | Application
     {
         $this->updateInvoiceOverDueStatus();
         $statusArr = Invoice::STATUS_ARR;
@@ -54,7 +54,7 @@ class InvoiceController extends AppBaseController
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View|Factory|Application
+    public function create(): View | Factory | Application
     {
         $data = $this->invoiceRepository->getSyncList();
         $data['currencies'] = getCurrencies();
@@ -87,7 +87,7 @@ class InvoiceController extends AppBaseController
     /**
      * Display the specified resource.
      */
-    public function show(Invoice $invoice): View|Factory|Application
+    public function show(Invoice $invoice): View | Factory | Application
     {
         $invoiceData = $this->invoiceRepository->getInvoiceData($invoice);
 
@@ -138,14 +138,14 @@ class InvoiceController extends AppBaseController
     {
         $invoice->delete();
 
-        return $this->sendSuccess( __('messages.flash.invoice_deleted_successfully'));
+        return $this->sendSuccess(__('messages.flash.invoice_deleted_successfully'));
     }
 
     public function getProduct($productId): JsonResponse
     {
         $product = Product::pluck('unit_price', 'id')->toArray();
 
-        return $this->sendResponse($product,__('messages.flash.product_price_retrieved_successfully.'));
+        return $this->sendResponse($product, __('messages.flash.product_price_retrieved_successfully.'));
     }
 
     public function getInvoiceCurrency($currencyId): mixed
@@ -157,12 +157,12 @@ class InvoiceController extends AppBaseController
 
     public function convertToPdf(Invoice $invoice): Response
     {
-        ini_set('max_execution_time', 36000000);
+        // ini_set('max_execution_time', 36000000);
         $invoice->load(['client.user', 'invoiceTemplate', 'invoiceItems.product', 'invoiceItems.invoiceItemTax', 'invoiceTaxes', 'paymentQrCode']);
         $invoiceData = $this->invoiceRepository->getPdfData($invoice);
         $invoiceTemplate = $this->invoiceRepository->getDefaultTemplate($invoice);
 
-        $pdf = Pdf::loadView("invoices.invoice_template_pdf.$invoiceTemplate", $invoiceData);
+        $pdf = PDF::loadView("invoices.invoice_template_pdf.$invoiceTemplate", $invoiceData);
 
         return $pdf->stream('invoice.pdf');
     }
@@ -192,7 +192,7 @@ class InvoiceController extends AppBaseController
         $invoice = Invoice::with(['client.user', 'payments'])->whereId($invoiceId)->firstOrFail();
         $paymentReminder = Mail::to($invoice->client->user->email)->send(new InvoicePaymentReminderMail($invoice));
 
-        return $this->sendResponse($paymentReminder,__('messages.flash.payment_reminder_mail_send_successfully'));
+        return $this->sendResponse($paymentReminder, __('messages.flash.payment_reminder_mail_send_successfully'));
     }
 
     public function exportInvoicesExcel(): BinaryFileResponse
@@ -200,7 +200,7 @@ class InvoiceController extends AppBaseController
         return Excel::download(new AdminInvoicesExport(), 'invoice-excel.xlsx');
     }
 
-    public function showPublicInvoice($invoiceId): View|Factory|Application
+    public function showPublicInvoice($invoiceId): View | Factory | Application
     {
         $invoice = Invoice::with('client.user')->whereInvoiceId($invoiceId)->firstOrFail();
         $invoiceData = $this->invoiceRepository->getInvoiceData($invoice);
@@ -221,12 +221,12 @@ class InvoiceController extends AppBaseController
         $invoice->load('client.user', 'invoiceTemplate', 'invoiceItems.product', 'invoiceItems.invoiceItemTax');
         $invoiceData = $this->invoiceRepository->getPdfData($invoice);
         $invoiceTemplate = $this->invoiceRepository->getDefaultTemplate($invoice);
-        $pdf = Pdf::loadView("invoices.invoice_template_pdf.$invoiceTemplate", $invoiceData);
+        $pdf = PDF::loadView("invoices.invoice_template_pdf.$invoiceTemplate", $invoiceData);
 
         return $pdf->stream('invoice.pdf');
     }
 
-    public function showPublicPayment($invoiceId): Factory|View|Application
+    public function showPublicPayment($invoiceId): Factory | View | Application
     {
         /** @var PaymentRepository $paymentRepo */
         $paymentRepo = App::make(PaymentRepository::class);
@@ -244,7 +244,7 @@ class InvoiceController extends AppBaseController
         }
 
         return view('invoices.public-invoice.payment',
-            compact('paymentType', 'paymentMode', 'totalPayable', 'stripeKey', 'invoice','userLang')
+            compact('paymentType', 'paymentMode', 'totalPayable', 'stripeKey', 'invoice', 'userLang')
         );
     }
 
@@ -252,7 +252,7 @@ class InvoiceController extends AppBaseController
     {
         $recurringCycle = empty($invoice->recurring_cycle) ? 1 : $invoice->recurring_cycle;
         $invoice->update([
-            'recurring_status' => ! $invoice->recurring_status,
+            'recurring_status' => !$invoice->recurring_status,
             'recurring_cycle' => $recurringCycle,
         ]);
 
@@ -261,9 +261,9 @@ class InvoiceController extends AppBaseController
 
     public function exportInvoicesPdf(): Response
     {
-        ini_set('max_execution_time', 3600000000);
+        // ini_set('max_execution_time', 3600000000);
         $data['invoices'] = Invoice::with('client.user', 'payments')->orderBy('created_at', 'desc')->get();
-        $pdf = Pdf::loadView('invoices.export_invoices_pdf', $data);
+        $pdf = PDF::loadView('invoices.export_invoices_pdf', $data);
 
         return $pdf->download('Invoices.pdf');
     }

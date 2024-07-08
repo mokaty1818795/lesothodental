@@ -56,7 +56,7 @@ body {
     font-size: 23px;
     font-weight: bold;
     text-transform: uppercase;
-    font-family: 'GeorgiaCustom',Arial, "Liberation Sans", sans-serif;
+    font-family:'GeorgiaCustom';
 }
 
 .name{
