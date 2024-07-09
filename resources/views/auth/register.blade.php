@@ -260,7 +260,7 @@
                                 <input class="form-control form-control-lg" id="attended_to" value="{{ old('attended_to') }}" type="date" name="attended_to" placeholder="{{__('Attended To')}}" required autocomplete="off" autofocus/>
                             </div>
                             <div class="col-xl-6">
-                                <label class="form-label fw-bolder text-dark fs-6 required " for="degree_date">Attended From:</label>
+                                <label class="form-label fw-bolder text-dark fs-6 required " for="degree_date">Degree Date:</label>
                                 <input class="form-control form-control-lg" type="date" value="{{ old('degree_date') }}" name="degree_date" placeholder="{{__('Degree Date')}}" required autocomplete="off" autofocus/>
                             </div>
                         </div>
@@ -282,7 +282,7 @@
                                 <input class="form-control form-control-lg" id="telephone" value="{{ old('telephone') }}" type="text" name="telephone" placeholder="{{__('Telephone')}}" required autocomplete="off" autofocus/>
                             </div>
                             <div class="col-xl-6">
-                                <label class="form-label fw-bolder text-dark fs-6 required " for="fax">Profession Studied:</label>
+                                <label class="form-label fw-bolder text-dark fs-6 required " for="fax">Fax:</label>
                                 <input class="form-control form-control-lg" type="text" value="{{ old('fax') }}" name="fax" placeholder="{{__('Fax')}}" required autocomplete="off" autofocus/>
                             </div>
                         </div>
