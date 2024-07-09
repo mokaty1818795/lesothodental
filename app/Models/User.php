@@ -83,7 +83,7 @@ class User extends Authenticatable implements HasMedia
 
     const PROFILE = 'profile';
 
-    const LETTER_OF_EMPLOYMENT= "employer_letter";
+    const LETTER_OF_EMPLOYMENT = "employer_letter";
 
     const ADMIN = 1;
 
@@ -142,6 +142,9 @@ class User extends Authenticatable implements HasMedia
         'registration_number',
         'license_number',
         'occupation',
+        'gender',
+        'tittle',
+        'town',
     ];
 
     protected $appends = ['full_name', 'profile_image'];
@@ -161,17 +164,20 @@ class User extends Authenticatable implements HasMedia
         'last_name' => 'required',
         'region' => 'required',
         'date_of_birth' => 'required',
-        'practice' => 'required',
-        'practice_number' => 'required',
+        'practice' => 'nullable',
+        'practice_number' => 'nullable',
         'address' => 'required',
         'zip_code' => 'required',
         'state' => 'required',
-        'authorization_number' => 'required',
-        'facility_name' => 'required',
-        'employer_letter' => 'required',
-        'registration_number' => 'required',
-        'license_number' => 'required',
-        'occupation' => 'required',
+        'authorization_number' => 'nullable',
+        'facility_name' => 'nullable',
+        'employer_letter' => 'nullable',
+        'registration_number' => 'nullable',
+        'license_number' => 'nullable',
+        'occupation' => 'nullable',
+        'gender' => 'required',
+        'tittle' => 'required',
+        'town' => 'required',
         'email' => 'required|email:filter|unique:users,email',
         'password' => 'required|same:password_confirmation|min:6',
     ];
@@ -243,5 +249,5 @@ class User extends Authenticatable implements HasMedia
     public function education(): HasOne
     {
         return $this->hasOne(Education::class, 'user_id');
-    }   
+    }
 }

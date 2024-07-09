@@ -157,7 +157,7 @@ class InvoiceController extends AppBaseController
 
     public function convertToPdf(Invoice $invoice): Response
     {
-        // ini_set('max_execution_time', 36000000);
+        ini_set('max_execution_time', 300);
         $invoice->load(['client.user', 'invoiceTemplate', 'invoiceItems.product', 'invoiceItems.invoiceItemTax', 'invoiceTaxes', 'paymentQrCode']);
         $invoiceData = $this->invoiceRepository->getPdfData($invoice);
         $invoiceTemplate = $this->invoiceRepository->getDefaultTemplate($invoice);

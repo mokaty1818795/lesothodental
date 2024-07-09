@@ -189,7 +189,7 @@ body {
     @endif
     <div class="name">{{ $client->user->full_name }}</div>
     <div class="registration-no">{{$client->user->authorization_number}}</div>
-    <div class="qualifications">{{$client->user->education->course}}</div>
+   <div class="qualifications">{{$client->user->education->course ? $client->user->education->course : "No Degree" }}</div>
     <div class="category">{{$client->user->occupation}}</div>
     <div class="praction-category">{{$client->user->practice}}</div>
     <div class="retention-dates">{{ \Carbon\Carbon::parse($invoice->invoice_date)->translatedFormat(currentDateFormat()) }} - {{ \Carbon\Carbon::parse($invoice->due_date)->translatedFormat(currentDateFormat()) }}</div>
