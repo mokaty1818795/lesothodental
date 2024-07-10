@@ -41,22 +41,29 @@ class RegisteredUserController extends Controller
             'region' => 'required|string|max:255',
             'date_of_birth' => 'required|string|max:255',
             'practice' => 'required|string|max:255',
-            'practice_number' => 'required|string|max:255',
+            'practice_number' => 'nullable|string|max:255',
             'address' => 'required|string|max:255',
             'zip_code' => 'required|string|max:255',
             'state' => 'required|string|max:255',
-            'authorization_number' => 'required|string|max:255',
-            'facility_name' => 'required|string|max:255',
-            'employer_letter' => 'required',
-            'registration_number' => 'required|string|max:255',
-            'license_number' => 'required|string|max:255',
-            'occupation' => 'required|string|max:255',
+            'authorization_number' => 'nullable|string|max:255',
+            'facility_name' => 'nullable|string|max:255',
+            'employer_letter' => 'nullable',
+            'registration_number' => 'nullable|string|max:255',
+            'license_number' => 'nullable|string|max:255',
+            'occupation' => 'nullable|string|max:255',
+            'gender' => 'nullable|string|max:255',
+            'tittle' => 'nullable|string|max:255',
+            'town' => 'nullable|string|max:255',
+            'catergory' => 'nullable|string|max:255',
             'institude' => 'required|string|max:255',
             'course' => 'required|string|max:255',
-            'institude1' => 'nullable|string|max:255',
-            'course1' => 'nullable|string|max:255',
-            'institude2' => 'nullable|string|max:255',
-            'course2' => 'nullable|string|max:255',
+            'attended_from' => 'nullable|string|max:255',
+            'attended_to' => 'nullable|string|max:255',
+            'degree_date' => 'nullable|string|max:255',
+            'specialization' => 'nullable|string|max:255',
+            'telephone' => 'nullable|string|max:255',
+            'fax' => 'nullable|string|max:255',
+            'certificate' => 'nullable',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
 
         ]);
@@ -80,6 +87,10 @@ class RegisteredUserController extends Controller
             'registration_number' => $request->registration_number,
             'license_number' => $request->license_number,
             'occupation' => $request->occupation,
+            'gender' => $request->gender,
+            'tittle' => $request->tittle,
+            'town' => $request->town,
+            'catergory' => $request->catergory,
         ]);
 
         // $path = $request->file('employer_letter')->store('letters', 'public');
@@ -103,26 +114,30 @@ class RegisteredUserController extends Controller
         ]);
         event(new Registered($user));
 
-        Education::create([
+        $userEducation = Education::create([
             'user_id' => $user->id,
             'institude' => $request->institude,
             'course' => $request->course,
+            'attended_from' => $request->attended_from,
+            'attended_to' => $request->attended_to,
+            'degree_date' => $request->degree_date,
+            'specialization' => $request->specialization,
+            'telephone' => $request->telephone,
+            'fax' => $request->fax,
+            'certificate' => $request->certificate,
         ]);
 
-        Education::create([
-            'user_id' => $user->id,
-            'institude' => $request->institude1,
-            'course' => $request->course1,
-        ]);
+        if ((!empty($request->certificate))) {
+            // $user->clearMediaCollection(User::LETTER_OF_EMPLOYMENT);
+            // $user->media()->delete();
+            $fileItem = $userEducation->addMedia($request->certificate)->toMediaCollection(Education::UNIVERSITY_CERTIFICATE, config('app.media_disc'));
 
-        Education::create([
-            'user_id' => $user->id,
-            'institude' => $request->institude2,
-            'course' => $request->course2,
-        ]);
+            $fileUrl = $fileItem->getUrl();
+            $userEducation->certificate = $fileUrl;
+            $userEducation->save();
+        }
 
         Auth::login($user);
-
         return redirect(RouteServiceProvider::CLIENT_HOME);
     }
 }

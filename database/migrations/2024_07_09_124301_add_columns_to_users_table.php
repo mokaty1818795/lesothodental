@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('tittle')->nullable();
             $table->string('town')->nullable();
+            $table->string('catergory')->nullable();
         });
     }
 
@@ -24,7 +25,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('gender')->nullable();
+            $table->dropColumn('tittle')->nullable();
+            $table->dropColumn('town')->nullable();
+            $table->dropColumn('catergory')->nullable();
         });
     }
 };

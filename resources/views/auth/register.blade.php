@@ -244,24 +244,24 @@
                         <!-- Company Registration Number and Pharmacy Trader's Licence Number fields -->
                         <div class="row fv-row mt-12 mb-7">
                             <div class="col-xl-6">
-                                <label class="form-label fw-bolder text-dark fs-6  required"  for="institude">Institution Name:</label>
-                                <input class="form-control form-control-lg" id="institude" value="{{ old('institude') }}" type="text" name="institude" placeholder="{{__('Institude Name')}}" required autocomplete="off" autofocus/>
+                                <label class="form-label fw-bolder text-dark fs-6 "  for="institude">Institution Name:</label>
+                                <input class="form-control form-control-lg" id="institude" value="{{ old('institude') }}" type="text" name="institude" placeholder="{{__('Institude Name')}}"  autocomplete="off" autofocus/>
                             </div>
                             <div class="col-xl-6">
-                                <label class="form-label fw-bolder text-dark fs-6 required " for="attended_from">Attended From:</label>
-                                <input class="form-control form-control-lg" type="date" value="{{ old('attended_from') }}" name="attended_from" placeholder="{{__('Attended From')}}" required autocomplete="off" autofocus/>
+                                <label class="form-label fw-bolder text-dark fs-6  " for="attended_from">Attended From:</label>
+                                <input class="form-control form-control-lg" type="date" id="attended_from" value="{{ old('attended_from') }}" name="attended_from" placeholder="{{__('Attended From')}}"  autocomplete="off" autofocus/>
                             </div>
                         </div>
 
 
                         <div class="row fv-row mt-12 mb-7">
                             <div class="col-xl-6">
-                                <label class="form-label fw-bolder text-dark fs-6  required"  for="attended_to">Attended To:</label>
-                                <input class="form-control form-control-lg" id="attended_to" value="{{ old('attended_to') }}" type="date" name="attended_to" placeholder="{{__('Attended To')}}" required autocomplete="off" autofocus/>
+                                <label class="form-label fw-bolder text-dark fs-6"  for="attended_to">Attended To:</label>
+                                <input class="form-control form-control-lg" id="attended_to" value="{{ old('attended_to') }}" type="date" name="attended_to" placeholder="{{__('Attended To')}}" autocomplete="off" autofocus/>
                             </div>
                             <div class="col-xl-6">
                                 <label class="form-label fw-bolder text-dark fs-6 required " for="degree_date">Degree Date:</label>
-                                <input class="form-control form-control-lg" type="date" value="{{ old('degree_date') }}" name="degree_date" placeholder="{{__('Degree Date')}}" required autocomplete="off" autofocus/>
+                                <input class="form-control form-control-lg" type="date" id="degree_date" value="{{ old('degree_date') }}" name="degree_date" placeholder="{{__('Degree Date')}}" required autocomplete="off" autofocus/>
                             </div>
                         </div>
 
@@ -271,8 +271,8 @@
                                 <input class="form-control form-control-lg" id="specialization" value="{{ old('specialization') }}" type="text" name="specialization" placeholder="{{__('Specialization')}}" required autocomplete="off" autofocus/>
                             </div>
                             <div class="col-xl-6">
-                                <label class="form-label fw-bolder text-dark fs-6 required " for="profession_studied">Profession Studied:</label>
-                                <input class="form-control form-control-lg" type="text" value="{{ old('profession_studied') }}" name="profession_studied" placeholder="{{__('Profession Studied')}}" required autocomplete="off" autofocus/>
+                                <label class="form-label fw-bolder text-dark fs-6 required " for="course">Profession Studied:</label>
+                                <input class="form-control form-control-lg" type="text" id="course" value="{{ old('course') }}" name="course" placeholder="{{__('Profession Studied')}}" required autocomplete="off" autofocus/>
                             </div>
                         </div>
 
@@ -283,7 +283,7 @@
                             </div>
                             <div class="col-xl-6">
                                 <label class="form-label fw-bolder text-dark fs-6 required " for="fax">Fax:</label>
-                                <input class="form-control form-control-lg" type="text" value="{{ old('fax') }}" name="fax" placeholder="{{__('Fax')}}" required autocomplete="off" autofocus/>
+                                <input class="form-control form-control-lg" type="text" id="fax" value="{{ old('fax') }}" name="fax" placeholder="{{__('Fax')}}" required autocomplete="off" autofocus/>
                             </div>
                         </div>
 
