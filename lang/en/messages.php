@@ -198,6 +198,7 @@ return [
         'company_phone' => 'Company Phone',
         'fav_icon' => 'Favicon',
         'invoice_template' => 'Certificate Template',
+         'proof_of_payment' => 'Proof Of Payment',
         'color' => 'Color',
         'mail_notifications' => 'Mail Notifications',
         'stripe_key' => 'Stripe Key',

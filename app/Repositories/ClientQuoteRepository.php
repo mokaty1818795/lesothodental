@@ -109,14 +109,18 @@ class ClientQuoteRepository extends BaseRepository
     public function saveQuote(array $input): Quote
     {
         try {
+
             DB::beginTransaction();
             $input['final_amount'] = $input['amount'];
             if ($input['final_amount'] == 'NaN') {
                 $input['final_amount'] = 0;
             }
+
+            $inputImage = $input['paymentProof'];
             $quoteItemInputArray = Arr::only($input, ['product_id', 'quantity', 'price']);
             $quoteExist = Quote::where('quote_id', $input['quote_id'])->exists();
             $quoteItemInput = $this->prepareInputForQuoteItem($quoteItemInputArray);
+
             $total = [];
             foreach ($quoteItemInput as $key => $value) {
                 $total[] = $value['price'] * $value['quantity'];
@@ -126,6 +130,7 @@ class ClientQuoteRepository extends BaseRepository
                     throw new UnprocessableEntityHttpException('Discount amount should not be greater than sub total.');
                 }
             }
+
             if ($quoteExist) {
                 throw new UnprocessableEntityHttpException('Quote id already exist');
             }
@@ -142,33 +147,47 @@ class ClientQuoteRepository extends BaseRepository
             ]);
             $quote = Quote::create($input);
             $totalAmount = 0;
+
             foreach ($quoteItemInput as $key => $data) {
+
+                $data['paymentProof'] = $inputImage;
                 $validator = Validator::make($data, QuoteItem::$rules, QuoteItem::$messages);
 
                 if ($validator->fails()) {
                     throw new UnprocessableEntityHttpException($validator->errors()->first());
                 }
                 $data['product_name'] = is_numeric($data['product_id']);
+
                 if ($data['product_name'] == true) {
                     $data['product_name'] = null;
                 } else {
                     $data['product_name'] = $data['product_id'];
                     $data['product_id'] = null;
                 }
-                $data['amount'] = $data['price'] * $data['quantity'];
 
+                $data['amount'] = $data['price'] * $data['quantity'];
                 $data['total'] = $data['amount'];
                 $totalAmount += $data['amount'];
 
+                logger("Here Is the Output");
+                logger($data);
+
                 /** @var QuoteItem $quoteItem */
                 $quoteItem = new QuoteItem($data);
-
                 $quoteItem = $quote->quoteItems()->save($quoteItem);
+
+                if (isset($inputImage)) {
+                    $fileItem = $quoteItem->addMedia($inputImage)->toMediaCollection(QuoteItem::PAYMENT_ATTACHMENT, config('app.media_disc'));
+                    $fileUrl = $fileItem->getUrl();
+                    $quoteItem->paymentProof = $fileUrl;
+                    $quoteItem->save();
+
+                }
+
             }
 
             $quote->amount = $totalAmount;
             $quote->save();
-
             DB::commit();
             if (getSettingValue('mail_notification')) {
                 $input['quoteData'] = $quote;
@@ -264,7 +283,6 @@ class ClientQuoteRepository extends BaseRepository
     public function getDefaultTemplate($quote): mixed
     {
         $data['invoice_template_name'] = $quote->invoiceTemplate->key;
-
         return $data['invoice_template_name'];
     }
 

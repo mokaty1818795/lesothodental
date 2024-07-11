@@ -26,6 +26,19 @@
         {{ Form::label('templateId', __('messages.setting.invoice_template').(':'),['class' => 'form-label mb-3']) }}
         {{ Form::select('template_id', $template,\App\Models\Setting::DEFAULT_TEMPLATE ?? null, ['class' => 'form-select io-select2', 'id' => 'templateId','required','data-control' => "select2"]) }}
     </div>
+    <div class="mb-5 col-lg-6 col-sm-12">
+        {{ Form::label('paymentProof', __('messages.setting.proof_of_payment').(':'),['class' => 'form-label mb-3']) }}
+    <input
+       name="paymentProof"
+       value="{{ old('paymentProof') }}"
+       class="form-control"
+       type="file"
+       required
+       id="paymentProof"
+     >
+        <!-- {{ Form::text('paymentProof', \App\Models\Quote::generateUniqueQuoteId(), ['class' => 'form-control', 'required', 'id' => 'paymentProof', 'maxlength' => 6,'onkeypress'=>"return blockSpecialChar(event)"]) }} -->
+        <!-- <input class="form-control " id="paymentProof" value="{{ old('paymentProof') }}" type="file" name="paymentProof" placeholder="{{__('Proof Of Payemnt')}}" required autocomplete="off"/> -->
+    </div>
     <div class="mt-5">
         <div class="col-12 text-end mb-lg-10 mb-6">
             <button type="button" class="btn btn-primary text-start"

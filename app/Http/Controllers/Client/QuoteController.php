@@ -52,9 +52,12 @@ class QuoteController extends AppBaseController
 
     public function store(CreateClientQuoteRequest $request): JsonResponse
     {
+
         try {
             DB::beginTransaction();
+            // logger($request->all());
             $input = $request->all();
+
             $request->status = Quote::DRAFT;
             $quote = $this->clientQuoteRepository->saveQuote($input);
             DB::commit();
@@ -64,7 +67,7 @@ class QuoteController extends AppBaseController
             return $this->sendError($e->getMessage());
         }
 
-        return $this->sendResponse($quote, 'Quote saved successfully.');
+        return $this->sendResponse($quote, 'Application Created Successfully.');
     }
 
     public function show($id)
@@ -158,7 +161,7 @@ class QuoteController extends AppBaseController
     public function exportQuotesPdf(): Response
     {
         $data['quotes'] = Quote::with('client.user')->where('client_id', Auth::user()
-                            ->client->id)->orderBy('created_at', 'desc')->get();
+                ->client->id)->orderBy('created_at', 'desc')->get();
         $clientQuotesPdf = Pdf::loadView('quotes.export_quotes_pdf', $data);
 
         return $clientQuotesPdf->download('Client-Quotes.pdf');

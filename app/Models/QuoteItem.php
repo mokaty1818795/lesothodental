@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * App\Models\QuoteItem
@@ -18,19 +20,43 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @mixin \Eloquent
  */
-class QuoteItem extends Model
+class QuoteItem extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
+
+    const PAYMENT_ATTACHMENT = 'payment_attachment';
 
     /**
      * Validation rules
      *
      * @var array
      */
+
+    const PENDING = 0;
+
+    const APPROVED = 1;
+
+    const REJECTED = 2;
+
+    const STATUS_ALL = 3;
+
+    const PAID = 'Paid';
+
+    const PROCESSING = 'Processing';
+
+    const DENIED = 'Denied';
+
+    const STATUS_ARR_ALL = 'All';
+
+    const FULLPAYMENT = 2;
+
+    const PARTIALLYPAYMENT = 3;
+
     public static $rules = [
         'product_id' => 'required',
         'quantity' => 'required|integer',
         'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+        'paymentProof' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ];
 
     /**
@@ -51,6 +77,7 @@ class QuoteItem extends Model
         'quantity',
         'price',
         'total',
+        'paymentProof',
     ];
 
     protected $casts = [
@@ -60,6 +87,7 @@ class QuoteItem extends Model
         'quantity' => 'integer',
         'price' => 'double',
         'total' => 'double',
+        'paymentProof' => 'string',
     ];
 
     public function product(): BelongsTo

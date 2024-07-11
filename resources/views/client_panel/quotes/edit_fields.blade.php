@@ -27,6 +27,9 @@
         {{ Form::label('templateId', __('messages.setting.invoice_template').(':'),['class' => 'form-label mb-3']) }}
         {{ Form::select('template_id', $template,isset($quote) ? $quote->template_id:null, ['class' => 'form-select', 'id' => 'templateId','required', 'data-control' =>'select2']) }}
     </div>
+
+    
+
     <div class="mt-5">
         <div class="col-12 text-end mb-lg-10 mb-6">
             <button type="button" class="btn btn-primary text-start"
