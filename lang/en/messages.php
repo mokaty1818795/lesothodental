@@ -271,6 +271,7 @@ return [
         'state' => 'State',
         'country' => 'Country',
         'created_at' => 'Date',
+        'paymentproof' => 'Proof Of Payment',
     ],
 
     'category' => [
