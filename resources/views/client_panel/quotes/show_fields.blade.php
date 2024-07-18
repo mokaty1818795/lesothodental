@@ -190,6 +190,21 @@
                                             @endif
                                         </div>
                                     </div>
+                                    <div class="col-lg-3 col-md-3 col-6">
+                                        <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                            <label for="name"
+                                                   class="pb-2 fs-4 text-gray-600">{{ __('messages.client.employer_letter').':' }}</label>
+
+                                                    @foreach($quote->quoteItems as $index => $quoteItem)
+                                                         @if ($quoteItem->paymentProof)
+                                                            <a class="fs-4 text-green-400" href="{{$quoteItem->paymentProof}}" target="_blank" download>View Payment</a>
+                                                        @else
+                                                            <span class="fs-4 text-gray-800">N/A</span>
+                                                        @endif
+                                                    @endforeach
+
+                                        </div>
+                                    </div>
                                     <div class="col-12 table-responsive">
                                         <table class="table table-striped box-shadow-none mt-4">
                                             <thead>
