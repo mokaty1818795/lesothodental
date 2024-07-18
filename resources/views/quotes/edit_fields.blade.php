@@ -3,6 +3,19 @@
         {{ Form::label('client_id', __('messages.quote.client').(':'),['class' => 'form-label required fs-6 mb-3']) }}
         {{ Form::select('client_id', $clients, $client_id ?? null, ['class' => 'form-select io-select2', 'id' => 'client_id', 'placeholder' =>__('messages.quote.client'),'required', 'data-control' =>'select2']) }}
     </div>
+    <div class="mb-5 col-lg-4 col-sm-12">
+        {{ Form::label('paymentProof', __('messages.setting.proof_of_payment').(':'),['class' => 'form-label mb-3']) }}
+    <input
+       name="paymentProof"
+       value="{{ old('paymentProof') }}"
+       class="form-control"
+       type="file"
+       required
+       id="paymentProof"
+     >
+        <!-- {{ Form::text('paymentProof', \App\Models\Quote::generateUniqueQuoteId(), ['class' => 'form-control', 'required', 'id' => 'paymentProof', 'maxlength' => 6,'onkeypress'=>"return blockSpecialChar(event)"]) }} -->
+        <!-- <input class="form-control " id="paymentProof" value="{{ old('paymentProof') }}" type="file" name="paymentProof" placeholder="{{__('Proof Of Payemnt')}}" required autocomplete="off"/> -->
+    </div>
     <div class="col-lg-4 col-sm-12 mb-5">
         {{ Form::label('quote_id', __('messages.quote.quote').(' #'),['class' => 'form-label fs-6 mb-3']) }}
         <span class="text-gray-500">{{ $quote->quote_id }}</span>
