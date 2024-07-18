@@ -105,263 +105,17 @@ class InvoiceController extends AppBaseController
     <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <link rel="stylesheet" href="assets/css/certificate_styles.css">
         <title>Certificate</title>
-        <style>
-            @font-face {
-                font-family:"GeorgiaCustom";
-                src: url("/fonts/GeorgiaPro-Black.ttf") format('truetype');
-            }
-            @font-face {
-                font-family: 'CustomGotham';
-                src: url('/fonts/GothamBold/GothamBold.otf') format('opentype');
-            }
-            @font-face {
-                font-family: 'Welter';
-                src: url('/fonts/Welterweight.otf') format('opentype');
-            }
-            body {
-                /* background-image: url("assets/images/certificate.jpeg"); */
-                background-repeat: no-repeat;
-                background-size: cover;
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                height: 100%;
-            }
-            .certificate-type {
-                position: absolute;
-                top: 26%;
-                left: 27%;
-                color: #346073;
-                text-align: center;
-                font-size: 23px;
-                font-weight: bold;
-                text-transform: uppercase;
-                font-family:'GeorgiaCustom';
-            }
-
-            .certificate-name{
-                position: absolute;
-                top: 32%;
-                left: 38%;
-                color: #346073;
-                text-align: center;
-                font-size: 18px;
-                font-weight: bold;
-                font-family:'GeorgiaCustom';
-            }
-
-            .name {
-                position: absolute;
-                top: 38%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: black;
-                font-size: 20px;
-                font-weight: bold;
-                font-style: italic;
-                text-transform: uppercase;
-                font-family:'CustomGotham',Arial, "Liberation Sans", sans-serif;
-            }
-
-            .school-logo{
-                position: absolute;
-                top: 52%;
-                left: 19%;
-                transform: translate(-50%, -50%);
-            }
-
-            .registration-label {
-                position: absolute;
-                top: 42%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: #AD8D42;
-                font-size: 18px;
-                font-weight: bold;
-                font-family:'CustomGotham',Arial, "Liberation Sans", sans-serif;
-            }
-
-
-            .qualifications {
-                position: absolute;
-                top: 52%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: #AD8D42;
-                font-size: 18px;
-                font-weight: bold;
-                font-family:'CustomGotham',Arial, "Liberation Sans", sans-serif;
-            }
-
-            .wave1{
-                position: absolute;
-                background-color: gray;
-                top: 85%;
-                left: 40%;
-                transform: translate(-50%, -50%);
-            }
-
-            .waves{
-                position: absolute;
-                right:85%;
-                top:35%;
-                opacity: 0.2;
-            }
-
-            .waves2{
-                position: absolute;
-                left:85%;
-                top:35%;
-                opacity: 0.2;
-            }
-            .diamond{
-                position: absolute;
-                right:70%;
-                top:16%;
-                opacity: 0.3;
-            }
-
-            .names {
-                position: absolute;
-                top: 22%;
-                left:15%;
-                text-align: center;
-                color: #346073;
-                font-size: 17px;
-                font-weight: bold;
-                text-transform: uppercase;
-                font-family:'GeorgiaCustom';
-            }
-            .registration-no {
-                position: absolute;
-                top: 46%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: black;
-                font-weight: bold;
-                font-size: 20px;
-                font-family: 'Welter',sans-serif;
-            }
-            .category {
-                position: absolute;
-                top: 66%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: #346073;
-                font-size: 20px;
-                font-weight: bold;
-                font-family:'GeorgiaCustom';
-            }
-            .praction-category {
-                position: absolute;
-                top: 69%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: #346073;
-                font-size: 20px;
-                font-weight: bold;
-                font-family:'GeorgiaCustom';
-            }
-            .qr-code {
-                position: absolute;
-                background-color: gray;
-                top: 79%;
-                left: 30%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: black;
-                font-size: 20px;
-                font-weight: bold;
-                font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
-            }
-
-            .signature {
-                position: absolute;
-                top: 74%;
-                left: 68%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: #AD8D42;
-                font-size: 20px;
-                font-weight: bold;
-                font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
-            }
-
-             .badge{
-                position: absolute;
-                top: 79%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            .nation{
-                position: absolute;
-                top: 95%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-            .retention-dates {
-                position: absolute;
-                top: 97%;
-                left: 25%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: black;
-                font-size: 20px;
-                font-weight: bold;
-                font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
-            }
-            .stamp-date {
-                position: absolute;
-                top: 90%;
-                right: 9%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: black;
-                font-size: 15px;
-                font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
-            }
-
-            .dost-style {
-                position: absolute;
-                top: -7%;
-                left: 68%;
-                opacity: 0.2;
-
-            }
-
-            .image-logo{
-                position: absolute;
-                top: 0%;
-                left: 35%;
-                width: 100px;
-                height: 100px;
-            }
-
-            .image-logo1{
-                position: absolute;
-                opacity: 0.2;
-                top: 45%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-        </style>
     </head>
     <body>
         <div class="qr-code">
             <img src="data:image/png;base64, {$qrCode}">
         </div>
         <div class="signature">
-            Registrar
-            <!-- <img src="data:image/png;base64, {$qrCode}"> -->
+            REGISTRAR
         </div>
+        <div class="signature-line"></div>
     HTML;
 
         if (isset($invoice) && !empty($invoice)) {
@@ -373,21 +127,19 @@ class InvoiceController extends AppBaseController
         }
 
         $html .= <<<HTML
-
         <div class="names">LESOTHO MEDICAL DENTAL & PHARMACY COUNCIL</div>
         <div class="dost-style"><img src="assets/images/dots.png"/></div>
         <div class="diamond"><img src="assets/images/diamond.png"/></div>
         <div class="waves"><img src="assets/images/wave.png" height="700px"/></div>
         <div class="waves2"><img src="assets/images/wave.png" height="700px"/></div>
-
-
         <div class="image-logo"><img src="assets/images/logo1.png" height="200px" width="200px"/></div>
          <div class="image-logo1"><img src="assets/images/logo1.png" height="500px" width="500px"/></div>
         <div class="certificate-name">This is to certify that </div>
         <div class="name">{$client->user->full_name}</div>
+        <div class="qualifications-cert">{$client->user->education->course}</br> {$client->user->education->course}</div>
          <div class="registration-label">Registration No</div>
         <div class="registration-no">{$client->user->authorization_number}</div>
-        <div class="qualifications">Qualifications</div>
+        <div class="qualifications">QUALIFICATONS</div>
         <div class="category">is registered as a {$client->user->occupation} in a catergory</div>
         <div class="praction-category">{$client->user->practice}</div>
         <div class="retention-dates">{$this->formatDate($invoice->invoice_date)} - {$this->formatDate($invoice->due_date)}</div>
@@ -395,7 +147,10 @@ class InvoiceController extends AppBaseController
         <div class="badge"><img src="assets/images/asset12.png"/></div>
          <div class="nation"><img src="assets/images/nation.png"/></div>
         <div class="school-logo"><img src="assets/images/school.png"/></div>
-        <!-- <div class="wave1"><img src="assets/images/wave1.png"/></div> -->
+        <div class="stamp"><img src="assets/images/stamp.png"/></div>
+        <div class="expirydate">This Retention is from the date to the</div>
+         <div class="hat"><img src="assets/images/hat.png"/></div>
+        <div class="wave1"><img src="assets/images/waves.png"/></div>
     </body>
     </html>
     HTML;
