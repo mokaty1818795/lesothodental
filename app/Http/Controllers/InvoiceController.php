@@ -12,10 +12,11 @@ use App\Models\Payment;
 use App\Models\Product;
 use App\Repositories\InvoiceRepository;
 use App\Repositories\PaymentRepository;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
-use Exception;
 
 // use Barryvdh\DomPDF\Facade\Pdf;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -27,7 +28,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
-use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -218,12 +218,12 @@ class InvoiceController extends AppBaseController
         <div class="diamond"><img src="assets/images/diamond.png"/></div>
         <div class="waves"><img src="assets/images/wave.png" height="700px"/></div>
         <div class="waves2"><img src="assets/images/wave.png" height="700px"/></div>
-        <div class="image-logo"><img src="assets/images/logo1.png" height="200px" width="200px"/></div>
-         <div class="image-logo1"><img src="assets/images/logo1.png" height="500px" width="500px"/></div>
+        <div class="image-logo"><img src="assets/images/logo2.png" height="200px" width="200px"/></div>
+        <div class="image-logo1"><img src="assets/images/logo2.png" height="500px" width="500px"/></div>
         <div class="certificate-name">This is to certify that </div>
         <div class="name">{$client->user->full_name}</div>
         <div class="qualifications-cert">{$client->user->education->course}</br> {$client->user->education->course}</div>
-         <div class="registration-label">Registration No</div>
+        <div class="registration-label">Registration No</div>
         <div class="registration-no">{$client->user->authorization_number}</div>
         <div class="qualifications">QUALIFICATONS</div>
         <div class="category">is registered as a {$client->user->occupation} in a catergory</div>
@@ -231,11 +231,11 @@ class InvoiceController extends AppBaseController
         <div class="retention-dates">{$this->formatDate($invoice->invoice_date)} - {$this->formatDate($invoice->due_date)}</div>
         <div class="stamp-date">{$this->formatDate(Carbon::now())}</div>
         <div class="badge"><img src="assets/images/asset12.png"/></div>
-         <div class="nation"><img src="assets/images/nation.png"/></div>
+        <div class="nation"><img src="assets/images/nation.png"/></div>
         <div class="school-logo"><img src="assets/images/school.png"/></div>
         <div class="stamp"><img src="assets/images/stamp.png"/></div>
         <div class="expirydate">This Retention is from the date to the</div>
-         <div class="hat"><img src="assets/images/hat.png"/></div>
+        <div class="hat"><img src="assets/images/hat.png"/></div>
         <div class="wave1"><img src="assets/images/waves.png"/></div>
     </body>
     </html>
