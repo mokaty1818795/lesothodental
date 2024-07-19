@@ -13,8 +13,9 @@ use App\Models\Product;
 use App\Repositories\InvoiceRepository;
 use App\Repositories\PaymentRepository;
 use Carbon\Carbon;
-// use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
+
+// use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -26,7 +27,8 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class InvoiceController extends AppBaseController
@@ -155,16 +157,96 @@ class InvoiceController extends AppBaseController
         return $this->sendResponse($currency, __('messages.flash.invoice_currency_retrieved_successfully'));
     }
 
-    public function convertToPdf(Invoice $invoice): Response
+    // public function convertToPdf(Invoice $invoice): Response
+    // {
+    //     ini_set('max_execution_time', 300);
+    //     $invoice->load(['client.user', 'invoiceTemplate', 'invoiceItems.product', 'invoiceItems.invoiceItemTax', 'invoiceTaxes', 'paymentQrCode']);
+    //     $invoiceData = $this->invoiceRepository->getPdfData($invoice);
+    //     $invoiceTemplate = $this->invoiceRepository->getDefaultTemplate($invoice);
+
+    //     $pdf = PDF::loadView("invoices.invoice_template_pdf.$invoiceTemplate", $invoiceData);
+
+    //     return $pdf->stream('invoice.pdf');
+    // }
+
+    public function convertToPdf(Invoice $invoice)
     {
-        ini_set('max_execution_time', 300);
-        $invoice->load(['client.user', 'invoiceTemplate', 'invoiceItems.product', 'invoiceItems.invoiceItemTax', 'invoiceTaxes', 'paymentQrCode']);
-        $invoiceData = $this->invoiceRepository->getPdfData($invoice);
-        $invoiceTemplate = $this->invoiceRepository->getDefaultTemplate($invoice);
+        $client = $invoice->client;
+        $html = $this->generateHtml($invoice, $client);
 
-        $pdf = PDF::loadView("invoices.invoice_template_pdf.$invoiceTemplate", $invoiceData);
+        $pdf = PDF::loadHTML($html);
+        $pdf->setPaper('A4', 'portrait');
 
-        return $pdf->stream('invoice.pdf');
+        return $pdf->download('certificate.pdf');
+    }
+
+    private function generateHtml(Invoice $invoice, $client)
+    {
+        $message = "This is certificate is a true copy of the original document of ";
+        $fullMessage = $message . ' ' . $client->user->full_name . '' . " Acredited by the Lesotho Medical Dental and Pharmacy Council";
+        $qrCode = base64_encode(QrCode::size(120)->color(31, 122, 140)->generate($fullMessage));
+
+        $html = <<<HTML
+    <!DOCTYPE HTML>
+    <html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <link rel="stylesheet" href="assets/css/certificate_styles.css">
+        <title>Certificate</title>
+    </head>
+    <body>
+        <div class="qr-code">
+            <img src="data:image/png;base64, {$qrCode}">
+        </div>
+        <div class="signature">
+            REGISTRAR
+        </div>
+        <div class="signature-line"></div>
+    HTML;
+
+        if (isset($invoice) && !empty($invoice)) {
+            foreach ($invoice->invoiceItems as $invoiceItems) {
+                $html .= '<div class="certificate-type">' .
+                    (isset($invoiceItems->product->name) ? $invoiceItems->product->name : ($invoiceItems->product_name ?? 'N/A')) .
+                    '</div>';
+            }
+        }
+
+        $html .= <<<HTML
+        <div class="names">LESOTHO MEDICAL DENTAL & PHARMACY COUNCIL</div>
+        <div class="dost-style"><img src="assets/images/dots.png"/></div>
+        <div class="diamond"><img src="assets/images/diamond.png"/></div>
+        <div class="waves"><img src="assets/images/wave.png" height="700px"/></div>
+        <div class="waves2"><img src="assets/images/wave.png" height="700px"/></div>
+        <div class="image-logo"><img src="assets/images/logo1.png" height="200px" width="200px"/></div>
+         <div class="image-logo1"><img src="assets/images/logo1.png" height="500px" width="500px"/></div>
+        <div class="certificate-name">This is to certify that </div>
+        <div class="name">{$client->user->full_name}</div>
+        <div class="qualifications-cert">{$client->user->education->course}</br> {$client->user->education->course}</div>
+         <div class="registration-label">Registration No</div>
+        <div class="registration-no">{$client->user->authorization_number}</div>
+        <div class="qualifications">QUALIFICATONS</div>
+        <div class="category">is registered as a {$client->user->occupation} in a catergory</div>
+        <div class="praction-category">{$client->user->practice}</div>
+        <div class="retention-dates">{$this->formatDate($invoice->invoice_date)} - {$this->formatDate($invoice->due_date)}</div>
+        <div class="stamp-date">{$this->formatDate(Carbon::now())}</div>
+        <div class="badge"><img src="assets/images/asset12.png"/></div>
+         <div class="nation"><img src="assets/images/nation.png"/></div>
+        <div class="school-logo"><img src="assets/images/school.png"/></div>
+        <div class="stamp"><img src="assets/images/stamp.png"/></div>
+        <div class="expirydate">This Retention is from the date to the</div>
+         <div class="hat"><img src="assets/images/hat.png"/></div>
+        <div class="wave1"><img src="assets/images/waves.png"/></div>
+    </body>
+    </html>
+    HTML;
+
+        return $html;
+    }
+
+    private function formatDate($date)
+    {
+        return Carbon::parse($date)->translatedFormat(currentDateFormat());
     }
 
     public function updateInvoiceStatus(Invoice $invoice, $status): mixed
