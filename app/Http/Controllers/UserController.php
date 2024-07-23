@@ -64,7 +64,6 @@ class UserController extends AppBaseController
     public function store(CreateUserRequest $request): RedirectResponse
     {
         $input = $request->all();
-        dd($input);
         try {
             $this->userRepository->store($input);
             Flash::success(__('messages.flash.admin_created_successfully'));

@@ -133,7 +133,7 @@ class InvoiceController extends AppBaseController
         <div class="waves"><img src="assets/images/wave.png" height="700px"/></div>
         <div class="waves2"><img src="assets/images/wave.png" height="700px"/></div>
         <div class="image-logo"><img src="assets/images/logo2.png" height="200px" width="200px"/></div>
-         <div class="image-logo1"><img src="assets/images/logo2.png" height="500px" width="500px"/></div>
+         <div class="image-logo1"><img src="assets/images/logo2.png" height="970px" width="970px"/></div>
         <div class="certificate-name">This is to certify that </div>
         <div class="name">{$client->user->full_name}</div>
         <div class="qualifications-cert">{$client->user->education->course}</br> {$client->user->education->course}</div>
