@@ -182,11 +182,11 @@
         <div class="mb-5">
             {{ Form::label('employer_letter', __('messages.client.employer_letter') . ':', ['class' => 'form-label mb-3']) }}
             <input
-            name="paymentProof"
-            value="{{ old('paymentProof') }}"
+            name="employer_letter"
+            value="{{ old('employer_letter') }}"
             class="form-control"
             type="file"
-            id="paymentProof"
+            id="employer_letter"
             >
             <!-- {{ Form::file('employer_letter', isset($user) ? $user->employer_letter : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.employer_letter')]) }} -->
         </div>
