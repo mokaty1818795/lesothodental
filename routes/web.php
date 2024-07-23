@@ -131,6 +131,7 @@ Route::prefix('admin')->middleware(['auth', 'xss', 'role:admin'])->group(functio
             [InvoiceController::class, 'updateRecurring']
         )->name('update-recurring');
     });
+    
     Route::post(
         'change-invoice-status/{invoice}/{status}',
         [InvoiceController::class, 'updateInvoiceStatus']

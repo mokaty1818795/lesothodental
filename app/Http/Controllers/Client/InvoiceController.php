@@ -89,6 +89,8 @@ class InvoiceController extends AppBaseController
         $html = $this->generateHtml($invoice, $client);
 
         $pdf = PDF::loadHTML($html);
+        $pdf->setPaper('A4', 'portrait');
+
         return $pdf->download('certificate.pdf');
     }
 
@@ -103,126 +105,17 @@ class InvoiceController extends AppBaseController
     <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <link rel="stylesheet" href="assets/css/certificate_styles.css">
         <title>Certificate</title>
-        <style>
-            @font-face {
-                font-family:"GeorgiaCustom";
-                src: url("/fonts/GeorgiaPro-Black.ttf") format('truetype');
-            }
-            @font-face {
-                font-family: 'CustomGotham';
-                src: url('/fonts/GothamBold/GothamBold.otf') format('opentype');
-            }
-            @font-face {
-                font-family: 'Welter';
-                src: url('/fonts/Welterweight.otf') format('opentype');
-            }
-            body {
-                background-image: url("assets/images/certificate.jpeg");
-                background-repeat: no-repeat;
-                background-size: cover;
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                height: 100%;
-            }
-            .certificate-type {
-                position: absolute;
-                top: 27%;
-                left: 40%;
-                color: #346073;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                font-size: 23px;
-                font-weight: bold;
-                text-transform: uppercase;
-                font-family:'GeorgiaCustom';
-            }
-            .name {
-                position: absolute;
-                top: 39%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: black;
-                font-size: 20px;
-                font-weight: bold;
-                font-style: italic;
-                text-transform: uppercase;
-                font-family:'CustomGotham',Arial, "Liberation Sans", sans-serif;
-            }
-            .registration-no {
-                position: absolute;
-                top: 47%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: black;
-                font-weight: bold;
-                font-size: 20px;
-                font-family: 'Welter',sans-serif;
-            }
-            .category {
-                position: absolute;
-                top: 63%;
-                left: 56%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: black;
-                font-size: 20px;
-                font-weight: bold;
-                font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
-            }
-            .praction-category {
-                position: absolute;
-                top: 69%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: black;
-                font-size: 20px;
-                font-weight: bold;
-                font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
-            }
-            .qr-code {
-                position: absolute;
-                background-color: gray;
-                top: 79%;
-                left: 34%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: black;
-                font-size: 20px;
-                font-weight: bold;
-                font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
-            }
-            .retention-dates {
-                position: absolute;
-                top: 97%;
-                left: 25%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: black;
-                font-size: 20px;
-                font-weight: bold;
-                font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
-            }
-            .stamp-date {
-                position: absolute;
-                top: 90%;
-                right: 7%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: black;
-                font-size: 15px;
-                font-family: Arial, "Helvetica", Arial, "Liberation Sans", sans-serif;
-            }
-        </style>
     </head>
     <body>
         <div class="qr-code">
             <img src="data:image/png;base64, {$qrCode}">
         </div>
+        <div class="signature">
+            REGISTRAR
+        </div>
+        <div class="signature-line"></div>
     HTML;
 
         if (isset($invoice) && !empty($invoice)) {
@@ -234,12 +127,30 @@ class InvoiceController extends AppBaseController
         }
 
         $html .= <<<HTML
+        <div class="names">LESOTHO MEDICAL DENTAL & PHARMACY COUNCIL</div>
+        <div class="dost-style"><img src="assets/images/dots.png"/></div>
+        <div class="diamond"><img src="assets/images/diamond.png"/></div>
+        <div class="waves"><img src="assets/images/wave.png" height="700px"/></div>
+        <div class="waves2"><img src="assets/images/wave.png" height="700px"/></div>
+        <div class="image-logo"><img src="assets/images/logo2.png" height="200px" width="200px"/></div>
+         <div class="image-logo1"><img src="assets/images/logo2.png" height="970px" width="970px"/></div>
+        <div class="certificate-name">This is to certify that </div>
         <div class="name">{$client->user->full_name}</div>
+        <div class="qualifications-cert">{$client->user->education->course}</br> {$client->user->education->course}</div>
+         <div class="registration-label">Registration No</div>
         <div class="registration-no">{$client->user->authorization_number}</div>
-        <div class="category">{$client->user->occupation}</div>
+        <div class="qualifications">QUALIFICATONS</div>
+        <div class="category">is registered as a {$client->user->occupation} in a catergory</div>
         <div class="praction-category">{$client->user->practice}</div>
         <div class="retention-dates">{$this->formatDate($invoice->invoice_date)} - {$this->formatDate($invoice->due_date)}</div>
         <div class="stamp-date">{$this->formatDate(Carbon::now())}</div>
+        <div class="badge"><img src="assets/images/asset12.png"/></div>
+         <div class="nation"><img src="assets/images/nation.png"/></div>
+        <div class="school-logo"><img src="assets/images/school.png"/></div>
+        <div class="stamp"><img src="assets/images/stamp.png"/></div>
+        <div class="expirydate">This Retention is from the date to the</div>
+         <div class="hat"><img src="assets/images/hat.png"/></div>
+        <div class="wave1"><img src="assets/images/waves.png"/></div>
     </body>
     </html>
     HTML;

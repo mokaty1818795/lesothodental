@@ -4,6 +4,19 @@
         {{ Form::text('client', getLogInUser()->full_name, ['class' => 'form-control', 'readonly']) }}
         {{ Form::hidden('client_id', getLogInUserId(), ['class' => 'form-control', 'id' => 'client_id']) }}
     </div>
+    <div class="mb-5 col-lg-6 col-sm-12">
+        {{ Form::label('paymentProof', __('messages.setting.proof_of_payment').(':'),['class' => 'form-label mb-3']) }}
+    <input
+       name="paymentProof"
+       value="{{ old('paymentProof') }}"
+       class="form-control"
+       type="file"
+       required
+       id="paymentProof"
+     >
+        <!-- {{ Form::text('paymentProof', \App\Models\Quote::generateUniqueQuoteId(), ['class' => 'form-control', 'required', 'id' => 'paymentProof', 'maxlength' => 6,'onkeypress'=>"return blockSpecialChar(event)"]) }} -->
+        <!-- <input class="form-control " id="paymentProof" value="{{ old('paymentProof') }}" type="file" name="paymentProof" placeholder="{{__('Proof Of Payemnt')}}" required autocomplete="off"/> -->
+    </div>
     <div class="col-lg-4 col-sm-12 mb-5">
         {{ Form::label('quote_id', __('messages.quote.quote').(' #'),['class' => 'form-label mb-3']) }}
         <span class="text-gray-500">{{ $quote->quote_id }}</span>

@@ -122,6 +122,28 @@ function prepareDatePickers() {
         },
     });
 
+    $("#date_of_birth").flatpickr({
+        defaultDate: new Date(),
+        dateFormat: currentDateFormat,
+        locale: getUserLanguages,
+        onChange: function (selectedDates, dateStr, instance) {
+            let minDate = moment($("#invoice_date").val(), momentFormat)
+                .add(1, "days")
+                .format(momentFormat);
+            if (typeof dueDateFlatPicker != "undefined") {
+                dueDateFlatPicker.set("minDate", minDate);
+            }
+        },
+        onReady: function () {
+            let minDate = moment(new Date())
+                .add(1, "days")
+                .format(momentFormat);
+            if (typeof dueDateFlatPicker != "undefined") {
+                dueDateFlatPicker.set("minDate", minDate);
+            }
+        },
+    });
+
     $("#editInvoiceDate").flatpickr({
         dateFormat: currentDateFormat,
         defaultDate: moment($("#editInvoiceDate").val()).format(momentFormat),

@@ -188,10 +188,12 @@ class QuoteRepository extends BaseRepository
             if ($input['discount_type'] == 0) {
                 $input['discount'] = 0;
             }
+            logger($input);
             $input['final_amount'] = $input['amount'];
             $quoteItemInputArr = Arr::only($input, ['product_id', 'quantity', 'price', 'id']);
             $quoteItemInput = $this->prepareInputForQuoteItem($quoteItemInputArr);
             $total = [];
+
             foreach ($quoteItemInput as $key => $value) {
                 $total[] = $value['price'] * $value['quantity'];
             }

@@ -203,6 +203,23 @@
                                         </div>
                                     </div>
 
+                                    @foreach($quote->quoteItems as $index => $quoteItem)
+                                        <div class="col-lg-3 col-md-3 col-6">
+                                            <div class="d-flex flex-column mb-md-10 mb-5 mt-3 mt-md-0">
+                                                <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.client.paymentproof') . ':' }}</label>
+                                                <p class=" fs-4 mb-0">
+                                                    @if(isset($quoteItem->paymentProof) && !empty($quoteItem->paymentProof))
+                                                        <a class="btn btn-sm btn-success text-white"" href="{{ $quoteItem->paymentProof }}" target="_blank" download>View Payment</a>
+                                                    @else
+                                                        {{ "N/A" }}
+                                                    @endif
+                                                </p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+
+
 
 
 
