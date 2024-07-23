@@ -266,7 +266,7 @@ return [
         'authorization_number' => 'Authorization Number',
         'facility_name' => 'Facility Name',
         'employer_letter' => 'Employer Letter',
-        'registration_number' => 'Registration Number',
+        'registration_number' => 'Company Registration Number',
         'license_number' => 'License Number',
         'occupation' => 'Occupation',
         'note' => 'Zip Code',

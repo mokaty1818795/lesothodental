@@ -154,32 +154,38 @@
     </div>
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
-            {{ Form::label('practice_number', __('messages.client.practice_number') . ':', ['class' => 'form-label required mb-3']) }}
+            {{ Form::label('practice_number', __('messages.client.practice_number') . ':', ['class' => 'form-label mb-3']) }}
             {{ Form::text('practice_number', isset($user) ? $user->practice_number : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.practice_number')]) }}
         </div>
     </div>
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
-            {{ Form::label('authorization_number', __('messages.client.authorization_number') . ':', ['class' => 'form-label mb-3 required']) }}
+            {{ Form::label('authorization_number', __('messages.client.authorization_number') . ':', ['class' => 'form-label mb-3']) }}
             {{ Form::text('authorization_number', isset($user) ? $user->authorization_number : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.authorization_number')]) }}
         </div>
     </div>
 
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
-            {{ Form::label('facility_name', __('messages.client.facility_name') . ':', ['class' => 'form-label required mb-3']) }}
-            {{ Form::text('facility_name', isset($user) ? $user->facility_name : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.facility_name'), 'required']) }}
+            {{ Form::label('registration_number', __('messages.client.registration_number') . ':', ['class' => 'form-label  mb-3']) }}
+            {{ Form::text('registration_number', isset($user) ? $user->registration_number : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.registration_number')]) }}
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('facility_name', __('messages.client.facility_name') . ':', ['class' => 'form-label  mb-3']) }}
+            {{ Form::text('facility_name', isset($user) ? $user->facility_name : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.facility_name')]) }}
         </div>
     </div>
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
-            {{ Form::label('employer_letter', __('messages.client.employer_letter') . ':', ['class' => 'form-label required mb-3']) }}
+            {{ Form::label('employer_letter', __('messages.client.employer_letter') . ':', ['class' => 'form-label mb-3']) }}
             <input
             name="paymentProof"
             value="{{ old('paymentProof') }}"
             class="form-control"
             type="file"
-            required
             id="paymentProof"
             >
             <!-- {{ Form::file('employer_letter', isset($user) ? $user->employer_letter : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.employer_letter')]) }} -->
@@ -187,14 +193,14 @@
     </div>
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
-            {{ Form::label('license_number', __('messages.client.license_number') . ':', ['class' => 'form-label mb-3 required']) }}
+            {{ Form::label('license_number', __('messages.client.license_number') . ':', ['class' => 'form-label mb-3']) }}
             {{ Form::text('license_number', isset($user) ? $user->license_number : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.license_number')]) }}
         </div>
     </div>
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
             {{ Form::label('occupation', __('messages.client.occupation') . ':', ['class' => 'form-label required mb-3']) }}
-            {{ Form::text('occupation', isset($user) ? $user->occupation : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.occupation')]) }}
+            {{ Form::text('occupation', isset($user) ? $user->occupation : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.occupation'),'required']) }}
         </div>
     </div>
 
