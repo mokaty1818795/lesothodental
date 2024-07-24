@@ -41,15 +41,13 @@
 
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
-            {{ Form::label('first_name', __('messages.client.gender') . ':', ['class' => 'form-label required mb-3']) }}
-            <select class="form-select form-control-lg" id="gender"
-                value="{{ old('gender') }}" type="text" name="gender"
-                placeholder="{{ __('Female') }}" autocomplete="off" required autofocus>
-                <option value="Female">Female</option>
-                <option value="Male">Male</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
+    {{ Form::label('gender', __('messages.client.gender') . ':', ['class' => 'form-label required mb-3']) }}
+    <select class="form-select form-control-lg" id="gender" name="gender" autocomplete="off" required autofocus>
+        <option value="Female" {{ old('gender', $user->gender) == 'Female' ? 'selected' : '' }}>Female</option>
+        <option value="Male" {{ old('gender', $user->gender) == 'Male' ? 'selected' : '' }}>Male</option>
+        <option value="Other" {{ old('gender', $user->gender) == 'Other' ? 'selected' : '' }}>Other</option>
+    </select>
+</div>
     </div>
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
@@ -95,62 +93,62 @@
             {{ Form::text('town',isset($user) ? $user->town : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.town'), 'required']) }}
         </div>
     </div>
-    <div class="col-lg-4 col-sm-12 mb-5">
-        <div class="mb-5">
-            {{ Form::label('profession', __('messages.client.profession') . ':', ['class' => 'form-label mb-3 required']) }}
-             <select class="form-control form-control-solid" id="practice"
-                                value="{{ old('practice') }}" type="text" name="practice"
-                                placeholder="{{ __('Dentist') }}" autocomplete="off" required autofocus>
-                                    <option value="Clinical Officer">Clinical Officer</option>
-                                    <option value="Medical Practitioner">Medical Practitioner</option>
-                                    <option value="Specialist">Specialist</option>
-                                    <option value="Dentist">Dentist</option>
-                                    <option value="Pharmacist">Pharmacist</option>
-                                    <option value="Environmental Health Specialist">Environmental Health Specialist</option>
-                                    <option value="Health Assistant">Health Assistant</option>
-                                    <option value="Physiotherapist">Physiotherapist</option>
-                                    <option value="Psychologist">Psychologist</option>
-                                    <option value="Counsellor">Counsellor</option>
-                                    <option value="Dental Technician">Dental Technician</option>
-                                    <option value="Dental Technologist">Dental Technologist</option>
-                                    <option value="Dental Therapist">Dental Therapist</option>
-                                    <option value="Pharm Technician">Pharm Technician</option>
-                                    <option value="Dispenser">Dispenser</option>
-                                    <option value="Medical Technologist">Medical Technologist</option>
-                                    <option value="Radiographer">Radiographer</option>
-                                    <option value="Speech Therapist">Speech Therapist</option>
-                                    <option value="Optometrist">Optometrist</option>
-                                    <option value="Orthopedic Technician">Orthopedic Technician</option>
-                                    <option value="Dietician">Dietician</option>
-                                    <option value="Laboratory Technician">Laboratory Technician</option>
-                                    <option value="Plaster Room Technician">Plaster Room Technician</option>
-                                    <option value="Paramedic">Paramedic</option>
-                                    <option value="Biomedical Forensic Genetic">Biomedical Forensic Genetic</option>
-                                    <option value="Anesthetic">Anesthetic</option>
-                                    <option value="Clinical Technologist">Clinical Technologist</option>
-                                    <option value="Biokinetic">Biokinetic</option>
-                                    <option value="Pastoral Care & Counselling">Pastoral Care & Counselling</option>
-                                    <option value="Psychometrist">Psychometrist</option>
-                                    <option value="Audiologist">Audiologist</option>
-                                    <option value="Nutritionist">Nutritionist</option>
-                                    <option value="Masseur">Masseur</option>
-                                    <option value="Oral Hygienist">Oral Hygienist</option>
-                            </select>
-        </div>
-    </div>
 
     <div class="col-lg-4 col-sm-12 mb-5">
-        <div class="mb-5">
-            {{ Form::label('first_name', __('messages.client.category') . ':', ['class' => 'form-label required mb-3']) }}
-           <select class="form-control form-control-solid" id="catergory"
-            value="{{ old('catergory') }}" type="text" name="catergory"
-            placeholder="{{ __('Dentist') }}" autocomplete="off" required autofocus>
-                <option value="Dentist">Dentist</option>
-                <option value="Pharmacist">Pharmacist</option>
-                <option value="Specialist">Specialist</option>
-                <option value="Medical Practitioner">Medical Practioner</option>
-            </select>
-        </div>
+    <div class="mb-5">
+        {{ Form::label('profession', __('messages.client.profession') . ':', ['class' => 'form-label mb-3 required']) }}
+        <select class="form-control form-control-solid" id="practice" name="practice" autocomplete="off" required autofocus>
+            <option value="Clinical Officer" {{ old('practice', $user->practice) == 'Clinical Officer' ? 'selected' : '' }}>Clinical Officer</option>
+            <option value="Medical Practitioner" {{ old('practice', $user->practice) == 'Medical Practitioner' ? 'selected' : '' }}>Medical Practitioner</option>
+            <option value="Specialist" {{ old('practice', $user->practice) == 'Specialist' ? 'selected' : '' }}>Specialist</option>
+            <option value="Dentist" {{ old('practice', $user->practice) == 'Dentist' ? 'selected' : '' }}>Dentist</option>
+            <option value="Pharmacist" {{ old('practice', $user->practice) == 'Pharmacist' ? 'selected' : '' }}>Pharmacist</option>
+            <option value="Environmental Health Specialist" {{ old('practice', $user->practice) == 'Environmental Health Specialist' ? 'selected' : '' }}>Environmental Health Specialist</option>
+            <option value="Health Assistant" {{ old('practice', $user->practice) == 'Health Assistant' ? 'selected' : '' }}>Health Assistant</option>
+            <option value="Physiotherapist" {{ old('practice', $user->practice) == 'Physiotherapist' ? 'selected' : '' }}>Physiotherapist</option>
+            <option value="Psychologist" {{ old('practice', $user->practice) == 'Psychologist' ? 'selected' : '' }}>Psychologist</option>
+            <option value="Counsellor" {{ old('practice', $user->practice) == 'Counsellor' ? 'selected' : '' }}>Counsellor</option>
+            <option value="Dental Technician" {{ old('practice', $user->practice) == 'Dental Technician' ? 'selected' : '' }}>Dental Technician</option>
+            <option value="Dental Technologist" {{ old('practice', $user->practice) == 'Dental Technologist' ? 'selected' : '' }}>Dental Technologist</option>
+            <option value="Dental Therapist" {{ old('practice', $user->practice) == 'Dental Therapist' ? 'selected' : '' }}>Dental Therapist</option>
+            <option value="Pharm Technician" {{ old('practice', $user->practice) == 'Pharm Technician' ? 'selected' : '' }}>Pharm Technician</option>
+            <option value="Dispenser" {{ old('practice', $user->practice) == 'Dispenser' ? 'selected' : '' }}>Dispenser</option>
+            <option value="Medical Technologist" {{ old('practice', $user->practice) == 'Medical Technologist' ? 'selected' : '' }}>Medical Technologist</option>
+            <option value="Radiographer" {{ old('practice', $user->practice) == 'Radiographer' ? 'selected' : '' }}>Radiographer</option>
+            <option value="Speech Therapist" {{ old('practice', $user->practice) == 'Speech Therapist' ? 'selected' : '' }}>Speech Therapist</option>
+            <option value="Optometrist" {{ old('practice', $user->practice) == 'Optometrist' ? 'selected' : '' }}>Optometrist</option>
+            <option value="Orthopedic Technician" {{ old('practice', $user->practice) == 'Orthopedic Technician' ? 'selected' : '' }}>Orthopedic Technician</option>
+            <option value="Dietician" {{ old('practice', $user->practice) == 'Dietician' ? 'selected' : '' }}>Dietician</option>
+            <option value="Laboratory Technician" {{ old('practice', $user->practice) == 'Laboratory Technician' ? 'selected' : '' }}>Laboratory Technician</option>
+            <option value="Plaster Room Technician" {{ old('practice', $user->practice) == 'Plaster Room Technician' ? 'selected' : '' }}>Plaster Room Technician</option>
+            <option value="Paramedic" {{ old('practice', $user->practice) == 'Paramedic' ? 'selected' : '' }}>Paramedic</option>
+            <option value="Biomedical Forensic Genetic" {{ old('practice', $user->practice) == 'Biomedical Forensic Genetic' ? 'selected' : '' }}>Biomedical Forensic Genetic</option>
+            <option value="Anesthetic" {{ old('practice', $user->practice) == 'Anesthetic' ? 'selected' : '' }}>Anesthetic</option>
+            <option value="Clinical Technologist" {{ old('practice', $user->practice) == 'Clinical Technologist' ? 'selected' : '' }}>Clinical Technologist</option>
+            <option value="Biokinetic" {{ old('practice', $user->practice) == 'Biokinetic' ? 'selected' : '' }}>Biokinetic</option>
+            <option value="Pastoral Care & Counselling" {{ old('practice', $user->practice) == 'Pastoral Care & Counselling' ? 'selected' : '' }}>Pastoral Care & Counselling</option>
+            <option value="Psychometrist" {{ old('practice', $user->practice) == 'Psychometrist' ? 'selected' : '' }}>Psychometrist</option>
+            <option value="Audiologist" {{ old('practice', $user->practice) == 'Audiologist' ? 'selected' : '' }}>Audiologist</option>
+            <option value="Nutritionist" {{ old('practice', $user->practice) == 'Nutritionist' ? 'selected' : '' }}>Nutritionist</option>
+            <option value="Masseur" {{ old('practice', $user->practice) == 'Masseur' ? 'selected' : '' }}>Masseur</option>
+            <option value="Oral Hygienist" {{ old('practice', $user->practice) == 'Oral Hygienist' ? 'selected' : '' }}>Oral Hygienist</option>
+        </select>
+    </div>
+</div>
+
+
+
+    <div class="col-lg-4 col-sm-12 mb-5">
+       <div class="mb-5">
+    {{ Form::label('category', __('messages.client.category') . ':', ['class' => 'form-label required mb-3']) }}
+    <select class="form-control form-control-solid" id="catergory" name="catergory" autocomplete="off" required autofocus>
+        <option value="Dentist" {{ old('catergory', $user->catergory) == 'Dentist' ? 'selected' : '' }}>Dentist</option>
+        <option value="Pharmacist" {{ old('catergory', $user->catergory) == 'Pharmacist' ? 'selected' : '' }}>Pharmacist</option>
+        <option value="Specialist" {{ old('catergory', $user->catergory) == 'Specialist' ? 'selected' : '' }}>Specialist</option>
+        <option value="Medical Practitioner" {{ old('catergory', $user->catergory) == 'Medical Practitioner' ? 'selected' : '' }}>Medical Practitioner</option>
+    </select>
+</div>
+
     </div>
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
@@ -180,18 +178,26 @@
         </div>
     </div>
     <div class="col-lg-4 col-sm-12 mb-5">
-        <div class="mb-5">
-            {{ Form::label('employer_letter', __('messages.client.employer_letter') . ':', ['class' => 'form-label mb-3']) }}
-            <input
+    <div class="mb-5">
+        {{ Form::label('employer_letter', __('messages.client.employer_letter') . ':', ['class' => 'form-label mb-3']) }}
+        <input
             name="employer_letter"
-            value="{{ old('employer_letter') }}"
             class="form-control"
             type="file"
+            value="{{ isset($user->employer_letter) ? $user->employer_letter : null }}"
             id="employer_letter"
-            >
-            <!-- {{ Form::file('employer_letter', isset($user) ? $user->employer_letter : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.employer_letter')]) }} -->
-        </div>
+        >
+
+        @if(isset($user->employer_letter) && $user->employer_letter)
+            <div class="mt-2">
+                <a href="{{ $user->employer_letter }}" target="_blank">
+                    {{ __($user->employer_letter) }}
+                </a>
+            </div>
+        @endif
     </div>
+</div>
+
 
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
@@ -229,7 +235,9 @@
                     <input class="form-control form-control-solid"
                            type="password" placeholder={{__('messages.client.password')}} name="password"
                            autocomplete="off"
-                           aria-label="Password" data-toggle="password">
+                           aria-label="Password" data-toggle="password"
+                           value={{isset($user) ? $user->password : null}}
+                           >
                     <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4 input-icon input-password-hide cursor-pointer text-gray-600">
                                 <i class="bi bi-eye-slash-fill"></i>
                         </span>
@@ -245,7 +253,9 @@
                     <input class="form-control form-control-solid"
                            type="password"
                            placeholder="{{__('messages.client.confirm_password')}}" name="password_confirmation"
-                           autocomplete="off" aria-label="Password" data-toggle="password">
+                           autocomplete="off" aria-label="Password" data-toggle="password"
+                           value={{isset($user) ? $user->password : null}}
+                           >
                     <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4 input-icon input-password-hide cursor-pointer text-gray-600">
                                <i class="bi bi-eye-slash-fill"></i>
                         </span>

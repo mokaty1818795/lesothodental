@@ -111,7 +111,10 @@ class UserController extends AppBaseController
      */
     public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
+        logger("updating Fields");
+        logger($request->all());
         try {
+
             $this->userRepository->updateUser($request->all(), $user->id);
             Flash::success(__('messages.flash.admin_updated_successfully'));
         } catch (Exception $exception) {
