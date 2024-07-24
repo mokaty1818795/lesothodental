@@ -1,23 +1,162 @@
 <div class="row gx-10 mb-5">
-    <div class="col-lg-6">
+    <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
             {{ Form::label('first_name', __('messages.client.first_name').':', ['class' => 'form-label required mb-3']) }}
             {{ Form::text('first_name', null, ['class' => 'form-control', 'placeholder' =>  __('messages.client.first_name'), 'required']) }}
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
             {{ Form::label('last_name', __('messages.client.last_name').':', ['class' => 'form-label required mb-3']) }}
             {{ Form::text('last_name', null, ['class' => 'form-control', 'placeholder' =>  __('messages.client.last_name'), 'required']) }}
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
             {{ Form::label('email', __('messages.client.email').':', ['class' => 'form-label required mb-3']) }}
             {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' =>  __('messages.client.email'), 'required']) }}
         </div>
     </div>
-    <div class="col-lg-6">
+
+    <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('first_name', __('messages.client.gender') . ':', ['class' => 'form-label required mb-3']) }}
+            <select class="form-select form-control-lg" id="gender"
+                value="{{ old('gender') }}" type="text" name="gender"
+                placeholder="{{ __('Female') }}" autocomplete="off" required autofocus>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('tittle', __('messages.client.title') . ':', ['class' => 'form-label required mb-3']) }}
+            {{ Form::text('tittle', isset($user) ? $user->tittle : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.title'), 'required']) }}
+        </div>
+    </div>
+     <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('country',__('messages.client.country').':', ['class' => 'form-label mb-3']) }}
+            {{ Form::select('region', $countries, null, ['id'=>'countryId','class' => 'form-select io-select2 ','placeholder' =>  __('messages.client.country'), 'data-control' => 'select2']) }}
+        </div>
+    </div>
+
+     <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('dob', __('messages.client.dob') . ':', ['class' => 'form-label required mb-3']) }}
+            {{ Form::text('date_of_birth', null, ['class' => 'form-select', 'id' => 'date_of_birth', 'autocomplete' => 'off', 'required']) }}
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('zip_code', __('messages.client.zipcode') . ':', ['class' => 'form-label mb-3 required']) }}
+            {{ Form::text('zip_code', null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.zipcode'), 'required']) }}
+        </div>
+    </div>
+
+     <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('state', __('messages.client.state').':', ['class' => 'form-label mb-3']) }}
+            {{ Form::select('state_id', [], null, ['id'=>'stateId','class' => 'form-select io-select2 ','placeholder' =>  __('messages.client.state'), 'data-control' => 'select2']) }}
+        </div>
+    </div>
+
+     <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('town', __('messages.client.town') . ':', ['class' => 'form-label required mb-3']) }}
+            {{ Form::text('town', null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.town'), 'required']) }}
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('profession', __('messages.client.profession') . ':', ['class' => 'form-label mb-3 required']) }}
+             <select class="form-control form-control-solid" id="practice"
+                                value="{{ old('practice') }}" type="text" name="practice"
+                                placeholder="{{ __('Dentist') }}" autocomplete="off" required autofocus>
+                                    <option value="Clinical Officer">Clinical Officer</option>
+                                    <option value="Medical Practitioner">Medical Practitioner</option>
+                                    <option value="Specialist">Specialist</option>
+                                    <option value="Dentist">Dentist</option>
+                                    <option value="Pharmacist">Pharmacist</option>
+                                    <option value="Environmental Health Specialist">Environmental Health Specialist</option>
+                                    <option value="Health Assistant">Health Assistant</option>
+                                    <option value="Physiotherapist">Physiotherapist</option>
+                                    <option value="Psychologist">Psychologist</option>
+                                    <option value="Counsellor">Counsellor</option>
+                                    <option value="Dental Technician">Dental Technician</option>
+                                    <option value="Dental Technologist">Dental Technologist</option>
+                                    <option value="Dental Therapist">Dental Therapist</option>
+                                    <option value="Pharm Technician">Pharm Technician</option>
+                                    <option value="Dispenser">Dispenser</option>
+                                    <option value="Medical Technologist">Medical Technologist</option>
+                                    <option value="Radiographer">Radiographer</option>
+                                    <option value="Speech Therapist">Speech Therapist</option>
+                                    <option value="Optometrist">Optometrist</option>
+                                    <option value="Orthopedic Technician">Orthopedic Technician</option>
+                                    <option value="Dietician">Dietician</option>
+                                    <option value="Laboratory Technician">Laboratory Technician</option>
+                                    <option value="Plaster Room Technician">Plaster Room Technician</option>
+                                    <option value="Paramedic">Paramedic</option>
+                                    <option value="Biomedical Forensic Genetic">Biomedical Forensic Genetic</option>
+                                    <option value="Anesthetic">Anesthetic</option>
+                                    <option value="Clinical Technologist">Clinical Technologist</option>
+                                    <option value="Biokinetic">Biokinetic</option>
+                                    <option value="Pastoral Care & Counselling">Pastoral Care & Counselling</option>
+                                    <option value="Psychometrist">Psychometrist</option>
+                                    <option value="Audiologist">Audiologist</option>
+                                    <option value="Nutritionist">Nutritionist</option>
+                                    <option value="Masseur">Masseur</option>
+                                    <option value="Oral Hygienist">Oral Hygienist</option>
+                            </select>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('first_name', __('messages.client.category') . ':', ['class' => 'form-label required mb-3']) }}
+           <select class="form-control form-control-solid" id="catergory"
+            value="{{ old('catergory') }}" type="text" name="catergory"
+            placeholder="{{ __('Dentist') }}" autocomplete="off" required autofocus>
+                <option value="Dentist">Dentist</option>
+                <option value="Pharmacist">Pharmacist</option>
+                <option value="Specialist">Specialist</option>
+                <option value="Medical Practitioner">Medical Practioner</option>
+            </select>
+        </div>
+    </div>
+
+     <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('practice_number', __('messages.client.practice_number') . ':', ['class' => 'form-label mb-3']) }}
+            {{ Form::text('practice_number', isset($user) ? $user->practice_number : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.practice_number')]) }}
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('authorization_number', __('messages.client.authorization_number') . ':', ['class' => 'form-label mb-3']) }}
+            {{ Form::text('authorization_number', isset($user) ? $user->authorization_number : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.authorization_number')]) }}
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('registration_number', __('messages.client.registration_number') . ':', ['class' => 'form-label  mb-3']) }}
+            {{ Form::text('registration_number', isset($user) ? $user->registration_number : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.registration_number')]) }}
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('facility_name', __('messages.client.facility_name') . ':', ['class' => 'form-label  mb-3']) }}
+            {{ Form::text('facility_name', isset($user) ? $user->facility_name : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.facility_name')]) }}
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
             {{ Form::label('contact', __('messages.client.contact_no').':', ['class' => 'form-label mb-3']) }}
             {{ Form::tel('contact', getSettingValue('country_code'), ['class' => 'form-control', 'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")','id'=>'phoneNumber']) }}
@@ -26,7 +165,7 @@
             <span id="error-msg" class="hide text-danger fw-400 fs-small mt-2"></span>
         </div>
     </div>
-    <div class="col-md-6 mb-5">
+    <div class="col-lg-4 col-sm-12 mb-5">
         <div class="fv-row">
             <div class="">
                 {{ Form::label('password',__('messages.client.password').':' ,['class' => 'form-label mb-3']) }}
@@ -43,7 +182,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 mb-5">
+    <div class="col-lg-4 col-sm-12 mb-5">
         <div class="fv-row">
             <div class="">
                 {{ Form::label('confirmPassword',__('messages.client.confirm_password').':' ,['class' => 'form-label mb-3']) }}
@@ -60,43 +199,61 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+
+      <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('employer_letter', __('messages.client.employer_letter') . ':', ['class' => 'form-label mb-3']) }}
+            <input
+            name="employer_letter"
+            value="{{ old('employer_letter') }}"
+            class="form-control"
+            type="file"
+            id="employer_letter"
+            >
+            <!-- {{ Form::file('employer_letter', isset($user) ? $user->employer_letter : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.employer_letter')]) }} -->
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('license_number', __('messages.client.license_number') . ':', ['class' => 'form-label mb-3']) }}
+            {{ Form::text('license_number', isset($user) ? $user->license_number : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.license_number')]) }}
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('occupation', __('messages.client.occupation') . ':', ['class' => 'form-label required mb-3']) }}
+            {{ Form::text('occupation', isset($user) ? $user->occupation : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.occupation'),'required']) }}
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
             {{ Form::label('website', __('messages.client.website').':', ['class' => 'form-label mb-3']) }}
             {{ Form::text('website', null,['class' => 'form-control', 'placeholder' =>  __('messages.client.website')]) }}
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
             {{ Form::label('postal_code', __('messages.client.postal_code').':', ['class' => 'form-label  mb-3 required']) }}
             {{ Form::text('postal_code',null, ['class' => 'form-control', 'placeholder' =>  __('messages.client.postal_code'), 'required', 'maxlength' => 6]) }}
         </div>
     </div>
-    <div class="col-lg-4">
-        <div class="mb-5">
-            {{ Form::label('country',__('messages.client.country').':', ['class' => 'form-label mb-3']) }}
-            {{ Form::select('country_id', $countries, null, ['id'=>'countryId','class' => 'form-select io-select2 ','placeholder' =>  __('messages.client.country'), 'data-control' => 'select2']) }}
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="mb-5">
-            {{ Form::label('state', __('messages.client.state').':', ['class' => 'form-label mb-3']) }}
-            {{ Form::select('state_id', [], null, ['id'=>'stateId','class' => 'form-select io-select2 ','placeholder' =>  __('messages.client.state'), 'data-control' => 'select2']) }}
-        </div>
-    </div>
-    <div class="col-lg-4">
+
+
+    <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
             {{ Form::label('city',__('messages.client.city').':', ['class' => 'form-label mb-3']) }}
             {{ Form::select('city_id', [], null, ['id'=>'cityId','class' => 'form-select io-select2 ','placeholder' =>  __('messages.client.city'), 'data-control' => 'select2']) }}
         </div>
     </div>
-    <div class="col-lg-6">
+
+    <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
             {{ Form::label('address', __('messages.client.address').':', ['class' => 'form-label mb-3']) }}
             {{ Form::textarea('address', null, ['class' => 'form-control', 'placeholder' => __('messages.client.address'),'rows'=>'5']) }}
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
             {{ Form::label('notes', __('messages.client.notes').':', ['class' => 'form-label mb-3']) }}
             {{ Form::textarea('note', null, ['class' => 'form-control', 'placeholder' => __('messages.client.notes'),'rows'=>'5']) }}
