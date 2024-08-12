@@ -138,18 +138,17 @@
 
 
 
-    <div class="col-lg-4 col-sm-12 mb-5">
-       <div class="mb-5">
-    {{ Form::label('category', __('messages.client.category') . ':', ['class' => 'form-label required mb-3']) }}
-    <select class="form-control form-control-solid" id="catergory" name="catergory" autocomplete="off" required autofocus>
-        <option value="Dentist" {{ old('catergory', $user->catergory) == 'Dentist' ? 'selected' : '' }}>Dentist</option>
-        <option value="Pharmacist" {{ old('catergory', $user->catergory) == 'Pharmacist' ? 'selected' : '' }}>Pharmacist</option>
-        <option value="Specialist" {{ old('catergory', $user->catergory) == 'Specialist' ? 'selected' : '' }}>Specialist</option>
-        <option value="Medical Practitioner" {{ old('catergory', $user->catergory) == 'Medical Practitioner' ? 'selected' : '' }}>Medical Practitioner</option>
-    </select>
-</div>
-
+<div class="col-lg-4 col-sm-12 mb-5">
+    <div class="mb-5">
+        {{ Form::label('category', __('messages.client.category') . ':', ['class' => 'form-label required mb-3']) }}
+        <select class="form-control form-control-solid" id="catergory" name="catergory" autocomplete="off" required autofocus>
+            <option value="Dentist" {{ old('catergory', $user->catergory) == 'Dentist' ? 'selected' : '' }}>Dentist</option>
+            <option value="Pharmacist" {{ old('catergory', $user->catergory) == 'Pharmacist' ? 'selected' : '' }}>Pharmacist</option>
+            <option value="Specialist" {{ old('catergory', $user->catergory) == 'Specialist' ? 'selected' : '' }}>Specialist</option>
+            <option value="Medical Practitioner" {{ old('catergory', $user->catergory) == 'Medical Practitioner' ? 'selected' : '' }}>Medical Practitioner</option>
+        </select>
     </div>
+</div>
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
             {{ Form::label('practice_number', __('messages.client.practice_number') . ':', ['class' => 'form-label mb-3']) }}
@@ -178,24 +177,24 @@
         </div>
     </div>
     <div class="col-lg-4 col-sm-12 mb-5">
-    <div class="mb-5">
-        {{ Form::label('employer_letter', __('messages.client.employer_letter') . ':', ['class' => 'form-label mb-3']) }}
-        <input
-            name="employer_letter"
-            class="form-control"
-            type="file"
-            id="employer_letter"
-        >
+        <div class="mb-5">
+            {{ Form::label('employer_letter', __('messages.client.employer_letter') . ':', ['class' => 'form-label mb-3']) }}
+            <input
+                name="employer_letter"
+                class="form-control"
+                type="file"
+                id="employer_letter"
+            >
 
-        @if(isset($user->employer_letter) && $user->employer_letter)
-            <div class="mt-2 text-sm">
-                <a href="{{ $user->employer_letter }}" target="_blank">
-                    Employment Letter
-                </a>
-            </div>
-        @endif
+            @if(isset($user->employer_letter) && $user->employer_letter)
+                <div class="mt-2 text-sm">
+                    <a href="{{ $user->employer_letter }}" target="_blank">
+                        Employment Letter
+                    </a>
+                </div>
+            @endif
+        </div>
     </div>
-</div>
 
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
