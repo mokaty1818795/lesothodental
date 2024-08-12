@@ -70,6 +70,7 @@ class UserRepository extends BaseRepository
     {
         try {
             DB::beginTransaction();
+            logger(json_encode($input));
 
             if (isset($input['contact'])) {
                 $checkUniqueness = checkContactUniqueness($input['contact'], $input['region_code'], $id);
@@ -93,7 +94,7 @@ class UserRepository extends BaseRepository
                 $user->addMedia($input['profile'])->toMediaCollection(User::PROFILE, config('app.media_disc'));
             }
 
-            logger($input['employer_letter']);
+
 
             if (isset($input['employer_letter']) && !empty($input['employer_letter'])) {
                 $user->clearMediaCollection(User::LETTER_OF_EMPLOYMENT);
@@ -102,7 +103,6 @@ class UserRepository extends BaseRepository
 
                 $fileUrl = $fileItem->getUrl();
                 $user->employer_letter = $fileUrl;
-
                 $user->save();
             }
 
