@@ -551,7 +551,7 @@ return [
         'quote_updated_successfully' => 'Application updated successfully',
         'quote_deleted_successfully' => 'Application deleted successfully',
         'product_price_retrieved_successfully' => 'Product price retrieved successfully',
-        'converted_to_invoice_successfully' => 'Converted to invoice successfully',
+        'converted_to_invoice_successfully' => 'Application Approved successfully',
         'product_created_successfully' => 'Product created successfully',
         'product_updated_successfully' => 'Product updated successfully',
         'product_deleted_successfully' => 'Product deleted successfully',

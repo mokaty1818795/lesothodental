@@ -184,20 +184,18 @@
             name="employer_letter"
             class="form-control"
             type="file"
-            value="{{ isset($user->employer_letter) ? $user->employer_letter : null }}"
             id="employer_letter"
         >
 
         @if(isset($user->employer_letter) && $user->employer_letter)
-            <div class="mt-2">
+            <div class="mt-2 text-sm">
                 <a href="{{ $user->employer_letter }}" target="_blank">
-                    {{ __($user->employer_letter) }}
+                    Employment Letter
                 </a>
             </div>
         @endif
     </div>
 </div>
-
 
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
@@ -211,13 +209,6 @@
             {{ Form::text('occupation', isset($user) ? $user->occupation : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.occupation'),'required']) }}
         </div>
     </div>
-
-
-
-
-
-
-
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
             {{ Form::label('contact', __('messages.client.contact_no').':', ['class' => 'form-label mb-3']) }}
@@ -227,7 +218,7 @@
             <span id="error-msg" class="hide text-danger fw-400 fs-small mt-2"></span>
         </div>
     </div>
-    <div class="col-lg-4 col-sm-12 mb-5">
+    <!-- <div class="col-lg-4 col-sm-12 mb-5">
         <div class="fv-row">
             <div class="">
                 {{ Form::label('password',__('messages.client.password').':' ,['class' => 'form-label mb-3']) }}
@@ -262,7 +253,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 <div class="float-end d-flex">
     {{ Form::submit(__('messages.common.save'),['class' => 'btn btn-primary me-3']) }}
