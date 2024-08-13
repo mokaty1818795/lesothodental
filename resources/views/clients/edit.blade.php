@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    {{__('messages.invoice.edit_invoice')}}
+    {{__('messages.invoice.edit_client')}}
 @endsection
 @section('content')
     @php $styleCss = 'style'; @endphp
