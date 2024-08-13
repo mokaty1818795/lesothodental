@@ -2135,7 +2135,7 @@
                 issue_for: "Issue For",
                 last_recurring_on: "Last Recurring On",
                 make_payment: "Make Payment",
-                new_invoice: "New Invoice",
+                new_invoice: "New Certificate",
                 note: "Note",
                 note_not_found: "Note Not Found",
                 note_terms: "Note & Terms",
