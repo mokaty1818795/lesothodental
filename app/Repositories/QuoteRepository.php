@@ -48,7 +48,7 @@ class QuoteRepository extends BaseRepository
         /** @var Product $product */
         static $product;
 
-        if (! isset($product) && empty($product)) {
+        if (!isset($product) && empty($product)) {
             $product = Product::toBase()->orderBy('name', 'asc')->pluck('name', 'id')->toArray();
         }
 
@@ -60,7 +60,7 @@ class QuoteRepository extends BaseRepository
         /** @var QuoteItem $quoteItems */
         static $quoteItems;
 
-        if (! isset($quoteItems) && empty($quoteItems)) {
+        if (!isset($quoteItems) && empty($quoteItems)) {
             $quoteItems = QuoteItem::when($quote, function ($q) use ($quote) {
                 $q->whereQuoteId($quote[0]->id);
             })->whereNotNull('product_name')->pluck('product_name', 'product_name')->toArray();
@@ -72,7 +72,7 @@ class QuoteRepository extends BaseRepository
     public function getSyncList(array $quote = []): array
     {
         $data['products'] = $this->getProductNameList();
-        if (! empty($quote)) {
+        if (!empty($quote)) {
             $data['productItem'] = $this->getQuoteItemList();
             $data['products'] = $data['products'] + $data['productItem'];
         }
@@ -91,7 +91,7 @@ class QuoteRepository extends BaseRepository
     public function getAssociateProductList(array $quote = []): array
     {
         $result = $this->getProductNameList();
-        if (! empty($quote)) {
+        if (!empty($quote)) {
             $quoteItem = $this->getQuoteItemList();
             $result = $result + $quoteItem;
         }
@@ -114,6 +114,8 @@ class QuoteRepository extends BaseRepository
             if ($input['final_amount'] == 'NaN') {
                 $input['final_amount'] = 0;
             }
+
+            $inputImage = $input['paymentProof'];
             $quoteItemInputArray = Arr::only($input, ['product_id', 'quantity', 'price']);
             $quoteExist = Quote::where('quote_id', $input['quote_id'])->exists();
             $quoteItemInput = $this->prepareInputForQuoteItem($quoteItemInputArray);
@@ -121,7 +123,7 @@ class QuoteRepository extends BaseRepository
             foreach ($quoteItemInput as $key => $value) {
                 $total[] = $value['price'] * $value['quantity'];
             }
-            if (! empty($input['discount'])) {
+            if (!empty($input['discount'])) {
                 if (array_sum($total) <= $input['discount']) {
                     throw new UnprocessableEntityHttpException('Discount amount should not be greater than sub total.');
                 }
@@ -139,6 +141,8 @@ class QuoteRepository extends BaseRepository
             $quote = Quote::create($input);
             $totalAmount = 0;
             foreach ($quoteItemInput as $key => $data) {
+
+                $data['paymentProof'] = $inputImage;
                 $validator = Validator::make($data, QuoteItem::$rules, QuoteItem::$messages);
 
                 if ($validator->fails()) {
@@ -158,8 +162,16 @@ class QuoteRepository extends BaseRepository
 
                 /** @var QuoteItem $quoteItem */
                 $quoteItem = new QuoteItem($data);
-
                 $quoteItem = $quote->quoteItems()->save($quoteItem);
+
+                if (isset($inputImage)) {
+                    $fileItem = $quoteItem->addMedia($inputImage)->toMediaCollection(QuoteItem::PAYMENT_ATTACHMENT, config('app.media_disc'));
+                    $fileUrl = $fileItem->getUrl();
+                    $quoteItem->paymentProof = $fileUrl;
+                    $quoteItem->save();
+
+                }
+
             }
 
             $quote->amount = $totalAmount;
@@ -197,7 +209,7 @@ class QuoteRepository extends BaseRepository
             foreach ($quoteItemInput as $key => $value) {
                 $total[] = $value['price'] * $value['quantity'];
             }
-            if (! empty($input['discount'])) {
+            if (!empty($input['discount'])) {
                 if (array_sum($total) <= $input['discount']) {
                     throw new UnprocessableEntityHttpException('Discount amount should not be greater than sub total.');
                 }
@@ -268,7 +280,7 @@ class QuoteRepository extends BaseRepository
         foreach ($input as $key => $data) {
             foreach ($data as $index => $value) {
                 $items[$index][$key] = $value;
-                if (! (isset($items[$index]['price']) && $key == 'price')) {
+                if (!(isset($items[$index]['price']) && $key == 'price')) {
                     continue;
                 }
                 $items[$index]['price'] = removeCommaFromNumbers($items[$index]['price']);
@@ -282,7 +294,7 @@ class QuoteRepository extends BaseRepository
     {
         $userId = $input['client_id'];
         $input['quote_id'] = $quote->quote_id;
-        $title = 'New Quote created #'.$input['quote_id'].'.';
+        $title = 'New Quote created #' . $input['quote_id'] . '.';
         if ($input['status'] != Quote::DRAFT) {
             addNotification([
                 Notification::NOTIFICATION_TYPE['Quote Created'],
@@ -296,10 +308,10 @@ class QuoteRepository extends BaseRepository
     {
         $quote->load('client.user');
         $userId = $quote->client->user_id;
-        $title = 'Your Quote #'.$quote->quote_id.' was updated.';
+        $title = 'Your Quote #' . $quote->quote_id . ' was updated.';
         if ($input['status'] != Quote::DRAFT) {
             if (isset($changes['status'])) {
-                $title = 'Status of your Quote #'.$quote->quote_id.' was updated.';
+                $title = 'Status of your Quote #' . $quote->quote_id . ' was updated.';
             }
             addNotification([
                 Notification::NOTIFICATION_TYPE['Quote Updated'],
