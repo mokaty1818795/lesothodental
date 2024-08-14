@@ -13,6 +13,16 @@
        required
        id="paymentProof"
      >
+        @foreach($quote->quoteItems as $quoteItem)
+            @if(isset($quoteItem->paymentProof) && $quoteItem->paymentProof)
+                <div class="mt-2 text-sm">
+                    <a href="{{$quoteItem->paymentProof }}" target="_blank">
+                       Proof of Payment
+                    </a>
+                </div>
+            @endif
+        @endforeach
+
         <!-- {{ Form::text('paymentProof', \App\Models\Quote::generateUniqueQuoteId(), ['class' => 'form-control', 'required', 'id' => 'paymentProof', 'maxlength' => 6,'onkeypress'=>"return blockSpecialChar(event)"]) }} -->
         <!-- <input class="form-control " id="paymentProof" value="{{ old('paymentProof') }}" type="file" name="paymentProof" placeholder="{{__('Proof Of Payemnt')}}" required autocomplete="off"/> -->
     </div>

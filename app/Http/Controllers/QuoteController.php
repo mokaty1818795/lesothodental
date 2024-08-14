@@ -73,7 +73,7 @@ class QuoteController extends AppBaseController
             return $this->sendError($e->getMessage());
         }
 
-        return $this->sendResponse($quote,__('messages.flash.quote_saved_successfully'));
+        return $this->sendResponse($quote, __('messages.flash.quote_saved_successfully'));
     }
 
     /**
@@ -106,6 +106,8 @@ class QuoteController extends AppBaseController
     public function update(UpdateQuoteRequest $request, Quote $quote): JsonResponse
     {
         $input = $request->all();
+        logger("details before update");
+        json_decode(json_encode($input));
         try {
             DB::beginTransaction();
             $quote = $this->quoteRepository->updateQuote($quote->id, $input);
@@ -153,11 +155,11 @@ class QuoteController extends AppBaseController
         $quoteData = $quoteDatas['quote'];
         $quoteItems = $quoteDatas['quote']['quoteItems'];
 
-        if (! empty(getInvoiceNoPrefix())) {
-            $quoteData['quote_id'] = getInvoiceNoPrefix().'-'.$quoteData['quote_id'];
+        if (!empty(getInvoiceNoPrefix())) {
+            $quoteData['quote_id'] = getInvoiceNoPrefix() . '-' . $quoteData['quote_id'];
         }
-        if (! empty(getInvoiceNoSuffix())) {
-            $quoteData['quote_id'] .= '-'.getInvoiceNoSuffix();
+        if (!empty(getInvoiceNoSuffix())) {
+            $quoteData['quote_id'] .= '-' . getInvoiceNoSuffix();
         }
 
         $invoice['invoice_id'] = $quoteData['quote_id'];
@@ -209,7 +211,7 @@ class QuoteController extends AppBaseController
         return $pdf->stream('quote.pdf');
     }
 
-    public function showPublicQuote($quoteId): View|Factory|Application
+    public function showPublicQuote($quoteId): View | Factory | Application
     {
         $quote = Quote::with('client.user')->whereQuoteId($quoteId)->first();
         $quoteData = $this->quoteRepository->getQuoteData($quote);
