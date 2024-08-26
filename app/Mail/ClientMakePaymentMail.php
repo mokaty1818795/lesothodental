@@ -33,7 +33,7 @@ class ClientMakePaymentMail extends Mailable
         $receivedAmount = $this->data['amount'];
         $receivedDate = Carbon::parse($this->data['payment_date'])->translatedFormat(currentDateFormat());
         $invoiceId = $this->data['invoice_id'];
-        $subject = "#$invoiceNo Invoice Payment Received.";
+        $subject = "#$invoiceNo Certificate Payment Received.";
 
         return $this->view('emails.client_make_payment_mail',
             compact('adminName', 'invoiceNo', 'receivedAmount', 'receivedDate', 'invoiceId'))

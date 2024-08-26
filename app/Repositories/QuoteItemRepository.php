@@ -57,14 +57,6 @@ class QuoteItemRepository extends BaseRepository
                 $quoteItem = $quote->quoteItems()->save($quoteItem);
                 $quoteItemIds[] = $quoteItem->id;
 
-                if (isset($inputImage)) {
-                    $fileItem = $quoteItem->addMedia($inputImage)->toMediaCollection(QuoteItem::PAYMENT_ATTACHMENT, config('app.media_disc'));
-                    $fileUrl = $fileItem->getUrl();
-                    $quoteItem->paymentProof = $fileUrl;
-                    $quoteItem->save();
-
-                }
-
             }
         }
 

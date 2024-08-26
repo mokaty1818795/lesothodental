@@ -13,6 +13,7 @@
        required
        id="paymentProof"
      >
+     
         @foreach($quote->quoteItems as $quoteItem)
             @if(isset($quoteItem->paymentProof) && $quoteItem->paymentProof)
                 <div class="mt-2 text-sm">

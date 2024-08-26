@@ -11,7 +11,7 @@
         <h2>Welcome to {{ $clientName }}, <b></b></h2><br>
         <p>Your account has been successfully created on {{ getAppName() }}</p>
         <p>Your email address is <strong>{{ $userName }}</strong></p>
-        <p>In {{ getAppName() }}, you can manage all of your invoices.</p>
+        <p>In {{ getAppName() }}, you can manage all of your Certificate.</p>
         <p>Thank for joining and have a great day!</p><br>
         <div style="display: flex;justify-content: center">
             <a href="{{ route('client.password.reset', $client_id) }}"
