@@ -200,7 +200,9 @@ class QuoteRepository extends BaseRepository
             if ($input['discount_type'] == 0) {
                 $input['discount'] = 0;
             }
+            logger("data comes from input controller");
             logger($input);
+            $inputImage = $input['paymentProof'];
             $input['final_amount'] = $input['amount'];
             $quoteItemInputArr = Arr::only($input, ['product_id', 'quantity', 'price', 'id']);
             $quoteItemInput = $this->prepareInputForQuoteItem($quoteItemInputArr);
@@ -226,6 +228,7 @@ class QuoteRepository extends BaseRepository
             $totalAmount = 0;
 
             foreach ($quoteItemInput as $key => $data) {
+                $data['paymentProof'] = $inputImage;
                 $validator = Validator::make($data, QuoteItem::$rules, QuoteItem::$messages);
                 if ($validator->fails()) {
                     throw new UnprocessableEntityHttpException($validator->errors()->first());
@@ -241,6 +244,7 @@ class QuoteRepository extends BaseRepository
                 $data['total'] = $data['amount'];
                 $totalAmount += $data['amount'];
                 $quoteItemInput[$key] = $data;
+
             }
             /** @var QuoteItemRepository $quoteItemRepo */
             $quoteItemRepo = app(QuoteItemRepository::class);
@@ -339,6 +343,8 @@ class QuoteRepository extends BaseRepository
 
         $data['quote'] = $quote;
         $quoteItems = $quote->quoteItems;
+
+        logger($data);
 
         return $data;
     }

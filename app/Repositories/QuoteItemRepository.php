@@ -45,8 +45,10 @@ class QuoteItemRepository extends BaseRepository
         $quote = Quote::find($quoteId);
         $quoteItemIds = [];
 
+        logger(json_decode(json_encode($quoteItemInput)));
+
         foreach ($quoteItemInput as $key => $data) {
-            if (isset($data['id']) && ! empty($data['id'])) {
+            if (isset($data['id']) && !empty($data['id'])) {
                 $quoteItemIds[] = $data['id'];
                 $this->update($data, $data['id']);
             } else {
@@ -54,10 +56,11 @@ class QuoteItemRepository extends BaseRepository
                 $quoteItem = new QuoteItem($data);
                 $quoteItem = $quote->quoteItems()->save($quoteItem);
                 $quoteItemIds[] = $quoteItem->id;
+
             }
         }
 
-        if (! (isset($quoteItemIds) && count($quoteItemIds))) {
+        if (!(isset($quoteItemIds) && count($quoteItemIds))) {
             return;
         }
 

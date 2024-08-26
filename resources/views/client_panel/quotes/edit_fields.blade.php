@@ -14,8 +14,15 @@
        required
        id="paymentProof"
      >
-        <!-- {{ Form::text('paymentProof', \App\Models\Quote::generateUniqueQuoteId(), ['class' => 'form-control', 'required', 'id' => 'paymentProof', 'maxlength' => 6,'onkeypress'=>"return blockSpecialChar(event)"]) }} -->
-        <!-- <input class="form-control " id="paymentProof" value="{{ old('paymentProof') }}" type="file" name="paymentProof" placeholder="{{__('Proof Of Payemnt')}}" required autocomplete="off"/> -->
+    @foreach($quote->quoteItems as $quoteItem)
+            @if(isset($quoteItem->paymentProof) && $quoteItem->paymentProof)
+                <div class="mt-2 text-sm">
+                    <a href="{{$quoteItem->paymentProof }}" target="_blank">
+                       Proof of Payment
+                    </a>
+                </div>
+            @endif
+    @endforeach
     </div>
     <div class="col-lg-4 col-sm-12 mb-5">
         {{ Form::label('quote_id', __('messages.quote.quote').(' #'),['class' => 'form-label mb-3']) }}
@@ -41,7 +48,7 @@
         {{ Form::select('template_id', $template,isset($quote) ? $quote->template_id:null, ['class' => 'form-select', 'id' => 'templateId','required', 'data-control' =>'select2']) }}
     </div>
 
-    
+
 
     <div class="mt-5">
         <div class="col-12 text-end mb-lg-10 mb-6">

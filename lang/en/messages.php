@@ -226,7 +226,7 @@ return [
         'razorpay' => 'Razorpay',
         'paypal' => 'Paypal',
         'show_additional_address' => 'Show Additional Address In Invoice',
-        'send_due_invoice_email_before_x_days' => 'Send Due Invoice Email Before X Days',
+        'send_due_invoice_email_before_x_days' => 'Send Due certiicate Email Before X Days',
         'paystack_key' => 'Paystack Key',
         'paystack_secret' => 'Paystack Secret',
         'paystack' => 'Paystack',

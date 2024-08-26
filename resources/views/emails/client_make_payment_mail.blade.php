@@ -9,7 +9,7 @@
     {{-- Body --}}
     <div>
         <h2>Dear {{ $adminName }},</h2>
-        <h4 style="color: green">Payment received successfully for invoice #{{ $invoiceNo }} ..!</h4>
+        <h4 style="color: green">Payment received successfully for Certificate #{{ $invoiceNo }} ..!</h4>
         <p>Payment Date : <strong>{{ $receivedDate }}</strong></p>
         <p>Received Payment Amount : <strong>{{ $receivedAmount }}</strong> </p>
         <br>
