@@ -5,16 +5,16 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Quote Excel</title>
+    <title>Aplpications Excel</title>
 </head>
 <body>
 <table>
     <thead>
     <tr>
-        <th style="width: 200%"><b>Quote ID</b></th>
+        <th style="width: 200%"><b>Aplpication ID</b></th>
         <th style="width: 200%"><b>Client Name</b></th>
         <th style="width: 300%"><b>Client Email</b></th>
-        <th style="width: 150%"><b>Quote Date</b></th>
+        <th style="width: 150%"><b>Application Date</b></th>
         <th style="width: 170%"><b>Amount</b></th>
         <th style="width: 150%"><b>Due Date</b></th>
         <th style="width: 150%"><b>Status</b></th>

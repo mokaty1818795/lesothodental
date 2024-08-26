@@ -5,15 +5,15 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Client Invoice Excel</title>
+    <title>Client Certificate Excel</title>
 </head>
 <body>
 <table>
     <thead>
     <tr>
-        <th class="text-danger" style="width: 200%"><b>Invoice ID</b></th>
-        <th style="width: 150%"><b>Invoice Date</b></th>
-        <th style="width: 170%"><b>Invoice Amount</b></th>
+        <th class="text-danger" style="width: 200%"><b>Certificate ID</b></th>
+        <th style="width: 150%"><b>Certificate Date</b></th>
+        <th style="width: 170%"><b>Certificate Amount</b></th>
         <th style="width: 150%"><b>Paid Amount</b></th>
         <th style="width: 150%"><b>Due Amount</b></th>
         <th style="width: 150%"><b>Due Date</b></th>

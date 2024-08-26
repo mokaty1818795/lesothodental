@@ -12,7 +12,7 @@
     <thead>
     <tr>
         <th style="width: 170%"><b>Payment Date</b></th>
-        <th style="width: 170%"><b>Invoice ID</b></th>
+        <th style="width: 170%"><b>Certificate ID</b></th>
         <th style="width: 180%"><b>Client Name</b></th>
         <th style="width: 200%"><b>Payment Amount</b></th>
         <th style="width: 200%"><b>Payment Method</b></th>
