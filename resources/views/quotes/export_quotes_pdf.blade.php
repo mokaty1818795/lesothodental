@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="icon" href="{{ asset('web/media/logos/favicon.ico') }}" type="image/png">
-    <title>{{ getLogInUser()->hasRole('client') ? 'Client' : '' }} Quotes PDF</title>
+    <title>{{ getLogInUser()->hasRole('client') ? 'Client' : '' }} Application PDF</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('assets/css/invoice-pdf.css') }}" rel="stylesheet" type="text/css"/>
@@ -19,15 +19,15 @@
 </head>
 <body>
 <div class="d-flex align-items-center justify-content-center mb-4">
-    <h4 class="text-center">{{ getLogInUser()->hasRole('client') ? 'Client' : '' }} Quotes Export Data</h4>
+    <h4 class="text-center">{{ getLogInUser()->hasRole('client') ? 'Client' : '' }} Application Export Data</h4>
 </div>
 <table class="table table-bordered border-primary">
     <thead>
     <tr>
-        <th style="width: 10%"><b>Quote ID</b></th>
+        <th style="width: 10%"><b>Application ID</b></th>
         <th style="word-break: break-all;width: 10%"><b>Client Name</b></th>
         <th style="width: 14%"><b>Client Email</b></th>
-        <th style="width: 13%"><b>Quote Date</b></th>
+        <th style="width: 13%"><b>Application Date</b></th>
         <th style="width: 15%"><b>Amount</b></th>
         <th style="width: 25%"><b>Due Date</b></th>
         <th style="width: 8%"><b>Status</b></th>

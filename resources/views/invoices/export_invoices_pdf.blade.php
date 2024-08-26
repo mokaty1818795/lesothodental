@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="icon" href="{{ asset('web/media/logos/favicon.ico') }}" type="image/png">
-    <title>{{ getLogInUser()->hasRole('client') ? 'Client' : '' }} Invoices PDF</title>
+    <title>{{ getLogInUser()->hasRole('client') ? 'Client' : '' }} Certificates PDF</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Fonts -->
     <!-- General CSS Files -->
@@ -21,15 +21,15 @@
 </head>
 <body>
 <div class="d-flex align-items-center justify-content-center mb-4">
-    <h4 class="text-center">{{ getLogInUser()->hasRole('client') ? 'Client' : '' }} Invoices Export Data</h4>
+    <h4 class="text-center">{{ getLogInUser()->hasRole('client') ? 'Client' : '' }} Certificate Export Data</h4>
 </div>
 <table class="table table-bordered border-primary">
     <thead>
     <tr>
-        <th style="width: 3%"><b>Invoice ID</b></th>
+        <th style="width: 3%"><b>Certificate ID</b></th>
         <th style="word-break: break-all;width: 10%"><b>Client Name</b></th>
-        <th style="width: 12%"><b>Invoice Date</b></th>
-        <th style="width: 15%"><b>Invoice Amount</b></th>
+        <th style="width: 12%"><b>Certificate Date</b></th>
+        <th style="width: 15%"><b>Certificate Amount</b></th>
         <th style="width: 17%"><b>Paid Amount</b></th>
         <th style="width: 18%"><b>Due Amount</b></th>
         <th style="white-space: nowrap;width: 20%"><b>Due Date</b></th>
