@@ -11,11 +11,11 @@
 <table>
     <thead>
     <tr>
-        <th style="width: 200%"><b>Invoice ID</b></th>
+        <th style="width: 200%"><b>Certificate ID</b></th>
         <th style="width: 200%"><b>Client Name</b></th>
         <th style="width: 300%"><b>Client Email</b></th>
-        <th style="width: 150%"><b>Invoice Date</b></th>
-        <th style="width: 170%"><b>Invoice Amount</b></th>
+        <th style="width: 150%"><b>Certificate Date</b></th>
+        <th style="width: 170%"><b>Certificate Amount</b></th>
         <th style="width: 150%"><b>Paid Amount</b></th>
         <th style="width: 150%"><b>Due Amount</b></th>
         <th style="width: 150%"><b>Due Date</b></th>
