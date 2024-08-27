@@ -21,6 +21,12 @@
                     <?php echo __('messages.common.edit') ?>
                 </a>
             </li>
+             <li>
+                <a href="#" data-id="{{$row->id}}" class="reject-application dropdown-item text-hover-primary me-1 edit-btn"
+                data-bs-toggle="tooltip" title="{{ __('messages.common.reject') }}" data-turbo="false">
+                    <?php echo __('messages.common.reject') ?>
+                </a>
+            </li>
         @endif
         <li>
             <a href="#" data-id="{{$row->id}}" class="delete-btn dropdown-item me-1 text-hover-primary quote-delete-btn"

@@ -60,6 +60,26 @@ listenClick(".convert-to-invoice", function (e) {
     });
 });
 
+listenClick(".reject-application", function (e) {
+    e.preventDefault();
+    let quoteId = $(this).data("id");
+    $.ajax({
+        url: route("quotes.reject-application"),
+        type: "GET",
+        data: { quoteId: 70 },
+        success: function (result) {
+            if (result.success) {
+                displaySuccessMessage(result.message);
+                livewire.emit("refreshDatatable");
+                livewire.emit("resetPageTable");
+            }
+        },
+        error: function (result) {
+            displayErrorMessage(result.responseJSON.message);
+        },
+    });
+});
+
 listenChange("#quoteStatus", function () {
     window.livewire.emit("changeQuoteStatusFilter", $(this).val());
 });
