@@ -194,52 +194,31 @@ class QuoteController extends AppBaseController
         return $this->sendSuccess(__('messages.flash.converted_to_invoice_successfully'));
     }
 
-    public function rejectApplication(Request $request): mixed
+    public function rejectApplication(Request $request): JsonResponse
     {
-        $quoteId = $request->quoteId;
-        Quote::whereId($quoteId)->firstOrFail();
+        $quoteId = $request->input('quoteId');
+        if (!$quoteId) {
+            return response()->json(['success' => false, 'message' => 'No quote ID provided'], 400);
+        }
 
-        // $quoteDatas = $this->quoteRepository->getQuoteData($quote);
-        // $quoteData = $quoteDatas['quote'];
-        // $quoteItems = $quoteDatas['quote']['quoteItems'];
-
-        // if (!empty(getInvoiceNoPrefix())) {
-        //     $quoteData['quote_id'] = getInvoiceNoPrefix() . '-' . $quoteData['quote_id'];
-        // }
-        // if (!empty(getInvoiceNoSuffix())) {
-        //     $quoteData['quote_id'] .= '-' . getInvoiceNoSuffix();
-        // }
-
-        // $invoice['invoice_id'] = $quoteData['quote_id'];
-        // $invoice['client_id'] = $quoteData['client_id'];
-        // $invoice['invoice_date'] = Carbon::parse($quoteData['quote_date'])->format(currentDateFormat());
-        // $invoice['due_date'] = Carbon::parse($quoteData['due_date'])->format(currentDateFormat());
-        // $invoice['amount'] = $quoteData['amount'];
-        // $invoice['final_amount'] = $quoteData['final_amount'];
-        // $invoice['discount_type'] = $quoteData['discount_type'];
-        // $invoice['discount'] = $quoteData['discount'];
-        // $invoice['note'] = $quoteData['note'];
-        // $invoice['term'] = $quoteData['term'];
-        // $invoice['template_id'] = $quoteData['template_id'];
-        // $invoice['recurring'] = $quoteData['recurring'];
-        // $invoice['status'] = Invoice::DRAFT;
-
-        // $invoice = Invoice::create($invoice);
-
-        // foreach ($quoteItems as $quoteItem) {
-        //     $invoiceItem = InvoiceItem::create([
-        //         'invoice_id' => $invoice->id,
-        //         'product_id' => $quoteItem['product_id'],
-        //         'product_name' => $quoteItem['product_name'],
-        //         'quantity' => $quoteItem['quantity'],
-        //         'price' => $quoteItem['price'],
-        //         'total' => $quoteItem['total'],
-        //     ]);
-        // }
-
-        Quote::whereId($quoteId)->update(['status' => Quote::REJECTED]);
-
-        return $this->sendSuccess(__('messages.flash.application_rejected'));
+        try {
+            $quote = Quote::findOrFail($quoteId);
+            $quote->status = Quote::REJECTED;
+            $result = $quote->save();
+            if ($result) {
+                return response()->json([
+                    'success' => true,
+                    'message' => __('messages.flash.application_rejected'),
+                    'newStatus' => $quote->status,
+                ]);
+            } else {
+                logger('Unable to reject application');
+                return response()->json(['success' => false, 'message' => 'messages.application_unable_to_rejected'], 500);
+            }
+        } catch (\Exception $e) {
+            logger($e->getMessage());
+            return response()->json(['success' => false, 'message' => 'messages.application_unable_to_rejected '], 500);
+        }
     }
 
     public function exportQuotesExcel(): BinaryFileResponse

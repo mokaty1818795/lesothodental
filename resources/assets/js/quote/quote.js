@@ -61,12 +61,16 @@ listenClick(".convert-to-invoice", function (e) {
 });
 
 listenClick(".reject-application", function (e) {
+    console.log("Reject button clicked");
     e.preventDefault();
     let quoteId = $(this).data("id");
     $.ajax({
         url: route("quotes.reject-application"),
-        type: "GET",
-        data: { quoteId: 70 },
+        type: "POST",
+        data: { quoteId: quoteId },
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
         success: function (result) {
             if (result.success) {
                 displaySuccessMessage(result.message);

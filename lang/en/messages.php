@@ -521,6 +521,7 @@ return [
 
     'flash' => [
         'application_rejected' => 'Application rejected successfully',
+        'application_unable_to_rejected' => 'Unable to reject the application',
         'client_cant_deleted' => 'Client can\'t be deleted.',
         'category_cant_deleted' => 'Category can\'t be deleted.',
         'product_cant_deleted' => 'Product can\'t be deleted.',

@@ -145,9 +145,7 @@ Route::prefix('admin')->middleware(['auth', 'xss', 'role:admin'])->group(functio
     Route::resource('quotes', QuoteController::class);
     Route::get('quotes/{quote}/pdf', [QuoteController::class, 'convertToPdf'])->name('quotes.pdf');
     Route::get('convert-to-invoice', [QuoteController::class, 'convertToInvoice'])->name('quotes.convert-to-invoice');
-    Route::get('reject-application', [QuoteController::class, 'rejectApplication'])->name('quotes.reject-application');
-
-
+    Route::post('reject-application', [QuoteController::class, 'rejectApplication'])->name('quotes.reject-application');
 
     //Tax
     Route::resource('taxes', TaxController::class);
