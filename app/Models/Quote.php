@@ -82,10 +82,13 @@ class Quote extends Model
 
     const STATUS_ALL = 2;
 
+    const REJECTED = 3;
+
     const STATUS_ARR = [
         self::DRAFT => 'Draft',
         self::CONVERTED => 'Converted',
         self::STATUS_ALL => 'All',
+        self::REJECTED => 'Rejected',
     ];
 
     const MONTHLY = 1;

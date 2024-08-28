@@ -194,6 +194,33 @@ class QuoteController extends AppBaseController
         return $this->sendSuccess(__('messages.flash.converted_to_invoice_successfully'));
     }
 
+    public function rejectApplication(Request $request): JsonResponse
+    {
+        $quoteId = $request->input('quoteId');
+        if (!$quoteId) {
+            return response()->json(['success' => false, 'message' => 'No quote ID provided'], 400);
+        }
+
+        try {
+            $quote = Quote::findOrFail($quoteId);
+            $quote->status = Quote::REJECTED;
+            $result = $quote->save();
+            if ($result) {
+                return response()->json([
+                    'success' => true,
+                    'message' => __('messages.flash.application_rejected'),
+                    'newStatus' => $quote->status,
+                ]);
+            } else {
+                logger('Unable to reject application');
+                return response()->json(['success' => false, 'message' => 'messages.application_unable_to_rejected'], 500);
+            }
+        } catch (\Exception $e) {
+            logger($e->getMessage());
+            return response()->json(['success' => false, 'message' => 'messages.application_unable_to_rejected '], 500);
+        }
+    }
+
     public function exportQuotesExcel(): BinaryFileResponse
     {
         return Excel::download(new AdminQuotesExport(), 'quote-excel.xlsx');
