@@ -8,12 +8,16 @@
         @php
             $isEdit = ($row->status == 0) ? 0 : 1;
         @endphp
-        @if($isEdit != 1)
+        @if($isEdit != 1 && 3)
         <li>
             <a href="{{route('client.quotes.edit',$row->id)}}" class="dropdown-item text-hover-primary me-1 edit-btn"
                data-bs-toggle="tooltip" title="{{ __('messages.common.edit') }}" data-turbo="false">
                 <?php echo __('messages.common.edit') ?>
             </a>
+        </li>
+         <li>
+            <a class="dropdown-item" href="{{route('client.quotes.pdf', $row->id)}}"
+               target="_blank"><?php echo __('messages.invoice.download') ?></a>
         </li>
         @endif
         <li>
@@ -22,10 +26,7 @@
                 <?php echo __('messages.common.delete') ?>
             </a>
         </li>
-        <li>
-            <a class="dropdown-item" href="{{route('client.quotes.pdf', $row->id)}}"
-               target="_blank"><?php echo __('messages.invoice.download') ?></a>
-        </li>
+       
     </ul>
 </div>
 
