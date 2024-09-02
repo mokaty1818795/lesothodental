@@ -146,6 +146,7 @@ class User extends Authenticatable implements HasMedia
         'tittle',
         'town',
         'catergory',
+        'retention_number',
     ];
 
     protected $appends = ['full_name', 'profile_image'];
@@ -182,6 +183,7 @@ class User extends Authenticatable implements HasMedia
         'catergory' => 'required',
         'email' => 'required|email:filter|unique:users,email',
         'password' => 'required|same:password_confirmation|min:6',
+        'retention_number' => 'nullable',
     ];
 
     /**
@@ -215,10 +217,11 @@ class User extends Authenticatable implements HasMedia
         'registration_number' => 'string',
         'license_number' => 'string',
         'occupation' => 'string',
-        'gender'=> 'string',
-        'tittle'=> 'string',
-        'town'=> 'string',
-        'catergory'=> 'string',
+        'gender' => 'string',
+        'tittle' => 'string',
+        'town' => 'string',
+        'catergory' => 'string',
+        'retention_number' => 'string',
 
     ];
 

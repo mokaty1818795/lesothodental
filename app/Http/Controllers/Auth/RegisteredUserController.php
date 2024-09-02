@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -32,6 +33,11 @@ class RegisteredUserController extends Controller
      *
      * @return Application|RedirectResponse|Redirector
      */
+
+    public static function generateRententionNumber(): string
+    {
+
+    }
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -65,8 +71,20 @@ class RegisteredUserController extends Controller
             'fax' => 'nullable|string|max:255',
             'certificate' => 'nullable',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'retention_number' => 'nullable|string|max:255',
 
         ]);
+
+        $retenTionNumber = $request->retention_number;
+        if (empty($retenTionNumber)) {
+            $randomPrefix = strtoupper(substr(bin2hex(random_bytes(1)), 0, 1));
+            $now = now();
+            $year = $now->format('Y');
+            $randomSequence = random_int(0, 9999);
+            $formattedSequence = str_pad($randomSequence, 4, '0', STR_PAD_LEFT);
+            $retenTionNumber = "{$randomPrefix} {$formattedSequence}/{$year}";
+
+        }
 
         /** @var User $user */
         $user = User::create([
@@ -91,19 +109,13 @@ class RegisteredUserController extends Controller
             'tittle' => $request->tittle,
             'town' => $request->town,
             'catergory' => $request->catergory,
+            'retention_number' => $retenTionNumber,
         ]);
 
-        // $path = $request->file('employer_letter')->store('letters', 'public');
-        // $url = Storage::url($path);
-
         if ((!empty($request->employer_letter))) {
-            // $user->clearMediaCollection(User::LETTER_OF_EMPLOYMENT);
-            // $user->media()->delete();
             $fileItem = $user->addMedia($request->employer_letter)->toMediaCollection(User::LETTER_OF_EMPLOYMENT, config('app.media_disc'));
-
             $fileUrl = $fileItem->getUrl();
             $user->employer_letter = $fileUrl;
-
             $user->save();
         }
 
@@ -128,10 +140,7 @@ class RegisteredUserController extends Controller
         ]);
 
         if ((!empty($request->certificate))) {
-            // $user->clearMediaCollection(User::LETTER_OF_EMPLOYMENT);
-            // $user->media()->delete();
             $fileItem = $userEducation->addMedia($request->certificate)->toMediaCollection(Education::UNIVERSITY_CERTIFICATE, config('app.media_disc'));
-
             $fileUrl = $fileItem->getUrl();
             $userEducation->certificate = $fileUrl;
             $userEducation->save();

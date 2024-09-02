@@ -159,7 +159,7 @@
                                     <option value="Oral Hygienist">Oral Hygienist</option>
                             </select>
                         </div>
-                             <div class="col-xl-6">
+                        <div class="col-xl-6">
                             <label class="form-label fw-bolder text-dark fs-6 required" for="category">Catergory:</label>
                             <select class="form-control form-control-lg" id="category"
                                 value="{{ old('category') }}" type="text" name="category"
@@ -170,7 +170,10 @@
                                     <option value="Medical Practitioner">Medical Practioner</option>
                             </select>
                         </div>
-
+                        <div class="col-xl-6 mt-3">
+                                <label class="form-label fw-bolder text-dark fs-6 " for="town">Cuurent Retention Number</label>
+                                <input class="form-control form-control-lg" type="text" value="{{ old('retention_number') }}" name="retention_number" placeholder="{{__('Current Retention Number')}}" autocomplete="off" autofocus/>
+                            </div>
                         </div>
                         <button type="button" class="btn btn-primary" onclick="nextStep(1, 2)">Next</button>
                     </div>
