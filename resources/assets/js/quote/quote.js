@@ -27,6 +27,7 @@ function initializeSelect2Quote() {
 
 // delete quote record
 listenClick(".quote-delete-btn", function (event) {
+    console.log("Delete button clicked by client");
     event.preventDefault();
     let quoteId = $(this).attr("data-id");
     deleteItem(
