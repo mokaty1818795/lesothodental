@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\Payment;
 use App\Models\Product;
+use App\Models\Quote;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\DB;
@@ -44,6 +45,8 @@ class DashboardRepository
     {
         $user = getLogInUser();
         $invoice = Invoice::where('client_id', $user->client->id)->where('status', '!=', Invoice::DRAFT)->get();
+        $quotes = Quote::where('client_id', $user->client->id)->get();
+        $data['total_quotes'] = $quotes->count();
         $data['total_invoices'] = $invoice->count();
         $data['total_products'] = Product::count();
         $data['paid_invoices'] = $invoice->where('status', Invoice::PAID)->count();

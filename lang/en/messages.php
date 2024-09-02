@@ -70,6 +70,7 @@ return [
         'year' => 'Year',
         'week' => 'Week',
         'day' => 'Day',
+        'total_quotes' => 'Total Applications',
         'total_invoices' => 'Total Certificates',
         'total_clients' => 'Total Professionals',
         'total_payments' => 'Total Payments',
