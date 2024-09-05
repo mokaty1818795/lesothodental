@@ -279,6 +279,7 @@ return [
         'country' => 'Country',
         'created_at' => 'Date',
         'paymentproof' => 'Proof Of Payment',
+        'oldcertificate' => 'Old Certificate',
     ],
 
     'category' => [

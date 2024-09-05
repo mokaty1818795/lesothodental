@@ -25,6 +25,7 @@ class QuoteItem extends Model implements HasMedia
     use HasFactory, InteractsWithMedia;
 
     const PAYMENT_ATTACHMENT = 'payment_attachment';
+    const OLD_CERTIFICATE = 'old_certificate';
 
     /**
      * Validation rules
@@ -57,6 +58,7 @@ class QuoteItem extends Model implements HasMedia
         'quantity' => 'required|integer',
         'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
         'paymentProof' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'oldCertificate' => 'nullable',
     ];
 
     /**
@@ -78,6 +80,7 @@ class QuoteItem extends Model implements HasMedia
         'price',
         'total',
         'paymentProof',
+        'oldCertificate',
     ];
 
     protected $casts = [
@@ -88,6 +91,7 @@ class QuoteItem extends Model implements HasMedia
         'price' => 'double',
         'total' => 'double',
         'paymentProof' => 'string',
+        'oldCertificate' => 'string',
     ];
 
     public function product(): BelongsTo
