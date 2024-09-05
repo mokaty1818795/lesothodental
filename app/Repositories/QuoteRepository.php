@@ -116,6 +116,13 @@ class QuoteRepository extends BaseRepository
             }
 
             $inputImage = $input['paymentProof'];
+            $inputCertficate = $input['oldCertificate'];
+
+            logger("data comes from input controller");
+
+            logger($inputCertficate);
+
+
             $quoteItemInputArray = Arr::only($input, ['product_id', 'quantity', 'price']);
             $quoteExist = Quote::where('quote_id', $input['quote_id'])->exists();
             $quoteItemInput = $this->prepareInputForQuoteItem($quoteItemInputArray);
@@ -143,6 +150,7 @@ class QuoteRepository extends BaseRepository
             foreach ($quoteItemInput as $key => $data) {
 
                 $data['paymentProof'] = $inputImage;
+                $data['oldCertificate'] = $inputCertficate;
                 $validator = Validator::make($data, QuoteItem::$rules, QuoteItem::$messages);
 
                 if ($validator->fails()) {
@@ -165,6 +173,14 @@ class QuoteRepository extends BaseRepository
                 $quoteItem = $quote->quoteItems()->save($quoteItem);
 
                 if (isset($inputImage)) {
+
+                    if (isset($inputCertficate)) {
+                        $certificateItem = $quoteItem->addMedia($inputCertficate)->toMediaCollection(QuoteItem::OLD_CERTIFICATE, config('app.media_disc'));
+                        $fileCertificateUrl = $certificateItem->getUrl();
+                        $quoteItem->oldCertificate= $fileCertificateUrl;
+                        $quoteItem->save();
+                    }
+
                     $fileItem = $quoteItem->addMedia($inputImage)->toMediaCollection(QuoteItem::PAYMENT_ATTACHMENT, config('app.media_disc'));
                     $fileUrl = $fileItem->getUrl();
                     $quoteItem->paymentProof = $fileUrl;
