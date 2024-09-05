@@ -171,7 +171,7 @@
                             </select>
                         </div>
                         <div class="col-xl-6 mt-3">
-                                <label class="form-label fw-bolder text-dark fs-6 " for="town">Cuurent Retention Number</label>
+                                <label class="form-label fw-bolder text-dark fs-6 " for="town">Cuurent Registration Number</label>
                                 <input class="form-control form-control-lg" type="text" value="{{ old('retention_number') }}" name="retention_number" placeholder="{{__('Current Retention Number')}}" autocomplete="off" autofocus/>
                             </div>
                         </div>
