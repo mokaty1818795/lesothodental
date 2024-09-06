@@ -280,6 +280,7 @@ return [
         'created_at' => 'Date',
         'paymentproof' => 'Proof Of Payment',
         'oldcertificate' => 'Old Certificate',
+        'registrationNumber' => 'Registration Number',
     ],
 
     'category' => [

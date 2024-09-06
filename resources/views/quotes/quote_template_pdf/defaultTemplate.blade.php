@@ -37,24 +37,7 @@
         </tr>
     </table>
     <br>
-    <table width="100%">
-        <thead>
-            <tr>
-                <td colspan="2" class="vertical-align-top" width="200px">
-                    <strong class="from-font-size">{{ __('messages.common.from') }}</strong><br>
-                    {{ html_entity_decode(getAppName()) }}<br>
-                    <b>{{ __('messages.common.address') . ':' }}&nbsp;</b>{!! $setting['company_address'] !!}<br>
-                    <b>{{ __('messages.user.phone') . ':' }}&nbsp;</b>{{ $setting['company_phone'] }}<br>
-                    <strong class="from-font-size">{{ __('messages.common.to') }}</strong><br>
-                    <b>{{ __('messages.common.name') . ':' }}&nbsp;</b>{{ $client->user->full_name }}<br>
-                    <b>{{ __('messages.common.email') . ':' }}&nbsp;</b>{{ $client->user->email }}
-                    @if (!empty($client->address))
-                        <br><b>{{ __('messages.common.address') . ':' }}&nbsp;</b>{{ $client->address }}
-                    @endif
-                </td>
-            </tr>
-        </thead>
-    </table>
+
     <br>
     <table width="100%">
         <thead class="text-left">
