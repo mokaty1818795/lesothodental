@@ -149,6 +149,13 @@
         </div>
     </div>
 
+     <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('retention_number', __('messages.client.registrationNumber') . ':', ['class' => 'form-label  mb-3']) }}
+            {{ Form::text('retention_number', isset($client) ?  $client->user->retention_number : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.registrationNumber')]) }}
+        </div>
+    </div>
+
 
      <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">

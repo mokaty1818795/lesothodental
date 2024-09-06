@@ -170,12 +170,20 @@
         </div>
     </div>
 
+     <div class="col-lg-4 col-sm-12 mb-5">
+        <div class="mb-5">
+            {{ Form::label('retention_number', __('messages.client.registrationNumber') . ':', ['class' => 'form-label  mb-3']) }}
+            {{ Form::text('retention_number', isset($user) ? $user->retention_number : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.registrationNumber')]) }}
+        </div>
+    </div>
+
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
             {{ Form::label('facility_name', __('messages.client.facility_name') . ':', ['class' => 'form-label  mb-3']) }}
             {{ Form::text('facility_name', isset($user) ? $user->facility_name : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('messages.client.facility_name')]) }}
         </div>
     </div>
+
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
             {{ Form::label('employer_letter', __('messages.client.employer_letter') . ':', ['class' => 'form-label mb-3']) }}
@@ -217,42 +225,6 @@
             <span id="error-msg" class="hide text-danger fw-400 fs-small mt-2"></span>
         </div>
     </div>
-    <!-- <div class="col-lg-4 col-sm-12 mb-5">
-        <div class="fv-row">
-            <div class="">
-                {{ Form::label('password',__('messages.client.password').':' ,['class' => 'form-label mb-3']) }}
-                <div class="position-relative">
-                    <input class="form-control form-control-solid"
-                           type="password" placeholder={{__('messages.client.password')}} name="password"
-                           autocomplete="off"
-                           aria-label="Password" data-toggle="password"
-                           value={{isset($user) ? $user->password : null}}
-                           >
-                    <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4 input-icon input-password-hide cursor-pointer text-gray-600">
-                                <i class="bi bi-eye-slash-fill"></i>
-                        </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-sm-12 mb-5">
-        <div class="fv-row">
-            <div class="">
-                {{ Form::label('confirmPassword',__('messages.client.confirm_password').':' ,['class' => 'form-label mb-3']) }}
-                <div class="position-relative">
-                    <input class="form-control form-control-solid"
-                           type="password"
-                           placeholder="{{__('messages.client.confirm_password')}}" name="password_confirmation"
-                           autocomplete="off" aria-label="Password" data-toggle="password"
-                           value={{isset($user) ? $user->password : null}}
-                           >
-                    <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4 input-icon input-password-hide cursor-pointer text-gray-600">
-                               <i class="bi bi-eye-slash-fill"></i>
-                        </span>
-                </div>
-            </div>
-        </div>
-    </div> -->
 </div>
 <div class="float-end d-flex">
     {{ Form::submit(__('messages.common.save'),['class' => 'btn btn-primary me-3']) }}
