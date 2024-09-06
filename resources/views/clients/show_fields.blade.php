@@ -119,6 +119,13 @@
 
                          <div class="col-sm-6 d-flex flex-column mb-md-10 mb-5">
                             <label for="name"
+                                class="pb-2 fs-4 text-gray-600">{{ __('messages.client.registrationNumber') }}
+                                :</label>
+                            <span
+                                class="fs-4 text-gray-800">{{ !empty($client->user->retention_number) ? $client->user->retention_number : 'N/A' }}</span>
+                        </div>
+                         <div class="col-sm-6 d-flex flex-column mb-md-10 mb-5">
+                            <label for="name"
                                 class="pb-2 fs-4 text-gray-600">{{ __('messages.client.occupation') }}
                                 :</label>
                             <span
