@@ -83,7 +83,7 @@
     </div>
 
 
-       <div class="col-lg-4 col-sm-12 mb-5">
+<div class="col-lg-4 col-sm-12 mb-5">
     <div class="mb-5">
         {{ Form::label('profession', __('messages.client.profession') . ':', ['class' => 'form-label mb-3 required']) }}
         <select class="form-control form-control-solid" id="practice" name="practice" autocomplete="off" required autofocus>
