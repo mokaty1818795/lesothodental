@@ -9,12 +9,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="current-date-format" content="{{ currentDateFormat() }}">
 
+
+
+
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/third-party.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ mix('assets/css/page.css') }}">
+
     @if(!Auth::user()->dark_mode)
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/plugins.css') }}">
@@ -33,6 +37,7 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js" data-turbolinks-eval="false"
             data-turbo-eval="false"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
     <script src="{{ asset('assets/js/third-party.js') }}"></script>
     <script src="{{ asset('messages.js') }}"></script>
     <script data-turbo-eval="false">

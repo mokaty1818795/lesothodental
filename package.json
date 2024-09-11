@@ -35,8 +35,10 @@
         "daterangepicker": "^3.1.0",
         "flatpickr": "^4.6.13",
         "intl-tel-input": "^17.0.13",
+        "jq-signature": "^2.0.0",
         "js-datepicker": "^5.18.0",
         "moment": "^2.29.1",
+        "signature_pad": "^5.0.3",
         "toastr": "^2.1.4"
     }
 }
