@@ -1,122 +1,153 @@
-document.addEventListener('turbo:load', loadSettings);
+document.addEventListener("turbo:load", loadSettings);
 
 function loadSettings() {
-    initializeSelect2Dropdown()
-    initializeDefaultCountryCode()
+    initializeSelect2Dropdown();
+    initializeDefaultCountryCode();
+
+    
 }
 
-function initializeDefaultCountryCode()
-{
-    let countryCode = $('#countryPhone');
+function initializeSignaturePad() {
+    console.log("initializeSignaturePad");
+     $(".js-signature").jqSignature();
+    $(".js-signature").on("click", function () {
+        console.log("jq.signature.changed");
+    });
+
+    // $(".js-signature").on("jq.signature.changed", function () {
+    //     $("#signature").val($(".js-signature").jqSignature("getDataURL"));
+    // });
+}
+
+// resources/js/signature.js
+
+function initializeDefaultCountryCode() {
+    let countryCode = $("#countryPhone");
     if (!countryCode.length) {
         return false;
     }
-    
-    let input = document.querySelector('#countryPhone')
 
-// initialise plugin
+    let input = document.querySelector("#countryPhone");
+
+    // initialise plugin
     let intl = window.intlTelInput(input, {
-        initialCountry: 'IN',
+        initialCountry: "IN",
         separateDialCode: true,
         geoIpLookup: function (success, failure) {
-            $.get('https://ipinfo.io', function () {}, 'jsonp').
-                always(function (resp) {
-                    let countryCode = (resp && resp.country)
-                        ? resp.country
-                        : ''
-                    success(countryCode)
-                })
+            $.get("https://ipinfo.io", function () {}, "jsonp").always(
+                function (resp) {
+                    let countryCode = resp && resp.country ? resp.country : "";
+                    success(countryCode);
+                }
+            );
         },
-        utilsScript: '../../public/assets/js/inttel/js/utils.min.js',
+        utilsScript: "../../public/assets/js/inttel/js/utils.min.js",
     });
 
     let reset = function () {
-        input.classList.remove('error');
+        input.classList.remove("error");
     };
 
-    input.addEventListener('blur', function () {
+    input.addEventListener("blur", function () {
         reset();
         if (input.value.trim()) {
             if (intl.isValidNumber()) {
-                validMsg.classList.remove('d-none');
+                validMsg.classList.remove("d-none");
             } else {
-                input.classList.add('error');
-                let errorCode = intl.getValidationError()
+                input.classList.add("error");
+                let errorCode = intl.getValidationError();
                 errorMsg.innerHTML = errorMap[errorCode];
-                errorMsg.classList.remove('d-none');
+                errorMsg.classList.remove("d-none");
             }
         }
     });
 
-// on keyup / change flag: reset
-    input.addEventListener('change', reset);
-    input.addEventListener('keyup', reset);
+    // on keyup / change flag: reset
+    input.addEventListener("change", reset);
+    input.addEventListener("keyup", reset);
 
+    $(document).on(
+        "blur keyup change countrychange",
+        "#countryPhone",
+        function () {
+            let getCode = intl.selectedCountryData["dialCode"];
+            $("#countryCode").val(getCode);
+        }
+    );
 
-    $(document).on('blur keyup change countrychange','#countryPhone', function () {
-        let getCode = intl.selectedCountryData['dialCode'];
-        $('#countryCode').val(getCode);
-    });
-    
-    let defaultCountryCode = $('#defaultCountryCode').val();
+    let defaultCountryCode = $("#defaultCountryCode").val();
 
     intl.setNumber(defaultCountryCode);
-    $('#countryCode').val(defaultCountryCode).trigger('change');
+    $("#countryCode").val(defaultCountryCode).trigger("change");
 }
 
 function initializeSelect2Dropdown() {
-    let currencyType = $('#currencyType');
+    let currencyType = $("#currencyType");
     if (!currencyType.length) {
         return false;
     }
 
     ["#currencyType", "#timeZone", "#dateFormat"].forEach(function (value) {
         if ($(value).hasClass("select2-hidden-accessible")) {
-            $('.select2-container').remove();
+            $(".select2-container").remove();
         }
     });
 
-    $('#currencyType, #timeZone, #dateFormat').select2({
-        width: '100%',
+    $("#currencyType, #timeZone, #dateFormat").select2({
+        width: "100%",
     });
 }
 
-listenChange('input[type=radio][name=decimal_separator]', function () {
-    if (this.value === ',') {
-        $('input[type=radio][name=thousand_separator][value="."]').prop('checked', true);
+listenChange("input[type=radio][name=decimal_separator]", function () {
+    if (this.value === ",") {
+        $('input[type=radio][name=thousand_separator][value="."]').prop(
+            "checked",
+            true
+        );
     } else {
-        $('input[type=radio][name=thousand_separator][value=","]').prop('checked', true);
+        $('input[type=radio][name=thousand_separator][value=","]').prop(
+            "checked",
+            true
+        );
     }
 });
 
-listenChange('input[type=radio][name=thousand_separator]', function () {
-    if (this.value === ',') {
-        $('input[type=radio][name=decimal_separator][value="."]').prop('checked', true);
+listenChange("input[type=radio][name=thousand_separator]", function () {
+    if (this.value === ",") {
+        $('input[type=radio][name=decimal_separator][value="."]').prop(
+            "checked",
+            true
+        );
     } else {
-        $('input[type=radio][name=decimal_separator][value=","]').prop('checked', true);
+        $('input[type=radio][name=decimal_separator][value=","]').prop(
+            "checked",
+            true
+        );
     }
 });
 
-listenChange('#appLogo', function () {
-    $('#validationErrorsBox').addClass('d-none');
-    if (isValidLogo($(this), '#validationErrorsBox')) {
-        displaySettingImage(this, '#previewImage');
+listenChange("#appLogo", function () {
+    $("#validationErrorsBox").addClass("d-none");
+    if (isValidLogo($(this), "#validationErrorsBox")) {
+        displaySettingImage(this, "#previewImage");
     }
 });
 
-listenChange('#companyLogo', function () {
-    $('#validationErrorsBox').addClass('d-none');
-    if (isValidLogo($(this), '#validationErrorsBox')) {
-        displaySettingImage(this, '#previewImage1');
+listenChange("#companyLogo", function () {
+    $("#validationErrorsBox").addClass("d-none");
+    if (isValidLogo($(this), "#validationErrorsBox")) {
+        displaySettingImage(this, "#previewImage1");
     }
 });
 
 function isValidLogo(inputSelector, validationMessageSelector) {
-    let ext = $(inputSelector).val().split('.').pop().toLowerCase();
-    if ($.inArray(ext, ['jpg', 'png', 'jpeg']) == -1) {
-        $(inputSelector).val('');
-        $(validationMessageSelector).removeClass('d-none');
-        $(validationMessageSelector).html('The image must be a file of type: jpg, jpeg, png.').show();
+    let ext = $(inputSelector).val().split(".").pop().toLowerCase();
+    if ($.inArray(ext, ["jpg", "png", "jpeg"]) == -1) {
+        $(inputSelector).val("");
+        $(validationMessageSelector).removeClass("d-none");
+        $(validationMessageSelector)
+            .html("The image must be a file of type: jpg, jpeg, png.")
+            .show();
         return false;
     }
     $(validationMessageSelector).hide();
@@ -131,7 +162,7 @@ function displaySettingImage(input, selector) {
             let image = new Image();
             image.src = e.target.result;
             image.onload = function () {
-                $(selector).attr('src', e.target.result);
+                $(selector).attr("src", e.target.result);
                 displayPreview = true;
             };
         };
@@ -142,20 +173,20 @@ function displaySettingImage(input, selector) {
     }
 }
 
-listenSubmit('#createSetting', function (e) {
-    let companyAddress = $('#companyAddress').val();
-    let companyName = $('#company_name').val();
-    let appName = $('#app_name').val();
+listenSubmit("#createSetting", function (e) {
+    let companyAddress = $("#companyAddress").val();
+    let companyName = $("#company_name").val();
+    let appName = $("#app_name").val();
     if (!$.trim(appName)) {
-        displayErrorMessage('App Name is required');
+        displayErrorMessage("App Name is required");
         return false;
     }
     if (!$.trim(companyName)) {
-        displayErrorMessage('Company Name is required');
+        displayErrorMessage("Company Name is required");
         return false;
     }
     if (!$.trim(companyAddress)) {
-        displayErrorMessage('Please enter company address');
+        displayErrorMessage("Please enter company address");
         return false;
     }
 });

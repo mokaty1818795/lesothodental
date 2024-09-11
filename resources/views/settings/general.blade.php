@@ -125,7 +125,13 @@
                             </label>
                         </div>
                     </div>
+                     <div class="form-group col-sm-3 mb-5">
+                        <div class="js-signature"" id="signature-pad" style="border: 1px solid black;">
+
+                        </div>
+                     </div>
                     <div class="row">
+                       
                         <div class="form-group col-sm-12 mb-5">
                             {{ Form::label('company_address', __('messages.setting.company_address') . ':', ['class' => 'form-label required fs-6  mb-3']) }}
                             {{ Form::textarea('company_address', $settings['company_address'], ['class' => 'form-control ', 'rows' => 5, 'cols' => 5, 'required', 'id' => 'companyAddress']) }}
@@ -292,6 +298,10 @@ play-none hide"
                 </div>
 
 
+
+
+
+
                 <div class="row">
                     <div class="form-group col-sm-12 mb-5">
                         {{ Form::label('company_address', __('messages.setting.company_address') . ':', ['class' => 'form-label required fs-6  mb-3']) }}
@@ -323,6 +333,8 @@ play-none hide"
 
                         </div>
                     </div>
+
+
                     <!-- Company Logo Field -->
                     <div class="form-group col-sm-6 mb-5">
                         <div class="mb-3" io-image-input="true">
