@@ -173,6 +173,7 @@ return [
     ],
 
     'setting' => [
+        'signature' => 'Signature',
         'setting' => 'Setting',
         'general' => 'General',
         'regards' => 'Regards',
