@@ -125,13 +125,24 @@
                             </label>
                         </div>
                     </div>
-                     <div class="form-group col-sm-3 mb-5">
+                    <div class="form-group col-sm-6 mb-5">
+                        {{ Form::label('signature', __('messages.setting.signature') . ':', ['class' => 'form-label required fs-6 mb-3']) }}
+                        <div id="signature-pad" class="signature-pad" style="width: 100%; height: 200px; border: 1px solid #ccc;">
+                            <canvas></canvas>
+                        </div>
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-primary btn-sm" id="clear-signature">Clear</button>
+                            <button type="button" class="btn btn-secondary btn-sm" id="save-signature">Save</button>
+                        </div>
+                        <input type="hidden" name="signature" id="signature-input">
+                    </div>
+                     <!-- <div class="form-group col-sm-3 mb-5">
                         <div class="js-signature"" id="signature-pad" style="border: 1px solid black;">
 
                         </div>
-                     </div>
+                     </div> -->
                     <div class="row">
-                       
+
                         <div class="form-group col-sm-12 mb-5">
                             {{ Form::label('company_address', __('messages.setting.company_address') . ':', ['class' => 'form-label required fs-6  mb-3']) }}
                             {{ Form::textarea('company_address', $settings['company_address'], ['class' => 'form-control ', 'rows' => 5, 'cols' => 5, 'required', 'id' => 'companyAddress']) }}
@@ -372,3 +383,48 @@ play-none hide"
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+<script>
+
+    console.log("Script is Loaded Here")
+    let signaturePad;
+
+    function initSignaturePad() {
+        var canvas = document.querySelector("#signature-pad canvas");
+        signaturePad = new SignaturePad(canvas);
+
+        document.getElementById('clear-signature').addEventListener('click', function() {
+            signaturePad.clear();
+        });
+
+        document.getElementById('save-signature').addEventListener('click', function() {
+            if (signaturePad.isEmpty()) {
+                alert('Please provide a signature first.');
+            } else {
+                var dataURL = signaturePad.toDataURL();
+                document.getElementById('signature-input').value = dataURL;
+            }
+        });
+
+        function resizeCanvas() {
+            var ratio =  Math.max(window.devicePixelRatio || 1, 1);
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            canvas.getContext("2d").scale(ratio, ratio);
+            signaturePad.clear();
+        }
+
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+    }
+
+    // Check if the DOM is already loaded
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initSignaturePad);
+    } else {  // `DOMContentLoaded` already fired
+        initSignaturePad();
+    }
+</script>
+@endpush

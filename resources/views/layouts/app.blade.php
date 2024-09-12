@@ -37,7 +37,7 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js" data-turbolinks-eval="false"
             data-turbo-eval="false"></script>
-    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
     <script src="{{ asset('assets/js/third-party.js') }}"></script>
     <script src="{{ asset('messages.js') }}"></script>
     <script data-turbo-eval="false">
@@ -75,6 +75,7 @@
         </div>
     </div>
 </div>
+ @stack('scripts')
 @include('profile.changePassword')
 @include('profile.changelanguage')
 </body>
