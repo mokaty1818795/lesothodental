@@ -70,7 +70,7 @@ class UserTable extends LivewireTableComponent
 
     public function builder(): Builder
     {
-        return User::where('id', '!=', Auth::id())
+        return User::where('id', '!=', value: Auth::id())
             ->whereHas('roles', function ($q) {
                 $q->where('name', Role::ROLE_ADMIN);
             })->with('media');
