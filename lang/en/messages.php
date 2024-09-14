@@ -62,6 +62,12 @@ return [
         'last_30_days' => 'Last 30 Days',
     ],
 
+
+     'education' => [
+        'education_details' => 'Education Details',
+    ],
+
+
     'admin_dashboard' => [
         'dashboard' => 'Dashboard',
         'name' => 'NAME',

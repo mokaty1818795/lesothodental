@@ -7,6 +7,7 @@ use App\Http\Controllers\Client as Client;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Educationcontroller;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoiceTemplateController;
 use App\Http\Controllers\NotificationController;
@@ -238,6 +239,7 @@ Route::prefix('admin')->middleware(['auth', 'xss', 'role:admin'])->group(functio
     Route::get('currency-reports', [DashboardController::class, 'currencyReports'])->name('currency.reports');
 });
 
+
 Route::prefix('client')->middleware(['auth', 'xss', 'role:client'])->group(function () {
     Route::get(
         'dashboard',
@@ -321,6 +323,7 @@ Route::middleware(['auth', 'xss'])->group(function () {
     Route::put('/change-user-password', [UserController::class, 'changePassword'])->name('user.changePassword');
     Route::get('get-all-language', [UserController::class, 'getLanguages'])->name('get-all-language');
     Route::get('quotes/{productId}/product', [QuoteController::class, 'getProduct'])->name('quotes.get-product');
+    Route::get('/profile/education', [Educationcontroller::class, 'index'])->name('client.education');
 
     // Download Attachment
     Route::get('transactions-attachment/{id}', [PaymentController::class, 'downloadAttachment'])->name('transaction.attachment');

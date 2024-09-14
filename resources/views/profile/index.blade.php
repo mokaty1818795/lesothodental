@@ -262,6 +262,8 @@
                                     @endif
                                 </div>
                             </div>
+                             <a href="{{route('client.education')}}" type="reset"
+                                   class="btn btn-primary">{{__('messages.education.education_details')}}</a>
                             </div>
 
 
