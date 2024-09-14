@@ -125,24 +125,39 @@
                             </label>
                         </div>
                     </div>
-                    <div class="form-group col-sm-6 mb-5">
+
+                    <div class="form-group col-12 mb-5">
                         {{ Form::label('signature', __('messages.setting.signature') . ':', ['class' => 'form-label required fs-6 mb-3']) }}
-                        <div id="signature-pad" class="signature-pad" style="width: 100%; height: 200px; border: 1px solid #ccc;">
+                        <div id="signature-pad" class="signature-pad" style=" border: 1px solid #ccc; width: 100%; height: 200px;">
+                            <canvas  id="signature-canvas" style="width: 100%; height: 200px;">
+
+                            </canvas>
+                        </div>
+                        <input type="hidden" name="signature" id="signature-input">
+                        <div class="mt-2 d-flex flex-wrap">
+                            <button type="button" class="btn btn-primary btn-sm me-2 mb-2" id="clear-signature">Clear</button>
+                            <button type="button" class="btn btn-secondary btn-sm mb-2" id="save-signature">Save</button>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-group col-sm-12 mb-5">
+                        {{ Form::label('signature', __('messages.setting.signature') . ':', ['class' => 'form-label required fs-6 mb-3']) }}
+                        <div id="signature-pad"  class="signature-pad col-sm-12" style="border: 1px solid #ccc;">
                             <canvas></canvas>
                         </div>
+                        <input type="hidden" name="signature" id="signature-input">
                         <div class="mt-2">
                             <button type="button" class="btn btn-primary btn-sm" id="clear-signature">Clear</button>
                             <button type="button" class="btn btn-secondary btn-sm" id="save-signature">Save</button>
                         </div>
-                        <input type="hidden" name="signature" id="signature-input">
-                    </div>
+                    </div> -->
+
                      <!-- <div class="form-group col-sm-3 mb-5">
                         <div class="js-signature"" id="signature-pad" style="border: 1px solid black;">
 
                         </div>
                      </div> -->
                     <div class="row">
-
                         <div class="form-group col-sm-12 mb-5">
                             {{ Form::label('company_address', __('messages.setting.company_address') . ':', ['class' => 'form-label required fs-6  mb-3']) }}
                             {{ Form::textarea('company_address', $settings['company_address'], ['class' => 'form-control ', 'rows' => 5, 'cols' => 5, 'required', 'id' => 'companyAddress']) }}
@@ -392,7 +407,7 @@ play-none hide"
     let signaturePad;
 
     function initSignaturePad() {
-        var canvas = document.querySelector("#signature-pad canvas");
+        var canvas = document.getElementById("signature-canvas");
         signaturePad = new SignaturePad(canvas);
 
         document.getElementById('clear-signature').addEventListener('click', function() {

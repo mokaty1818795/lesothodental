@@ -73,6 +73,7 @@ class Setting extends Model implements HasMedia
     public $fillable = [
         'key',
         'value',
+
     ];
 
     protected $casts = [
@@ -101,13 +102,14 @@ class Setting extends Model implements HasMedia
         'city' => 'nullable|required_with:show_additional_address_in_invoice',
         'zipcode' => 'nullable|required_with:show_additional_address_in_invoice',
         'fax_no' => 'nullable|required_with:show_additional_address_in_invoice',
+        'signature' => 'nullable|mimes:jpg,jpeg,png',
     ];
 
     public function getLogoUrlAttribute(): string
     {
         /** @var Media $media */
         $media = $this->media->first();
-        if (! empty($media)) {
+        if (!empty($media)) {
             return $media->getFullUrl();
         }
 

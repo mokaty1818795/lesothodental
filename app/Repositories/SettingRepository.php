@@ -23,6 +23,7 @@ class SettingRepository extends BaseRepository
     protected $fieldSearchable = [
         'app_name',
         'app_logo',
+        'signature',
     ];
 
     /**
@@ -73,6 +74,13 @@ class SettingRepository extends BaseRepository
                 $setting = Setting::where('key', '=', 'favicon_icon')->first();
                 $setting = $this->uploadSettingImages($setting, $input['favicon_icon']);
             }
+
+            if (isset($input['signature']) && ! empty($input['signature'])) {
+                /** @var Setting $setting */
+                $setting = Setting::where('key', '=', 'signature')->first();
+                $setting = $this->uploadSettingImages($setting, $input['signature']);
+            }
+
             if ($input['payment_auto_approved'] == 1) {
                 $manualPayments = Payment::wherePaymentMode(Payment::MANUAL)->whereIsApproved(Payment::PENDING)->get();
                 foreach ($manualPayments as $manualPayment) {
@@ -155,7 +163,6 @@ class SettingRepository extends BaseRepository
         $media = $setting->addMedia($value)->toMediaCollection(Setting::PATH, config('app.media_disc'));
         $setting = $setting->refresh();
         $setting->update(['value' => $media->getFullUrl()]);
-
         return $setting;
     }
 }
