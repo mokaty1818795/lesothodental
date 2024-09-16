@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class Educationcontroller extends Controller
 {
     public function index()
@@ -28,18 +26,21 @@ class Educationcontroller extends Controller
     //         return redirect()->route('education.create')->withInput();
     //     }
     // }
-    // public function show($id)
-    // {
-    //     $education = $this->educationRepository->find($id);
+    public function show()
+    {
+        // $education = $this->educationRepository->find($id);
 
-    //     if (empty($education)) {
-    //         Flash::error(__('messages.flash.education_not_found'));
+        // if (empty($education)) {
+        //     Flash::error(__('messages.flash.education_not_found'));
 
-    //         return redirect(route('education.index'));
-    //     }
+        //     return redirect(route('education.index'));
+        // }
 
-    //     return view('education.show')->with('education', $education);
-    // }
+        // return view('education.show')->with('education', $education);
+
+        return view('education.show');
+
+    }
     // public function edit($id)
     // {
     //     $education = $this->educationRepository->find($id);

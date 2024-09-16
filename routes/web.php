@@ -324,6 +324,8 @@ Route::middleware(['auth', 'xss'])->group(function () {
     Route::get('get-all-language', [UserController::class, 'getLanguages'])->name('get-all-language');
     Route::get('quotes/{productId}/product', [QuoteController::class, 'getProduct'])->name('quotes.get-product');
     Route::get('/profile/education', [Educationcontroller::class, 'index'])->name('client.education');
+    Route::get('/profile/education/edit', [Educationcontroller::class, 'show'])->name('client.education.edit');
+
 
     // Download Attachment
     Route::get('transactions-attachment/{id}', [PaymentController::class, 'downloadAttachment'])->name('transaction.attachment');
