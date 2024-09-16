@@ -112,12 +112,12 @@ class UserEducation extends LivewireTableComponent
         Column::make(__('messages.common.action'), 'id')
             ->format(function ($value, $row, Column $column) {
                 return view('livewire.action-button')->with([
-                    'editRoute' => route('users.edit', $row->id),
+                    'editRoute' => route('client.education.edit',$row->id),
                     'dataId' => $row->id,
                     'row' => $row,
                     'editClass' => 'user-edit-btn',
                     'deleteClass' => 'user-delete-btn',
-                    'isDefaultAdmin' => $row->is_default_admin,
+                    // 'isDefaultAdmin' => $row->is_default_admin,
                 ]);
             }),
     ];
