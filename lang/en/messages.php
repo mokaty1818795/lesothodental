@@ -530,6 +530,9 @@ return [
     ],
 
     'flash' => [
+        'education_created_successfully' => 'Education created successfully',
+        'education_updated_successfully' => 'Education updated successfully',
+        'education_not_found' => 'Education not found',
         'application_rejected' => 'Application rejected successfully',
         'application_unable_to_rejected' => 'Unable to reject the application',
         'client_cant_deleted' => 'Client can\'t be deleted.',

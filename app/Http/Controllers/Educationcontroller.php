@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Education;
+
 class Educationcontroller extends Controller
+
 {
     public function index()
     {
@@ -26,9 +29,10 @@ class Educationcontroller extends Controller
     //         return redirect()->route('education.create')->withInput();
     //     }
     // }
-    public function show()
+    public function show(Education $education)
     {
-        // $education = $this->educationRepository->find($id);
+        
+        $education = Education::find($education->id);
 
         // if (empty($education)) {
         //     Flash::error(__('messages.flash.education_not_found'));
@@ -36,9 +40,7 @@ class Educationcontroller extends Controller
         //     return redirect(route('education.index'));
         // }
 
-        // return view('education.show')->with('education', $education);
-
-        return view('education.show');
+        return view('education.show')->with('education', $education);
 
     }
     // public function edit($id)

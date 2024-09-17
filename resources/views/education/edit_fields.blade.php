@@ -2,7 +2,7 @@
     <div class="col-lg-4 col-sm-12 mb-5">
         <div class="mb-5">
             {{ Form::label('institude', __('Institude').':', ['class' => 'form-label required mb-3']) }}
-            {{ Form::text('institude',"Thabo", ['class' => 'form-control form-control-solid', 'placeholder' => __('Institude'), 'required']) }}
+            {{ Form::text('institude', isset($education) ? $education->institude : null, ['class' => 'form-control form-control-solid', 'placeholder' => __('Institude'), 'required']) }}
         </div>
     </div>
     <div class="col-lg-4 col-sm-12 mb-5">
