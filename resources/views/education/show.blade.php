@@ -7,7 +7,8 @@
     <div class="container-fluid">
         @include('flash::message')
         <div class="d-flex flex-column">
-            @include('education.show_fields')
+            @include('education.show_fields', ['education' => $education]) <!-- Passing $education -->
         </div>
     </div>
 @endsection
+
