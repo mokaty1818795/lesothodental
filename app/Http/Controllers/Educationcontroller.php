@@ -1,39 +1,62 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\CreateEducationRequest;
 use App\Http\Requests\UpdateEducationRequest;
 use App\Models\Education;
-use Laracasts\Flash\Flash;
 use Illuminate\Http\RedirectResponse;
+use Laracasts\Flash\Flash;
 
 class Educationcontroller extends Controller
-
 {
     public function index()
     {
         return view('education.index');
     }
-    // public function create()
-    // {
-    //     $countries = $this->educationRepository->getData();
+    public function create()
+    {
+        return view('education.create');
+    }
+    public function store(CreateEducationRequest $request): RedirectResponse
+    {
+        // $input = $request->all();
+        // try {
+        //     $this->educationRepository->store($input);
+        //     Flash::success(__('messages.flash.education_created_successfully'));
+        // } catch (Exception $exception) {
+        //     Flash::error($exception->getMessage());
 
-    //     return view('education.create', compact('countries'));
-    // }
-    // public function store(CreateEducationRequest $request): RedirectResponse
-    // {
-    //     $input = $request->all();
-    //     try {
-    //         $this->educationRepository->store($input);
-    //         Flash::success(__('messages.flash.education_created_successfully'));
-    //     } catch (Exception $exception) {
-    //         Flash::error($exception->getMessage());
+        //     return redirect()->route('education.create')->withInput();
+        // }
 
-    //         return redirect()->route('education.create')->withInput();
-    //     }
-    // }
+        $userEducation = Education::create([
+            'user_id' => auth()->user()->id,
+            'institude' => $request->institude,
+            'course' => $request->course,
+            'attended_from' => $request->attended_from,
+            'attended_to' => $request->attended_to,
+            'degree_date' => $request->degree_date,
+            'specialization' => $request->specialization,
+            'telephone' => $request->telephone,
+            'fax' => $request->fax,
+            'certificate' => $request->certificate,
+        ]);
+
+        if ((!empty($request->certificate))) {
+            $fileItem = $userEducation->addMedia($request->certificate)->toMediaCollection(Education::UNIVERSITY_CERTIFICATE, config('app.media_disc'));
+            $fileUrl = $fileItem->getUrl();
+            $userEducation->certificate = $fileUrl;
+            $userEducation->save();
+        }
+
+        Flash::success(__('messages.flash.education_created_successfully'));
+        return redirect(route('client.education'));
+
+    }
     public function show(Education $education)
     {
-        
+
         $education = Education::find($education->id);
 
         // if (empty($education)) {
@@ -57,24 +80,31 @@ class Educationcontroller extends Controller
 
     //     return view('education.edit')->with('education', $education);
     // }
-   public function update($id, UpdateEducationRequest $request): RedirectResponse
-{
-    // Find the education record using the Education model
-    $education = Education::find($id);
+    public function update($id, UpdateEducationRequest $request): RedirectResponse
+    {
+        // Find the education record using the Education model
+        $education = Education::find($id);
 
-    if (empty($education)) {
-        Flash::error(__('messages.flash.education_not_found'));
+        if (empty($education)) {
+            Flash::error(__('messages.flash.education_not_found'));
 
-        return redirect(route('education.index'));
+            return redirect(route('education.index'));
+        }
+
+        // Update the education record with the request data
+        $education->update($request->all());
+
+        if ((!empty($request->certificate))) {
+            $fileItem = $education->addMedia($request->certificate)->toMediaCollection(Education::UNIVERSITY_CERTIFICATE, config('app.media_disc'));
+            $fileUrl = $fileItem->getUrl();
+            $education->certificate = $fileUrl;
+            $education->save();
+        }
+
+        Flash::success(__('messages.flash.education_updated_successfully'));
+
+        return redirect(route('client.education.edit', $id));
     }
-
-    // Update the education record with the request data
-    $education->update($request->all());
-
-    Flash::success(__('messages.flash.education_updated_successfully'));
-
-    return redirect(route('client.education.edit', $id));
-}
     // public function destroy($id): JsonResponse
     // {
     //     $education = $this->educationRepository->find($id);

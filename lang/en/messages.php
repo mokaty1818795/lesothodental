@@ -65,7 +65,7 @@ return [
 
      'education' => [
         'education_details' => 'Education Details',
-        ""
+        "add_education"=> "Add Education",
     ],
 
 
