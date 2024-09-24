@@ -70,6 +70,14 @@
             id="certificate"
             >
         </div>
+        <div class="col-sm-6 d-flex flex-column mb-md-10 mb-5">
+            @if ($education->certificate)
+                    <a class="fs-4 text-green-400" href="{{ $education->certificate }}" target="_blank" download>View</a>
+                @else
+                    <span class="fs-4 text-gray-800">{{ !empty( $education->certificate ) ?  $education->certificate : 'N/A' }}</span>
+                @endif
+
+        </div>
     </div>
 </div>
 

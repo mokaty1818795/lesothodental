@@ -19,17 +19,17 @@ class Educationcontroller extends Controller
         return view('education.create');
     }
     public function store(CreateEducationRequest $request): RedirectResponse
-    {
-        // $input = $request->all();
-        // try {
-        //     $this->educationRepository->store($input);
-        //     Flash::success(__('messages.flash.education_created_successfully'));
-        // } catch (Exception $exception) {
-        //     Flash::error($exception->getMessage());
+{
+    // Check the count of existing education records for the authenticated user
+    $educationCount = Education::where('user_id', auth()->user()->id)->count();
 
-        //     return redirect()->route('education.create')->withInput();
-        // }
+    // If the user already has 3 education records, return an error message
+    if ($educationCount >= 3) {
+        Flash::error(__('messages.flash.max_education_limit')); // Adjust the message in your language file
+        return redirect()->route('education.create')->withInput();
+    }
 
+    try {
         $userEducation = Education::create([
             'user_id' => auth()->user()->id,
             'institude' => $request->institude,
@@ -52,8 +52,12 @@ class Educationcontroller extends Controller
 
         Flash::success(__('messages.flash.education_created_successfully'));
         return redirect(route('client.education'));
-
+    } catch (Exception $exception) {
+        Flash::error($exception->getMessage());
+        return redirect()->route('client.education')->withInput();
     }
+}
+
     public function show(Education $education)
     {
 
@@ -105,16 +109,22 @@ class Educationcontroller extends Controller
 
         return redirect(route('client.education.edit', $id));
     }
-    // public function destroy($id): JsonResponse
-    // {
-    //     $education = $this->educationRepository->find($id);
+    public function destroy($id):RedirectResponse
+    {
+        
+        $education = Education::find($id);
 
-    //     if (empty($education)) {
-    //         return $this->sendError(__('messages.flash.education_not_found'));
-    //     }
+        if (empty($education)) {
+            Flash::error(__('messages.flash.education_not_found'));
 
-    //     $this->educationRepository->delete($id);
+            return redirect(route('education.index'));
+        }
 
-    //     return $this->sendSuccess(__('messages.flash.education_deleted_successfully'));
-    // }
+        $education->delete();
+
+        Flash::success(__('messages.flash.education_deleted_successfully'));
+
+        return redirect(route('education.index'));
+
+    }
 }
