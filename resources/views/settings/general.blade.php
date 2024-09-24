@@ -408,22 +408,66 @@ play-none hide"
             signaturePad.clear();
         });
 
-         document.getElementById('save-signature').addEventListener('click', function() {
-            if (signaturePad.isEmpty()) {
-                alert('Please provide a signature first.');
-            } else {
+        //  document.getElementById('save-signature').addEventListener('click', function() {
+        //     if (signaturePad.isEmpty()) {
+        //         alert('Please provide a signature first.');
+        //     } else {
 
-                const dataURL = signaturePad.toDataURL('image/png');
-                const link = document.createElement('a');
-                link.href = dataURL;
-                link.download = 'signature.png';
+        //         const dataURL = signaturePad.toDataURL('image/png');
+        //         const link = document.createElement('a');
+        //         link.href = dataURL;
+        //         link.download = 'signature.png';
 
 
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-        });
+        //         document.body.appendChild(link);
+        //         link.click();
+        //         document.body.removeChild(link);
+        //     }
+        // });
+
+
+        document.getElementById('save-signature').addEventListener('click', function() {
+    if (signaturePad.isEmpty()) {
+        alert('Please provide a signature first.');
+    } else {
+        // Create a new temporary canvas
+        const tempCanvas = document.createElement('canvas');
+        const tempContext = tempCanvas.getContext('2d');
+
+        // Set the canvas size to 50x50
+        const width = 50;
+        const height = 50;
+        tempCanvas.width = width;
+        tempCanvas.height = height;
+
+        // Get the signature data from the original canvas
+        const signatureData = signaturePad.toDataURL('image/png');
+
+        // Create a new image element
+        const img = new Image();
+        img.src = signatureData;
+
+        // Once the image is loaded, draw it on the new canvas with the specified size
+        img.onload = function() {
+            // Draw the scaled image onto the temporary canvas
+            tempContext.drawImage(img, 0, 0, width, height);
+
+            // Convert the resized canvas to a new data URL
+            const resizedDataURL = tempCanvas.toDataURL('image/png');
+
+            // Create a link and download the resized image
+            const link = document.createElement('a');
+            link.href = resizedDataURL;
+            link.download = 'signature.png';
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
+    }
+});
+
+
 
         function resizeCanvas() {
             var ratio =  Math.max(window.devicePixelRatio || 1, 1);

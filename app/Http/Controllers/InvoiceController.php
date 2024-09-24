@@ -10,13 +10,16 @@ use App\Models\Currency;
 use App\Models\Invoice;
 use App\Models\Payment;
 use App\Models\Product;
+use App\Models\Setting;
+use App\Models\Education;
+
 use App\Repositories\InvoiceRepository;
 use App\Repositories\PaymentRepository;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Exception;
 
 // use Barryvdh\DomPDF\Facade\Pdf;
-use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -185,24 +188,45 @@ class InvoiceController extends AppBaseController
         $message = "This is certificate is a true copy of the original document of ";
         $fullMessage = $message . ' ' . $client->user->full_name . '' . " Acredited by the Lesotho Medical Dental and Pharmacy Council";
         $qrCode = base64_encode(QrCode::size(120)->color(31, 122, 140)->generate($fullMessage));
+        $settings = Setting::all()->pluck('value', 'key')->toArray();
+        $edcucations= Education::where('user_id', $client->user->id)->get();
+
+  
+        $signature = isset($settings['signature']) ? $settings['signature'] : null;
 
         $html = <<<HTML
-    <!DOCTYPE HTML>
-    <html lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-        <link rel="stylesheet" href="assets/css/certificate_styles.css">
-        <title>Certificate</title>
-    </head>
-    <body>
-        <div class="qr-code">
-            <img src="data:image/png;base64, {$qrCode}">
-        </div>
-        <div class="signature">
-            REGISTRAR
-        </div>
-        <div class="signature-line"></div>
-    HTML;
+        <!DOCTYPE HTML>
+        <html lang="en">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+            <link rel="stylesheet" href="assets/css/certificate_styles.css">
+            <title>Certificate</title>
+        </head>
+        <body>
+            <div class="qr-code">
+                <img src="data:image/png;base64, {$qrCode}">
+            </div>
+            <div class="signature">
+                REGISTRAR
+            </div>
+            <div class="signature-line">
+        HTML;
+
+        if ($signature) {
+            $absolutePath = str_replace('http://localhost:8000/', '', $signature);
+            $absolutePath = public_path($absolutePath);
+            if (file_exists($absolutePath)) {
+                $imageData = base64_encode(file_get_contents($absolutePath));
+                $src = 'data:' . mime_content_type($absolutePath) . ';base64,' . $imageData;
+                $html .= '<img src="' . $src . '" alt="Signature" style="width: 250px; height: 250px; object-fit: contain;" />';
+            } else {
+                $html .= '<p>Signature file not found</p>';
+            }
+
+        } else {
+            $html .= '<p>No signature available</p>';
+        }
+        $html .= '</div>';
 
         if (isset($invoice) && !empty($invoice)) {
             foreach ($invoice->invoiceItems as $invoiceItems) {
@@ -212,34 +236,44 @@ class InvoiceController extends AppBaseController
             }
         }
 
-        $html .= <<<HTML
-        <div class="names">LESOTHO MEDICAL DENTAL & PHARMACY COUNCIL</div>
-        <div class="dost-style"><img src="assets/images/dots.png"/></div>
-        <div class="diamond"><img src="assets/images/diamond.png"/></div>
-        <div class="waves"><img src="assets/images/wave.png" height="700px"/></div>
-        <div class="waves2"><img src="assets/images/wave.png" height="700px"/></div>
-        <div class="image-logo"><img src="assets/images/logo2.png" height="200px" width="200px"/></div>
-        <div class="image-logo1"><img src="assets/images/logo2.png" height="970px" width=970px"/></div>
-        <div class="certificate-name">This is to certify that </div>
-        <div class="name">{$client->user->full_name}</div>
-        <div class="qualifications-cert">{$client->user->education->course}</br> {$client->user->education->course}</div>
-        <div class="registration-label">Registration No</div>
-        <div class="registration-no">{$client->user->authorization_number}</div>
-        <div class="qualifications">QUALIFICATONS</div>
-        <div class="category">is registered as a {$client->user->occupation} in a catergory</div>
-        <div class="praction-category">{$client->user->practice}</div>
-        <div class="retention-dates">{$this->formatDate($invoice->invoice_date)} - {$this->formatDate($invoice->due_date)}</div>
-        <div class="stamp-date">{$this->formatDate(Carbon::now())}</div>
-        <div class="badge"><img src="assets/images/asset12.png"/></div>
-        <div class="nation"><img src="assets/images/nation.png"/></div>
-        <div class="school-logo"><img src="assets/images/school.png"/></div>
-        <div class="stamp"><img src="assets/images/stamp.png"/></div>
-        <div class="expirydate">This Retention is from the date to the</div>
-        <div class="hat"><img src="assets/images/hat.png"/></div>
-        <div class="wave1"><img src="assets/images/waves.png"/></div>
-    </body>
-    </html>
-    HTML;
+       $html .= <<<HTML
+<div class="names">LESOTHO MEDICAL DENTAL & PHARMACY COUNCIL</div>
+<div class="dost-style"><img src="assets/images/dots.png"/></div>
+<div class="diamond"><img src="assets/images/diamond.png"/></div>
+<div class="waves"><img src="assets/images/wave.png" height="700px"/></div>
+<div class="waves2"><img src="assets/images/wave.png" height="700px"/></div>
+<div class="image-logo"><img src="assets/images/logo2.png" height="200px" width="200px"/></div>
+<div class="image-logo1"><img src="assets/images/logo2.png" height="970px" width="970px"/></div>
+<div class="certificate-name">This is to certify that </div>
+<div class="name">{$client->user->full_name}</div>
+<div class="qualifications-cert">
+HTML;
+
+
+// Loop through the user's qualifications
+foreach ($edcucations as $qualification) {
+    $html .= '<div class="qualification">' . $qualification->course. '</div>';
+}
+
+$html .= <<<HTML
+</div>
+<div class="registration-label">Registration No</div>
+<div class="registration-no">{$client->user->registration_number}</div>
+<div class="qualifications">QUALIFICATONS</div>
+<div class="category">is registered as a {$client->user->occupation} in a catergory</div>
+<div class="praction-category">{$client->user->practice}</div>
+<div class="retention-dates">{$this->formatDate($invoice->invoice_date)} - {$this->formatDate($invoice->due_date)}</div>
+<div class="stamp-date">{$this->formatDate(Carbon::now())}</div>
+<div class="badge"><img src="assets/images/asset12.png"/></div>
+<div class="nation"><img src="assets/images/nation.png"/></div>
+<div class="school-logo"><img src="assets/images/school.png"/></div>
+<div class="stamp"><img src="assets/images/stamp.png"/></div>
+<div class="expirydate">This Retention is from the date to the</div>
+<div class="hat"><img src="assets/images/hat.png"/></div>
+<div class="wave1"><img src="assets/images/waves.png"/></div>
+</body>
+</html>
+HTML;
 
         return $html;
     }
