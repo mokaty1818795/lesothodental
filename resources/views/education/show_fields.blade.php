@@ -18,7 +18,7 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        {{ Form::open() }}
+                       {{Form::open(['route' => ['client.education.update', $education->id], 'method' => 'put','files' => 'true','id'=>'editEducationForm'])}}
                             @include('education.edit_fields')
                         {{ Form::close() }}
                     </div>
