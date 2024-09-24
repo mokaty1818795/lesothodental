@@ -531,7 +531,9 @@ return [
     ],
 
     'flash' => [
+        'max_education_limit' => 'You can only add a maximum of three education records.',
         'education_created_successfully' => 'Education created successfully',
+        'education_deleted_successfully' => 'Education deleted successfully',
         'education_updated_successfully' => 'Education updated successfully',
         'education_not_found' => 'Education not found',
         'application_rejected' => 'Application rejected successfully',

@@ -116,8 +116,6 @@ class UserEducation extends LivewireTableComponent
                         'dataId' => $row->id,
                         'row' => $row,
                         'editClass' => 'user-edit-btn',
-                        'deleteClass' => 'user-delete-btn',
-                        // 'isDefaultAdmin' => $row->is_default_admin,
                     ]);
                 }),
         ];
