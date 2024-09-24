@@ -326,10 +326,8 @@ Route::middleware(['auth', 'xss'])->group(function () {
     Route::get('/profile/education', [Educationcontroller::class, 'index'])->name('client.education');
     Route::get('/profile/education/{education}', [Educationcontroller::class, 'show'])->name('client.education.edit');
     Route::put('/profile/{education}/education', [Educationcontroller::class, 'update'])->name('client.education.update');
-
-
-
-
+    Route::get('/profile/add-education', [Educationcontroller::class, 'create'])->name('client.education.add');
+    Route::post('/profile/store-education', [Educationcontroller::class, 'store'])->name('client.education.store');
     // Download Attachment
     Route::get('transactions-attachment/{id}', [PaymentController::class, 'downloadAttachment'])->name('transaction.attachment');
 
