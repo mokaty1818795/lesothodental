@@ -140,29 +140,26 @@
                         </div>
                     </div>
 
-                    <!-- <div class="form-group col-sm-12 mb-5">
-                        {{ Form::label('signature', __('messages.setting.signature') . ':', ['class' => 'form-label required fs-6 mb-3']) }}
-                        <div id="signature-pad"  class="signature-pad col-sm-12" style="border: 1px solid #ccc;">
-                            <canvas></canvas>
-                        </div>
-                        <input type="hidden" name="signature" id="signature-input">
-                        <div class="mt-2">
-                            <button type="button" class="btn btn-primary btn-sm" id="clear-signature">Clear</button>
-                            <button type="button" class="btn btn-secondary btn-sm" id="save-signature">Save</button>
+                    <!-- <div class="col-lg-4 col-sm-12 mb-5">
+                        <div class="mb-5">
+                            {{ Form::label('signature', __('Signature') . ':', ['class' => 'form-label mb-3 ']) }}
+                            <input
+                                name="signature"
+                                value="{{ old('signature') }}"
+                                class="form-control"
+                                type="file"
+                                id="signature"
+                                accept="image/*"
+                            >
                         </div>
                     </div> -->
 
-                     <!-- <div class="form-group col-sm-3 mb-5">
-                        <div class="js-signature"" id="signature-pad" style="border: 1px solid black;">
-
-                        </div>
-                     </div> -->
                     <div class="row">
                         <div class="form-group col-sm-12 mb-5">
                             {{ Form::label('company_address', __('messages.setting.company_address') . ':', ['class' => 'form-label required fs-6  mb-3']) }}
                             {{ Form::textarea('company_address', $settings['company_address'], ['class' => 'form-control ', 'rows' => 5, 'cols' => 5, 'required', 'id' => 'companyAddress']) }}
                         </div>
-                        <div class="form-group col-sm-6 mb-5">
+                        <div class="form-group col-sm-2 mb-5">
                             <div class="form-group col-sm-6 mb-5">
                                 <div class="mb-3" io-image-input="true">
                                     <label for="appLogoPreview"
@@ -185,11 +182,33 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                    <!-- Company Logo Field -->
-                    <div class="form-group col-sm-3 mb-5">
+                    <div class="form-group col-sm-2 ">
+                            <div class="form-group col-sm-6 mb-5">
+                                <div class="mb-3" io-image-input="true">
+                                    <label for="appLogoPreview"
+                                           class="form-label required">{{ __('Signature') . ':' }}</label>
+                                    <div class="d-block">
+                                        <div class="image-picker">
+                                            <div class="image previewImage" id="appLogoPreview"
+                                            {{ $styleCss }}="
+                                        background-image: url({{ $settings['signature'] != null ? asset($settings['signature']) : asset('assets/images/infyom.png') }}
+                                            )">
+                                        </div>
+                                        <span class="picker-edit rounded-circle text-gray-500 fs-small"
+                                              data-bs-toggle="tooltip" title="Change app logo">
+                                            <label>
+                                                <i class="fa-solid fa-pen" id="appLogoIcon"></i>
+                                                <input type="file" id="signature" name="signature"
+                                                       class="image-upload d-none" accept="image/*"/>
+                                            </label>
+                                             </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="form-group col-sm-2 mb-5">
                         <div class="mb-3" io-image-input="true">
                             <label for="faviconPreview"
                                    class="form-label required"> {{ __('messages.setting.fav_icon') . ':' }}</label>
@@ -333,36 +352,11 @@ play-none hide"
                         {{ Form::label('company_address', __('messages.setting.company_address') . ':', ['class' => 'form-label required fs-6  mb-3']) }}
                         {{ Form::textarea('company_address', $settings['company_address'], ['class' => 'form-control ', 'rows' => 5, 'cols' => 5, 'required', 'id' => 'companyAddress']) }}
                     </div>
-                    <div class="form-group col-sm-6 mb-5">
-                        <div class="form-group col-sm-6 mb-5">
-                            <div class="mb-3" io-image-input="true">
-                                <label for="appLogoPreview"
-                                    class="form-label required">{{ __('messages.setting.app_logo') . ':' }}</label>
-                                <div class="d-block">
-                                    <div class="image-picker">
-                                        <div class="image previewImage" id="appLogoPreview"
-                                            {{ $styleCss }}="
-                                        background-image: url({{ $settings['app_logo'] != null ? asset($settings['app_logo']) : asset('assets/images/infyom.png') }}
-                                        )">
-                                        </div>
-                                        <span class="picker-edit rounded-circle text-gray-500 fs-small"
-                                            data-bs-toggle="tooltip" title="Change app logo">
-                                            <label>
-                                                <i class="fa-solid fa-pen" id="appLogoIcon"></i>
-                                                <input type="file" id="appLogo" name="app_logo"
-                                                    class="image-upload d-none" accept="image/*" />
-                                            </label>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
 
-                        </div>
-                    </div>
 
 
                     <!-- Company Logo Field -->
-                    <div class="form-group col-sm-6 mb-5">
+                    <div class="form-group col-sm-2 mb-5">
                         <div class="mb-3" io-image-input="true">
                             <label for="faviconPreview" class="form-label required">
                                 {{ __('messages.setting.fav_icon') . ':' }}</label>
@@ -414,12 +408,20 @@ play-none hide"
             signaturePad.clear();
         });
 
-        document.getElementById('save-signature').addEventListener('click', function() {
+         document.getElementById('save-signature').addEventListener('click', function() {
             if (signaturePad.isEmpty()) {
                 alert('Please provide a signature first.');
             } else {
-                var dataURL = signaturePad.toDataURL();
-                document.getElementById('signature-input').value = dataURL;
+
+                const dataURL = signaturePad.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.href = dataURL;
+                link.download = 'signature.png';
+
+
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
             }
         });
 
