@@ -1,13 +1,15 @@
 @extends('layouts.app')
 @section('title')
-    {{ __('messages.client.client_details') }}
+    {{ __('messages.education.education_details') }}
 @endsection
 
 @section('content')
+   <div class="col-12">
+     @include('layouts.errors')
+    </div>
     <div class="container-fluid">
-        @include('flash::message')
         <div class="d-flex flex-column">
-            @include('education.show_fields', ['education' => $education]) <!-- Passing $education -->
+            @include('education.show_fields', ['education' => $education])
         </div>
     </div>
 @endsection

@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\UpdateEducationRequest;
 use App\Models\Education;
+use Laracasts\Flash\Flash;
+use Illuminate\Http\RedirectResponse;
 
 class Educationcontroller extends Controller
 
@@ -55,22 +57,24 @@ class Educationcontroller extends Controller
 
     //     return view('education.edit')->with('education', $education);
     // }
-    // public function update($id, UpdateEducationRequest $request): RedirectResponse
-    // {
-    //     $education = $this->educationRepository->find($id);
+   public function update($id, UpdateEducationRequest $request): RedirectResponse
+{
+    // Find the education record using the Education model
+    $education = Education::find($id);
 
-    //     if (empty($education)) {
-    //         Flash::error(__('messages.flash.education_not_found'));
+    if (empty($education)) {
+        Flash::error(__('messages.flash.education_not_found'));
 
-    //         return redirect(route('education.index'));
-    //     }
+        return redirect(route('education.index'));
+    }
 
-    //     $education = $this->educationRepository->update($request->all(), $id);
+    // Update the education record with the request data
+    $education->update($request->all());
 
-    //     Flash::success(__('messages.flash.education_updated_successfully'));
+    Flash::success(__('messages.flash.education_updated_successfully'));
 
-    //     return redirect(route('education.index'));
-    // }
+    return redirect(route('client.education.edit', $id));
+}
     // public function destroy($id): JsonResponse
     // {
     //     $education = $this->educationRepository->find($id);

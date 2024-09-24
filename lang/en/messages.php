@@ -65,6 +65,7 @@ return [
 
      'education' => [
         'education_details' => 'Education Details',
+        ""
     ],
 
 

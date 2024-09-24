@@ -325,6 +325,9 @@ Route::middleware(['auth', 'xss'])->group(function () {
     Route::get('quotes/{productId}/product', [QuoteController::class, 'getProduct'])->name('quotes.get-product');
     Route::get('/profile/education', [Educationcontroller::class, 'index'])->name('client.education');
     Route::get('/profile/education/{education}', [Educationcontroller::class, 'show'])->name('client.education.edit');
+    Route::put('/profile/{education}/education', [Educationcontroller::class, 'update'])->name('client.education.update');
+
+
 
 
     // Download Attachment
