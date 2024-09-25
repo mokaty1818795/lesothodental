@@ -7,12 +7,11 @@ use App\Http\Requests\CreateInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Mail\InvoicePaymentReminderMail;
 use App\Models\Currency;
+use App\Models\Education;
 use App\Models\Invoice;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Setting;
-use App\Models\Education;
-
 use App\Repositories\InvoiceRepository;
 use App\Repositories\PaymentRepository;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -174,24 +173,118 @@ class InvoiceController extends AppBaseController
 
     public function convertToPdf(Invoice $invoice)
     {
-        $client = $invoice->client;
-        $html = $this->generateHtml($invoice, $client);
 
-        $pdf = PDF::loadHTML($html);
-        $pdf->setPaper('A4', 'portrait');
+        $invoiceTemplate = $this->invoiceRepository->getDefaultTemplate($invoice);
 
-        return $pdf->download('certificate.pdf');
+        if ($invoiceTemplate == 'Retention') {
+            $client = $invoice->client;
+            $html = $this->generateHtml($invoice, $client);
+
+            $pdf = PDF::loadHTML($html);
+            $pdf->setPaper('A4', 'portrait');
+
+            return $pdf->download('certificate.pdf');
+
+        } else {
+            $client = $invoice->client;
+            $html = $this->generateregistration($invoice, $client);
+
+            $pdf = PDF::loadHTML($html);
+            $pdf->setPaper('A4', 'landscape');
+
+            return $pdf->download('certificate.pdf');
+        }
+
     }
 
+    private function generateregistration(Invoice $invoice, $client): string
+    {
+
+        $educations = Education::where('user_id', $client->user->id)->get();
+        $settings = Setting::all()->pluck('value', 'key')->toArray();
+
+        $htmlContent = <<<HTML
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Certificate of Registration</title>
+            <link rel="stylesheet" href="assets/css/registration_style.css">
+        </head>
+        <body>
+            <div class="certificate-container">
+                <div class="wavy-border">
+                    <div class="inner-content">
+                        <div class="logo-section">
+                            <img src="assets/images/logo2.png" height="80px" width="80px" alt="Logo"> <!-- Replace 'logo.png' with the actual logo image -->
+                        </div>
+                        <div class="registration-number">
+                            <p>Registration No.:{{$client->user->registration_number}}</p>
+                        </div>
+                        <div class="certificate-header">
+                            <h1>Lesotho Medical, Dental and Pharmacy Council</h1>
+                            <h2>Certificate of Registration as</h2>
+                            <p>
+                                I HEREBY CERTIFY that the Health Professional below has today been fully registered
+                                in accordance with Section 15 (3) of the LMDPC Order of 1970 and is hereby authorized
+                                to practice as such within the Kingdom of Lesotho.
+                            </p>
+                        </div>
+                       <table class="registration-details">
+                        <tr>
+                            <td colspan="3" class="registered-as">REGISTERED AS: Pharmacist</td>
+                        </tr>
+                        <tr>
+                            <td class="info-cell">
+                                <p>{$client->user->tittle}</p>
+                                <p>{$client->user->last_name}</p>
+                                <p>{$client->user->first_name}</p>
+                            </td>
+                            <td class="info-cell">
+                                <p>{$client->user->address}</p>
+                                <p>{$client->user->state}</p>
+                                <p>{$client->user->region}</p>
+                            </td>
+                            <td class="info-cell">
+                                <p>{$educations->first()->course}</p>
+
+                                <p>{$educations->first()->degree_date}</p>
+                            </td>
+                        </tr>
+                    </table>
+
+                        <div class="provision-section">
+                            <strong>Provision:</strong> <span>NONE</span>
+                        </div>
+
+                        <div class="footer-section">
+                            <div class="date-of-certificate">
+                                <p>{$educations->first()->degree_date}</p>
+                                <p>Date of Certificate</p>
+                            </div>
+                            <div class="registrar-signature">
+                            
+                                <p></p>
+                                <p>Registrar</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>
+        HTML;
+        return $htmlContent;
+    }
     private function generateHtml(Invoice $invoice, $client)
     {
         $message = "This is certificate is a true copy of the original document of ";
         $fullMessage = $message . ' ' . $client->user->full_name . '' . " Acredited by the Lesotho Medical Dental and Pharmacy Council";
         $qrCode = base64_encode(QrCode::size(120)->color(31, 122, 140)->generate($fullMessage));
         $settings = Setting::all()->pluck('value', 'key')->toArray();
-        $edcucations= Education::where('user_id', $client->user->id)->get();
+        $edcucations = Education::where('user_id', $client->user->id)->get();
 
-  
         $signature = isset($settings['signature']) ? $settings['signature'] : null;
 
         $html = <<<HTML
@@ -236,44 +329,43 @@ class InvoiceController extends AppBaseController
             }
         }
 
-       $html .= <<<HTML
-<div class="names">LESOTHO MEDICAL DENTAL & PHARMACY COUNCIL</div>
-<div class="dost-style"><img src="assets/images/dots.png"/></div>
-<div class="diamond"><img src="assets/images/diamond.png"/></div>
-<div class="waves"><img src="assets/images/wave.png" height="700px"/></div>
-<div class="waves2"><img src="assets/images/wave.png" height="700px"/></div>
-<div class="image-logo"><img src="assets/images/logo2.png" height="200px" width="200px"/></div>
-<div class="image-logo1"><img src="assets/images/logo2.png" height="970px" width="970px"/></div>
-<div class="certificate-name">This is to certify that </div>
-<div class="name">{$client->user->full_name}</div>
-<div class="qualifications-cert">
-HTML;
+        $html .= <<<HTML
+        <div class="names">LESOTHO MEDICAL DENTAL & PHARMACY COUNCIL</div>
+        <div class="dost-style"><img src="assets/images/dots.png"/></div>
+        <div class="diamond"><img src="assets/images/diamond.png"/></div>
+        <div class="waves"><img src="assets/images/wave.png" height="700px"/></div>
+        <div class="waves2"><img src="assets/images/wave.png" height="700px"/></div>
+        <div class="image-logo"><img src="assets/images/logo2.png" height="200px" width="200px"/></div>
+        <div class="image-logo1"><img src="assets/images/logo2.png" height="970px" width="970px"/></div>
+        <div class="certificate-name">This is to certify that </div>
+        <div class="name">{$client->user->full_name}</div>
+        <div class="qualifications-cert">
+        HTML;
 
+        // Loop through the user's qualifications
+        foreach ($edcucations as $qualification) {
+            $html .= '<div class="qualification">' . $qualification->course . '</div>';
+        }
 
-// Loop through the user's qualifications
-foreach ($edcucations as $qualification) {
-    $html .= '<div class="qualification">' . $qualification->course. '</div>';
-}
-
-$html .= <<<HTML
-</div>
-<div class="registration-label">Registration No</div>
-<div class="registration-no">{$client->user->registration_number}</div>
-<div class="qualifications">QUALIFICATONS</div>
-<div class="category">is registered as a {$client->user->occupation} in a catergory</div>
-<div class="praction-category">{$client->user->practice}</div>
-<div class="retention-dates">{$this->formatDate($invoice->invoice_date)} - {$this->formatDate($invoice->due_date)}</div>
-<div class="stamp-date">{$this->formatDate(Carbon::now())}</div>
-<div class="badge"><img src="assets/images/asset12.png"/></div>
-<div class="nation"><img src="assets/images/nation.png"/></div>
-<div class="school-logo"><img src="assets/images/school.png"/></div>
-<div class="stamp"><img src="assets/images/stamp.png"/></div>
-<div class="expirydate">This Retention is from the date to the</div>
-<div class="hat"><img src="assets/images/hat.png"/></div>
-<div class="wave1"><img src="assets/images/waves.png"/></div>
-</body>
-</html>
-HTML;
+        $html .= <<<HTML
+        </div>
+        <div class="registration-label">Registration No</div>
+        <div class="registration-no">{$client->user->registration_number}</div>
+        <div class="qualifications">QUALIFICATONS</div>
+        <div class="category">is registered as a {$client->user->occupation} in a catergory</div>
+        <div class="praction-category">{$client->user->practice}</div>
+        <div class="retention-dates">{$this->formatDate($invoice->invoice_date)} - {$this->formatDate($invoice->due_date)}</div>
+        <div class="stamp-date">{$this->formatDate(Carbon::now())}</div>
+        <div class="badge"><img src="assets/images/asset12.png"/></div>
+        <div class="nation"><img src="assets/images/nation.png"/></div>
+        <div class="school-logo"><img src="assets/images/school.png"/></div>
+        <div class="stamp"><img src="assets/images/stamp.png"/></div>
+        <div class="expirydate">This Retention is from the date to the</div>
+        <div class="hat"><img src="assets/images/hat.png"/></div>
+        <div class="wave1"><img src="assets/images/waves.png"/></div>
+        </body>
+        </html>
+        HTML;
 
         return $html;
     }
