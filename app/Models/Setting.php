@@ -46,10 +46,10 @@ class Setting extends Model implements HasMedia
     const PAYMENT_AUTO_APPROVED = 1;
 
     const INVOICE__TEMPLATE_ARRAY = [
-        'defaultTemplate' => 'Default',
-        'newYorkTemplate' => 'New York',
-        'torontoTemplate' => 'Toronto',
-        'rioTemplate' => 'Rio',
+        'Retention' => 'Retention',
+        'Registration' => 'Registration',
+        'Provisional' => 'Provisional',
+        'GoodStanding' => 'GoodStanding',
         'londonTemplate' => 'London',
         'istanbulTemplate' => 'Istanbul',
         'mumbaiTemplate' => 'Mumbai',
