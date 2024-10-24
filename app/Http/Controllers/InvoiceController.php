@@ -220,7 +220,7 @@ class InvoiceController extends AppBaseController
                             <img src="assets/images/logo2.png" height="80px" width="80px" alt="Logo"> <!-- Replace 'logo.png' with the actual logo image -->
                         </div>
                         <div class="registration-number">
-                            <p>Registration No.:{{$client->user->registration_number}}</p>
+                            <p>Registration No.:{$client->user->registration_number}</p>
                         </div>
                         <div class="certificate-header">
                             <h1>Lesotho Medical, Dental and Pharmacy Council</h1>

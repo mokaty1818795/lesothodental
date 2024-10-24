@@ -1,4 +1,4 @@
-@extends('layouts.app')
+ @extends('layouts.app')
 @section('title')
     {{ __('messages.quote.new_quote') }}
 @endsection
