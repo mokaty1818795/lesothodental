@@ -23,9 +23,9 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-     public function index(): \Illuminate\View\View
+    public function index(): RedirectResponse
     {
-        return view('welcome');
+        return redirect()->away('https://lmdpcouncil.org.ls/');
     }
 
     /**

@@ -45,7 +45,7 @@ Route::middleware(['xss'])->group(function () {
             return Redirect::to(getClientDashboardURL());
         }
 
-        return redirect(route('welcome'));
+        return redirect(route('https://lmdpcouncil.org.ls/'));
     });
 
     // client reset password routes
@@ -238,7 +238,6 @@ Route::prefix('admin')->middleware(['auth', 'xss', 'role:admin'])->group(functio
     // currency reports for invoices route
     Route::get('currency-reports', [DashboardController::class, 'currencyReports'])->name('currency.reports');
 });
-
 
 Route::prefix('client')->middleware(['auth', 'xss', 'role:client'])->group(function () {
     Route::get(
